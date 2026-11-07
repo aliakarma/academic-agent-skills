@@ -1,0 +1,21 @@
+name: Skill request
+description: Propose a new skill or a change to an existing one.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: task
+    attributes:
+      label: Research task
+      description: What should the agent be able to do, and for whom?
+    validations:
+      required: true
+  - type: textarea
+    id: today
+    attributes:
+      label: What goes wrong today
+      description: What a generic agent does badly on this task, with an example if you can share one.
+  - type: textarea
+    id: verify
+    attributes:
+      label: How the output could be checked
+      description: Sources, scripts, or rules that would let the skill verify its own result.

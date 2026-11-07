@@ -1,0 +1,39 @@
+name: Bug report
+description: A skill gave wrong output, failed to install, or a bundled script broke.
+labels: ["bug"]
+body:
+  - type: input
+    id: skill
+    attributes:
+      label: Skill
+      placeholder: reference-verify
+    validations:
+      required: true
+  - type: input
+    id: agent
+    attributes:
+      label: Agent and version
+      placeholder: Claude Code 2.1.90, Codex CLI 0.x, Antigravity ...
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: How you installed it
+      options:
+        - Vercel Skills CLI (npx skills add)
+        - Claude Code plugin
+        - Manual copy
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What you asked and what happened
+      description: Include the exact error output. Remove private manuscript text and any secrets.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
