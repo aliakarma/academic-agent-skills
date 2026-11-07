@@ -1,0 +1,113 @@
+% rvhighlight.sty -- reviewer-traceable highlighting for a highlighted revised
+% manuscript. It adds annotation only; it does not change any manuscript
+% content. Requires hyperref (load it in the layer if the class does not).
+%
+%   \rv{IDs}{text}            inline yellow highlight preceded by an ID tag
+%   \rvtag{IDs}               ID tag alone (inside tables, before rows)
+%   \begin{rvbox}{IDs}...     boxed paragraph(s) with an ID tab at top left
+%   \begin{rvfloat}{IDs}...   the same box for a revised or new table/figure
+%   \rvmath[IDs]{formula}     boxed display formula inside an equation
+%   \rvbar{IDs}{note}         full-width marker before an element that cannot be boxed
+%   \rvpages{ID}              linked list of highlighted pages carrying ID
+%
+% IDs are comma-separated, e.g. {R1-01,R3-11}. Every tag writes
+% \rvrecord{ID}{anchor}{page} to the aux file at shipout, so the map lists the
+% pages of the compiled highlighted manuscript after a second run.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{rvhighlight}[2026/10/25 Reviewer-traceable highlighting]
+\RequirePackage{xcolor,soul,etoolbox,needspace}
+% the front guide uses these; journal classes often load them already
+\RequirePackage{array,enumitem,longtable,booktabs}
+\RequirePackage[most]{tcolorbox}
+
+\definecolor{rvfill}{HTML}{FFEC8B}
+\definecolor{rvboxfill}{HTML}{FFF8D6}
+\definecolor{rvframe}{HTML}{B38F00}
+\definecolor{rvtag}{HTML}{5C4A00}
+\sethlcolor{rvfill}
+
+% soul must treat these as unbreakable units inside \hl
+\soulregister\cite7
+\soulregister\cref7
+\soulregister\Cref7
+\soulregister\ref7
+\soulregister\eqref7
+\soulregister\emph7
+\soulregister\texttt7
+\soulregister\textbf7
+
+%---------------------------------------------------------------- recording
+\newcounter{rvloc}
+\newcommand*\rvrecord[3]{%
+  \forcsvlist{\rv@recordone{#2}{#3}}{#1}}
+\newcommand*\rv@recordone[3]{% anchor, page, ID
+  \ifcsdef{rv@seen@#3@#2}{}{%
+    \csgdef{rv@seen@#3@#2}{}%
+    \csxdef{rv@anchor@#3@#2}{#1}%
+    \listcsgadd{rv@plist@#3}{#2}}}
+\newcommand*\rv@write[1]{%
+  \stepcounter{rvloc}%
+  \raisebox{2.2ex}[0pt][0pt]{\hypertarget{rvloc.\the\c@rvloc}{}}%
+  \protected@write\@auxout{}{\string\rvrecord{#1}{\the\c@rvloc}{\thepage}}}
+\newcommand*\rvpages[1]{%
+  \ifcsdef{rv@plist@#1}{%
+    \def\rv@sep{}%
+    \forlistcsloop{\rv@printpage{#1}}{rv@plist@#1}}{--}}
+\newcommand*\rv@printpage[2]{%
+  \rv@sep\def\rv@sep{, }%
+  \hyperlink{rvloc.\csuse{rv@anchor@#1@#2}}{#2}}
+
+%---------------------------------------------------------------- tag labels
+\newcommand*\rv@idlinks[1]{%
+  \def\rv@isep{}%
+  \forcsvlist{\rv@idlink}{#1}}
+\newcommand*\rv@idlink[1]{%
+  \rv@isep\def\rv@isep{\,\textperiodcentered\,}%
+  \hyperlink{rvmap.#1}{\textcolor{white}{#1}}}
+\newcommand*\rv@label[1]{%
+  {\fontfamily{phv}\fontseries{b}\fontsize{6.2}{7}\selectfont\rv@idlinks{#1}}}
+% robust, because tags also appear in captions and in the MDPI abstract
+\DeclareRobustCommand*\rvtag[1]{%
+  \leavevmode\rv@write{#1}%
+  {\setlength{\fboxsep}{1.1pt}\colorbox{rvtag}{\rv@label{#1}}}\,}
+\DeclareRobustCommand\rv[2]{\rvtag{#1}\hl{#2}}
+% tag look-alike for the annotation key; it records nothing
+\newcommand*\rvsampletag[1]{{\setlength{\fboxsep}{1.1pt}\colorbox{rvtag}{%
+  \fontfamily{phv}\fontseries{b}\fontsize{6.2}{7}\selectfont\textcolor{white}{#1}}}}
+% continuation of a tagged highlight (e.g. further cells of a tagged table row)
+\DeclareRobustCommand\rvhl[1]{\hl{#1}}
+% classes copy titles and abstracts into PDF strings; annotation must vanish there
+\AtBeginDocument{\@ifpackageloaded{hyperref}{\pdfstringdefDisableCommands{%
+  \def\rv#1#2{#2}\def\rvtag#1{}\def\rvhl#1{#1}\def\hl#1{#1}}}{}}
+
+%---------------------------------------------------------------- boxes
+\tcbset{rv/.style={enhanced,breakable,
+  colback=rvboxfill,colframe=rvframe,boxrule=0.6pt,arc=1.5pt,
+  left=0pt,right=0pt,top=1pt,bottom=1pt,boxsep=3pt,
+  grow to left by=3.6pt,grow to right by=3.6pt,
+  before skip=9pt,after skip=5pt,
+  attach boxed title to top left={xshift=4pt,yshift=-0.6pt},
+  boxed title style={colback=rvtag,colframe=rvtag,boxrule=0pt,arc=1pt,
+    left=1.5pt,right=1.5pt,top=0.6pt,bottom=0.6pt,boxsep=0pt},
+  fonttitle=\fontfamily{phv}\fontseries{b}\fontsize{6.2}{7}\selectfont,
+  coltitle=white}}
+% parbox=false keeps the journal's paragraph indentation inside the box
+\newenvironment{rvbox}[1]
+  {\par\begin{tcolorbox}[rv,parbox=false,before upper=\indent,title={\rv@write{#1}\rv@idlinks{#1}}]}
+  {\end{tcolorbox}}
+\newenvironment{rvfloat}[1]
+  {\begin{tcolorbox}[rv,breakable=false,before skip=4pt,after skip=2pt,top=4pt,
+     title={\rv@write{#1}\rv@idlinks{#1}}]}
+  {\end{tcolorbox}}
+\newcommand\rvmath[2][]{%
+  \tcbhighmath[enhanced,colback=rvfill!70,colframe=rvframe,boxrule=0.5pt,arc=1pt,
+    left=2pt,right=2pt,top=1pt,bottom=1pt,boxsep=1pt,
+    overlay={\node[anchor=south west,inner sep=0pt,yshift=1pt]
+      at (frame.north west){\rvtag{#1}};}]{#2}}
+% the bar must stay on the page where its long table starts
+\newcommand\rvbar[2]{%
+  \par\needspace{10\baselineskip}\smallskip\noindent
+  \begin{tcolorbox}[rv,breakable=false,colback=rvfill!60,top=1pt,bottom=1pt,
+    title={\rv@write{#1}\rv@idlinks{#1}}]%
+  {\footnotesize\itshape #2}\end{tcolorbox}\nopagebreak}
+\endinput

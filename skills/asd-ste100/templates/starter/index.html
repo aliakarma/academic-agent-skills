@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{ONE SENTENCE: what this page explains}}">
+<script>
+  /* Set the theme before the first paint so that the page does not flash. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("ste-theme"); } catch (e) {}
+    document.documentElement.dataset.theme = t || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  })();
+</script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!--
+  STARTER CONTRACT
+  - Replace every {{...}} slot. validate_html.py reports a slot that remains as an error.
+  - Keep only the components that the source supports. Delete the others. Do not leave empty sections.
+  - Each main > section needs an id and an h2. app.js builds the section list from them.
+  - Text inside data-ste="skip" (verbatim quotes, the reference list) is not checked by ste_tool.py.
+  - Fixed interface labels below were checked with ste_tool.py. Their technical nouns are in _qa/ste-terms.tsv.
+-->
+<a class="skip-link" href="#content">Go to the content</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<header class="masthead" id="top">
+  <div class="masthead-inner">
+    <button type="button" class="theme-toggle" aria-pressed="false" aria-label="Dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.7 14.9A8.5 8.5 0 0 1 9.1 3.3a8.5 8.5 0 1 0 11.6 11.6Z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+    </button>
+    <p class="kicker">{{KIND, for example: Research paper}}</p>
+    <h1>{{TITLE}}</h1>
+    <p class="lede">{{LEDE: one or two sentences that tell the reader what this page explains and for whom}}</p>
+    <dl class="source-card">
+      <div><dt>Source</dt><dd data-ste="skip">{{SOURCE: title, authors, venue, year, exactly as in the source}}</dd></div>
+      <div><dt>Scope</dt><dd>{{SCOPE: the parts of the source that this page explains}}</dd></div>
+    </dl>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="toc" aria-label="Sections">
+    <details open>
+      <summary>Sections</summary>
+      <ol></ol>
+    </details>
+    <button type="button" class="levels-toggle" aria-pressed="false">Show all technical explanations</button>
+  </nav>
+
+  <main id="content">
+
+    <!-- SECTION: start with the problem and the answer. Give the reader the full idea before the details. -->
+    <section id="{{SECTION-ID}}">
+      <h2>{{HEADING}}</h2>
+      <p class="lead">{{LEAD: the problem, the proposed answer, and the primary result or claim, in short sentences}}</p>
+
+      <!-- COMPONENT: two levels. The simple text is always visible. The technical text opens on request. -->
+      <div class="explain">
+        <p class="simple">{{SIMPLE: the idea in familiar words, with one everyday example}}</p>
+        <details class="technical">
+          <summary>Technical explanation</summary>
+          <div class="technical-body">
+            <p>{{TECHNICAL: the exact terms, notation, and conditions, with source references}} <span class="src">({{SOURCE REF: Section 2, page 3}})</span></p>
+          </div>
+        </details>
+      </div>
+
+      <!-- COMPONENT: callouts. Use from-source for a claim of the authors, interpretation for your own analysis,
+           gap for information that the source does not give, and limit for a limit of the work. -->
+      <div class="callout from-source" role="note">
+        <p class="callout-label">From the source</p>
+        <p>{{CLAIM: what the authors state, with the same strength}} <span class="src">({{SOURCE REF}})</span></p>
+      </div>
+      <div class="callout interpretation" role="note">
+        <p class="callout-label">Not from the source</p>
+        <p>{{INTERPRETATION: your own analysis, which the source does not state}}</p>
+      </div>
+      <div class="callout gap" role="note">
+        <p class="callout-label">The source does not give this information</p>
+        <p>{{GAP: the detail that is missing}}</p>
+      </div>
+    </section>
+
+    <!-- SECTION: important terms. One card for each difficult term. Link each term to its glossary entry. -->
+    <section id="{{SECTION-ID}}">
+      <h2>{{HEADING}}</h2>
+      <div class="concepts">
+        <article class="concept">
+          <h3><a class="term-ref" href="#g-{{TERM-ID}}">{{TERM}}</a></h3>
+          <p>{{TERM IN SIMPLE WORDS}}</p>
+          <p class="role">{{WHY THE TERM IS IMPORTANT IN THE SOURCE}}</p>
+          <p class="eg">{{EXAMPLE}}</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION: an interactive diagram of the real structure. Nodes and arrows must agree with the source. -->
+    <section id="{{SECTION-ID}}">
+      <h2>{{HEADING}}</h2>
+      <figure class="diagram" id="fig-{{ID}}">
+        <figcaption><span class="fig-label">Figure 1.</span> {{CAPTION: what the diagram shows}}</figcaption>
+        <div class="diagram-body side">
+          <!-- For a wide diagram, set style="--diagram-min: 640px" on .diagram-scroll so that labels stay readable on a phone. -->
+          <div class="diagram-scroll" tabindex="0" aria-label="{{DIAGRAM NAME}}">
+            <svg viewBox="0 0 560 340" role="img" aria-labelledby="fig-{{ID}}-title fig-{{ID}}-desc">
+              <title id="fig-{{ID}}-title">{{SVG TITLE}}</title>
+              <desc id="fig-{{ID}}-desc">{{SVG DESCRIPTION: the full flow in one or two sentences}}</desc>
+              <defs>
+                <marker id="arrow-{{ID}}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path class="arrowhead" d="M0,0 L10,5 L0,10 z"/>
+                </marker>
+              </defs>
+              <g class="node" data-node="a">
+                <rect x="30" y="40" width="200" height="64" rx="10"/>
+                <text x="130" y="77" text-anchor="middle">{{NODE A}}</text>
+              </g>
+              <g class="node" data-node="b">
+                <rect x="330" y="40" width="200" height="64" rx="10"/>
+                <text x="430" y="77" text-anchor="middle">{{NODE B}}</text>
+              </g>
+              <g class="node" data-node="c">
+                <rect x="180" y="230" width="200" height="64" rx="10"/>
+                <text x="280" y="267" text-anchor="middle">{{NODE C}}</text>
+              </g>
+              <path class="edge" d="M230,72 H322" marker-end="url(#arrow-{{ID}})"/>
+              <text class="edge-label" x="276" y="62" text-anchor="middle">{{FLOW A TO B}}</text>
+              <path class="edge" d="M430,104 V160 Q430,180 410,180 H300 Q280,180 280,200 V222" marker-end="url(#arrow-{{ID}})"/>
+              <text class="edge-label" x="355" y="170" text-anchor="middle">{{FLOW B TO C}}</text>
+            </svg>
+          </div>
+          <div class="node-panel" aria-live="polite">
+            <p class="node-hint">Select a part of the diagram to see more information.</p>
+            <div class="node-info" data-node-info="a">
+              <h3>{{NODE A}}</h3>
+              <p>{{NODE A: its function and the cause for it}}</p>
+              <dl class="io">
+                <div><dt>Input</dt><dd>{{INPUT}}</dd></div>
+                <div><dt>Output</dt><dd>{{OUTPUT}}</dd></div>
+              </dl>
+              <p class="src">{{SOURCE REF}}</p>
+            </div>
+            <div class="node-info" data-node-info="b">
+              <h3>{{NODE B}}</h3>
+              <p>{{NODE B: its function and the cause for it}}</p>
+              <p class="src">{{SOURCE REF}}</p>
+            </div>
+            <div class="node-info" data-node-info="c">
+              <h3>{{NODE C}}</h3>
+              <p>{{NODE C: its function and the cause for it}}</p>
+              <p class="src">{{SOURCE REF}}</p>
+            </div>
+          </div>
+        </div>
+        <p class="figure-note">{{NOTE, for example: This diagram shows the structure of Section 3 and Figure 2 of the source. It is not a copy of a figure of the source.}}</p>
+      </figure>
+    </section>
+
+    <!-- SECTION: a sequence of steps (method, workflow, algorithm). Give the input and the output of each step. -->
+    <section id="{{SECTION-ID}}">
+      <h2>{{HEADING}}</h2>
+      <ol class="steps">
+        <li>
+          <h3>{{STEP NAME}}</h3>
+          <p>{{STEP: what occurs and why}}</p>
+          <dl class="io">
+            <div><dt>Input</dt><dd>{{INPUT}}</dd></div>
+            <div><dt>Output</dt><dd>{{OUTPUT}}</dd></div>
+          </dl>
+          <p class="src">{{SOURCE REF}}</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- SECTION: equations. Copy the notation of the source exactly. Write MathML and keep the LaTeX in the annotation. -->
+    <section id="{{SECTION-ID}}">
+      <h2>{{HEADING}}</h2>
+      <figure class="equation" id="eq-{{ID}}">
+        <figcaption><span class="fig-label">Equation {{N}}.</span> {{NAME}} <span class="src">({{SOURCE REF: Eq. 3, page 5}})</span></figcaption>
+        <div class="math-display">
+          <math display="block">
+            <semantics>
+              <mrow><mtext>{{EQUATION IN MATHML}}</mtext></mrow>
+              <annotation encoding="application/x-tex">{{LATEX FROM THE SOURCE}}</annotation>
+            </semantics>
+          </math>
+        </div>
+        <div class="table-wrap">
+          <table class="symbols">
+            <caption>Symbols in equation {{N}}</caption>
+            <thead><tr><th scope="col">Symbol</th><th scope="col">Name and function</th><th scope="col">Unit or type</th></tr></thead>
+            <tbody>
+              <tr><td><math><mi>{{SYMBOL}}</mi></math></td><td>{{NAME AND FUNCTION}}</td><td>{{UNIT OR TYPE}}</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="explain">
+          <p class="simple">{{SIMPLE: what the equation calculates and why the method needs it}}</p>
+          <details class="technical">
+            <summary>Technical explanation</summary>
+            <div class="technical-body">
+              <p>{{TECHNICAL: each term, the effect of each term, and the connection to the method}}</p>
+            </div>
+          </details>
+        </div>
+        <div class="worked">
+          <p class="worked-label">Example with numbers</p>
+          <p>{{WORKED EXAMPLE: if the inputs are not from the source, say that they are example values}}</p>
+        </div>
+      </figure>
+    </section>
+
+    <!-- SECTION: code. Copy the excerpt exactly from the source file. Give the file name and the line numbers. -->
+    <section id="{{SECTION-ID}}">
+      <h2>{{HEADING}}</h2>
+      <figure class="code">
+        <figcaption><span class="fig-label">Listing 1.</span> {{CAPTION}} <span class="src">({{FILE, LINES}})</span></figcaption>
+        <pre><code>{{CODE EXCERPT}}</code></pre>
+      </figure>
+    </section>
+
+    <!-- SECTION: results. Use only values that are in the source. The numbers in the cells stay exact.
+         data-bar-max (and optional data-bar-min) set the bar scale. Tell the reader which direction is better. -->
+    <section id="{{SECTION-ID}}">
+      <h2>{{HEADING}}</h2>
+      <figure class="chart">
+        <figcaption><span class="fig-label">Table 1.</span> {{CAPTION}} <span class="src">({{SOURCE REF: Table 2, page 7}})</span></figcaption>
+        <div class="table-wrap" tabindex="0" aria-label="{{TABLE NAME}}">
+          <table class="data" data-bar-max="{{AXIS MAXIMUM}}">
+            <caption>{{METRIC, UNIT, AND WHICH DIRECTION IS BETTER}}</caption>
+            <thead><tr><th scope="col">{{COLUMN}}</th><th scope="col">{{METRIC}}</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">{{ROW}}</th><td class="bar">{{VALUE FROM THE SOURCE}}</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="figure-note">{{NOTE: where the values come from and how to read the bars}}</p>
+      </figure>
+    </section>
+
+    <!-- SECTION: glossary. One entry for each technical term. The first <p> of each entry is the tooltip text. -->
+    <section id="glossary">
+      <h2>Glossary</h2>
+      <div class="glossary-tools">
+        <label for="glossary-filter">Filter the glossary</label>
+        <input id="glossary-filter" type="search" placeholder="Type a term" autocomplete="off">
+        <p class="glossary-empty" hidden>No term agrees with this filter.</p>
+      </div>
+      <dl class="glossary">
+        <div class="term" id="g-{{TERM-ID}}">
+          <dt>{{TERM}}</dt>
+          <dd>
+            <p>{{DEFINITION IN SIMPLE WORDS}}</p>
+            <p class="term-role">{{FUNCTION OF THE TERM IN THE SOURCE}}</p>
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- SECTION: important items to know. Each item states one idea that the reader must keep. -->
+    <section id="takeaways">
+      <h2>Important items to know</h2>
+      <ol class="takeaways">
+        <li>{{ITEM}}</li>
+      </ol>
+    </section>
+
+    <!-- SECTION: sources. Give the references exactly as the source gives them. -->
+    <section id="sources">
+      <h2>Sources</h2>
+      <ol class="sources" data-ste="skip">
+        <li id="src-1">{{FULL REFERENCE}}</li>
+      </ol>
+    </section>
+
+  </main>
+</div>
+
+<a class="to-top" href="#top" hidden><span aria-hidden="true">&#8593;</span> Go to the top</a>
+
+<footer class="site-footer">
+  <div>
+    <p>{{FOOTER: for example, The text of this page was written with ASD-STE100 Issue 9 rules. It is not an official STE document. Diagrams are conceptual unless their caption gives a source figure.}}</p>
+  </div>
+</footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>

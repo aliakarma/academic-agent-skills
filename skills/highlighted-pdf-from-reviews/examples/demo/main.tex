@@ -1,0 +1,46 @@
+% Synthetic demonstration manuscript for examples/example_build.py.
+% It is not a research paper: its text and values exist only to exercise the build operations.
+\documentclass[11pt]{article}
+\usepackage{amsmath,booktabs,graphicx}
+\usepackage{hyperref}
+\title{A Synthetic Manuscript for the Highlighting Example}
+\author{Example Author}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This document is a placeholder manuscript. It shows how a revised sentence is tagged with the reviewer comment that it answers. All values are invented for the demonstration.
+\end{abstract}
+
+\section{Introduction}
+The first paragraph of the introduction is unchanged in the revision.
+
+This paragraph was added in the revision to answer a reviewer request for a clearer statement of scope. The build script boxes it as a new paragraph.
+
+\section{Method}
+The method combines two placeholder terms into one score.
+\begin{equation}
+  s = \alpha x + (1-\alpha) y
+  \label{eq:score}
+\end{equation}
+The weight $\alpha$ lies between 0 and 1.
+
+\begin{table}[ht]
+  \centering
+  \caption{Placeholder values used only by this example.}
+  \label{tab:values}
+  \begin{tabular}{lcc}
+    \toprule
+    Setting & Value A & Value B \\
+    \midrule
+    Baseline & 1.0 & 2.0 \\
+    Revised & 1.5 & 2.5 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Conclusion}
+The revised conclusion now states the limits of the demonstration explicitly.
+
+\end{document}

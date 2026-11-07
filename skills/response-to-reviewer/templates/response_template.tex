@@ -1,0 +1,265 @@
+% =====================================================================
+% Response to Reviewers template (response-to-reviewer skill)
+%
+% Copy this file, then replace every \fillin{...}. Placeholders print in red,
+% so any left behind are visible in the PDF; `grep -n fillin` must return only
+% the two \newcommand lines before the letter is final.
+%
+% Conventions the checker scripts rely on:
+%   \begin{reviewercomment}{R1-01}{Short topic} ... \end{reviewercomment}
+%   \response ...            (one per comment)
+%   \actiontaken + itemize   (one per comment)
+%   \begin{location} \mainms ... \suppl ... \end{location}
+%   \rref{R1-01} links to a comment; the index uses \pageref{c:R1-01}.
+% Location format: "Section 3.4, p.~8, ll.~281--292; Table~13 (p.~31)".
+% Statements about the ORIGINAL submission that cannot be verified from the
+% available files get a trailing "% AUTHOR CHECK: <reason>" comment.
+% =====================================================================
+\documentclass[11pt]{article}
+
+%---------------------------------------------------------------- packages
+\usepackage[a4paper,top=2.6cm,bottom=2.6cm,left=2.5cm,right=2.5cm,headheight=14pt]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{newpxtext,newpxmath}          % Palatino text and math
+\usepackage[scaled=0.86]{beramono}
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage{array,tabularx,longtable,booktabs}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage[most]{tcolorbox}
+\usepackage{xparse}
+\usepackage[hyphens]{url}
+\usepackage[bookmarks=true,bookmarksnumbered=false,bookmarksopen=true,bookmarksopenlevel=1]{hyperref}
+
+%---------------------------------------------------------------- placeholders
+\newcommand{\fillin}[1]{\textcolor{red}{\bfseries[#1]}}
+\newcommand{\fillinplain}[1]{#1}  % for PDF metadata and headers; replace the argument too
+
+%---------------------------------------------------------------- colors (restrained, print-safe)
+\definecolor{accent}{HTML}{1F3A5F}
+\definecolor{muted}{HTML}{5A6270}
+\definecolor{commentbg}{HTML}{F2F4F7}
+\definecolor{commentrule}{HTML}{4A6A8F}
+\definecolor{locbg}{HTML}{F7F6F1}
+\definecolor{locrule}{HTML}{8C7E52}
+\definecolor{tablerule}{HTML}{C9CED6}
+
+\hypersetup{
+  colorlinks=true, linkcolor=accent, urlcolor=accent, citecolor=accent,
+  pdftitle={Response to Reviewers: \fillinplain{MANUSCRIPT ID}},
+  pdfauthor={The authors}
+}
+
+%---------------------------------------------------------------- layout
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+\setlength{\emergencystretch}{2em}
+\linespread{1.04}
+\setlist{nosep}
+\setlist[itemize]{leftmargin=1.3em,label={\color{accent}\small\textbullet},topsep=2pt}
+\setlist[enumerate]{leftmargin=1.6em,topsep=2pt}
+
+\titleformat{\section}{\Large\bfseries\color{accent}}{}{0pt}{}[{\color{accent}\titlerule[0.8pt]}]
+\titlespacing*{\section}{0pt}{18pt}{10pt}
+\titleformat{\subsection}{\large\bfseries\color{accent}}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{muted}Response to Reviewers}
+\fancyhead[R]{\small\color{muted}Manuscript \fillinplain{MANUSCRIPT ID}}
+\fancyfoot[C]{\small\color{muted}Page \thepage\ of \pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+% keep this form: an \hbox-based rule inflates \headheight and triggers fancyhdr warnings
+\renewcommand{\headrule}{{\color{tablerule}\hrule height\headrulewidth width\headwidth\vskip-\headrulewidth}}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\color{muted}Page \thepage\ of \pageref*{LastPage}}\renewcommand{\headrulewidth}{0pt}}
+
+%---------------------------------------------------------------- comment, response, action, location
+\newtcolorbox{revcommentbox}[2]{
+  enhanced, breakable,
+  colback=commentbg, colframe=commentrule,
+  boxrule=0pt, leftrule=3pt, arc=0pt, outer arc=0pt,
+  left=10pt, right=10pt, top=7pt, bottom=7pt,
+  before skip=16pt, after skip=8pt,
+  fontupper=\small,
+  before upper={{\normalsize\bfseries\color{accent}Reviewer comment #1}\hfill{\footnotesize\itshape\color{muted}#2}\par\smallskip}
+}
+\NewDocumentEnvironment{reviewercomment}{mm}
+  {\pdfbookmark[2]{#1: #2}{bm:#1}\phantomsection\label{c:#1}\begin{revcommentbox}{#1}{#2}}
+  {\end{revcommentbox}}
+
+\newcommand{\response}{\par\noindent{\color{accent}\bfseries Response.}\ }
+\newcommand{\actiontaken}{\par\medskip\noindent{\color{accent}\bfseries Action taken}\par\nopagebreak}
+
+\newtcolorbox{location}{
+  enhanced, breakable,
+  colback=locbg, colframe=locrule,
+  boxrule=0pt, leftrule=2pt, arc=0pt, outer arc=0pt,
+  left=9pt, right=9pt, top=5pt, bottom=5pt,
+  before skip=8pt, after skip=6pt,
+  fontupper=\small,
+  before upper={{\bfseries\color{locrule!75!black}Location in the revised manuscript}\par\smallskip}
+}
+\newcommand{\mainms}{\par\noindent{\bfseries Main manuscript}\par\nopagebreak}
+\newcommand{\suppl}{\par\smallskip\noindent{\bfseries Supplementary materials}\par\nopagebreak}
+
+% \rref, not \cref: avoids a clash if cleveref is ever loaded
+\newcommand{\rref}[1]{\hyperref[c:#1]{#1}}
+
+%================================================================ document
+\begin{document}
+
+\pdfbookmark[1]{Title and introduction}{bm:title}
+\begin{center}
+{\LARGE\bfseries\color{accent} Response to Reviewers}\par\medskip
+{\large \fillin{Full manuscript title}}\par
+\end{center}
+
+\vspace{4pt}
+{\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries\color{muted}}l X@{}}
+Manuscript ID & \fillin{ID} (revision \fillin{n})\\
+Journal & \textit{\fillin{Journal}}\\
+% Special Issue & \fillin{name}\\   % only if applicable
+Date & \fillin{Month DD, YYYY}\\
+\end{tabularx}}
+
+\vspace{6pt}
+{\color{tablerule}\hrule height 0.6pt}
+\vspace{8pt}
+
+Dear Editor, dear Reviewers,
+
+% Brief introductory note: thank the editor and reviewers, say in one or two
+% sentences what the reports led to (errors found, analyses added, claims
+% narrowed), and state that every response refers to changes present in the
+% revised files. Mention review-form ratings if the reports include them.
+\fillin{Introductory note}
+
+\subsection*{Summary of the principal changes}
+
+{\small
+\renewcommand{\arraystretch}{1.25}
+% column widths + 4 x \tabcolsep must stay within \textwidth
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.50\textwidth}>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{0.27\textwidth}@{}}
+\toprule
+\textbf{Change} & \textbf{Prompted by} & \textbf{Main location}\\
+\midrule
+\endhead
+\textbf{\fillin{Change}.} \fillin{One or two sentences.} & \rref{R1-01} & \fillin{Section, table, figure}\\
+\bottomrule
+\end{longtable}}
+
+\subsection*{How to read this letter}
+
+\begin{itemize}
+\item Comments are numbered in the order of each report. \fillin{Explain any 00 items, e.g. general assessments or language ratings, and any sub-comment letters.}
+\item Each comment is followed by our \textbf{Response}, the \textbf{Action taken}, and the \textbf{Location in the revised manuscript}. Locations distinguish the main manuscript from the supplementary materials.
+\item Page and line numbers refer to the revised manuscript \fillin{file name, page count, line-numbering mode}. Tables and figure captions carry no line numbers and are cited by number and page.
+\item Reviewer comments are reproduced verbatim. \fillin{State any purely typographical edits, e.g. duplicated symbols from text extraction shown once.}
+\end{itemize}
+
+%================================================================ Reviewer 1
+\clearpage
+\pdfbookmark[1]{Reviewer 1}{bm:rev1}
+\section*{Reviewer 1}
+
+\fillin{One sentence thanking Reviewer 1 for something specific in the report.}
+
+\begin{reviewercomment}{R1-00}{General assessment}
+\fillin{Verbatim general assessment, if the report has one.}
+\end{reviewercomment}
+
+\response \fillin{Thank and acknowledge. Point to the specific responses below.}
+
+\actiontaken
+\begin{itemize}
+\item No separate change. The revisions made in response to this report are described under \rref{R1-01}.
+\end{itemize}
+
+\begin{location}
+\mainms
+\begin{itemize}
+\item See the locations listed under \rref{R1-01}.
+\end{itemize}
+\end{location}
+
+%----------------------------------------------------------------
+\begin{reviewercomment}{R1-01}{\texorpdfstring{\fillin{Short topic}}{Short topic}}
+\fillin{Verbatim reviewer comment.}
+\end{reviewercomment}
+
+\response \fillin{Acknowledge the concern where valid. Say what was done, with the key numbers from the revised files, and state honestly any part that could not be done and why.}
+
+\actiontaken
+\begin{itemize}
+\item \textbf{Added} \fillin{what, where}.
+\item \textbf{Revised} \fillin{what, where}.
+% Verbs: Added, Revised, Removed, Corrected, Clarified, Stated, Recomputed,
+% Not done (with reason), Not determined (data need stated).
+\end{itemize}
+
+\begin{location}
+\mainms
+\begin{itemize}
+\item Section~\fillin{X.Y}, p.~\fillin{N}, ll.~\fillin{A--B}; Table~\fillin{K} (p.~\fillin{N}).
+\end{itemize}
+\suppl
+\begin{itemize}
+\item Supplementary File~\fillin{S1}, \fillin{name and part}.
+\end{itemize}
+\end{location}
+
+%================================================================ further corrections (optional)
+\clearpage
+\pdfbookmark[1]{Further corrections made by the authors}{bm:further}
+\phantomsection\label{sec:further}
+\section*{Further corrections made by the authors}
+
+% Only corrections that are present in the revised files. Delete the section if there are none.
+\begin{enumerate}
+\item \textbf{\fillin{Short title}.} \fillin{What was wrong and what it is now.}\\
+{\small\color{muted}Location: \fillin{Section, page, lines}.}
+\end{enumerate}
+
+%================================================================ completeness index
+\pdfbookmark[1]{Completeness index}{bm:index}
+\phantomsection\label{sec:index}
+\section*{Completeness index}
+
+The index lists every reviewer comment, its status and its principal location in the revised manuscript. Comment identifiers link to the corresponding response.
+% Status vocabulary: Acknowledged | Addressed | Addressed, data need stated | Corrected
+
+{\small
+\renewcommand{\arraystretch}{1.2}
+\rowcolors{2}{commentbg}{white}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.09\textwidth}>{\raggedright\arraybackslash}p{0.31\textwidth}>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{0.26\textwidth}>{\raggedleft\arraybackslash}p{0.06\textwidth}@{}}
+\toprule
+\rowcolor{white}\textbf{ID} & \textbf{Topic} & \textbf{Status} & \textbf{Principal location} & \textbf{Page}\\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{white}\textbf{ID} & \textbf{Topic} & \textbf{Status} & \textbf{Principal location} & \textbf{Page}\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\multicolumn{5}{@{}l}{\cellcolor{white}\bfseries\color{accent}Reviewer 1}\\
+\rref{R1-00} & General assessment & Acknowledged & See R1-01 & \pageref{c:R1-00}\\
+\rref{R1-01} & \fillin{Topic} & \fillin{Status} & \fillin{Location} & \pageref{c:R1-01}\\
+\end{longtable}}
+
+\medskip
+\fillin{Closing sentence thanking the editor and reviewers.}
+
+\medskip
+Sincerely,\par
+\fillin{Sign-off as the authors prefer, e.g. ``The authors''}
+
+\end{document}

@@ -1,0 +1,133 @@
+% =====================================================================
+% Finding-Gap report template
+% Fill every [FILL] marker. Cite only keys present in references.bib,
+% which must contain only Source Ledger entries. Remove unused sections.
+% Compile: latexmk -pdf gap_analysis.tex
+% =====================================================================
+\documentclass[11pt]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+% Latin Modern + microtype when available; fall back gracefully otherwise.
+\IfFileExists{lmodern.sty}{\usepackage{lmodern}\usepackage{microtype}}{}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\fillin}[1]{\textcolor{red}{[FILL: #1]}}
+\newcommand{\tagS}{\textsuperscript{\textsf{[S]}}}  % source-verified
+\newcommand{\tagU}{\textsuperscript{\textsf{[U]}}}  % user-provided
+\newcommand{\tagB}{\textsuperscript{\textsf{[B]}}}  % background, unverified
+\newcommand{\tagI}{\textsuperscript{\textsf{[I]}}}  % inference
+
+\title{Research Gap Analysis:\\ \fillin{topic}}
+\author{Prepared with the Finding-Gap skill for \fillin{researcher}}
+\date{Search conducted \fillin{dates}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\fillin{Two to four sentences: scope, evidence base size, recommended gap, its classification and evidence confidence, and the main remaining risk.}
+\end{abstract}
+
+\paragraph{Evidence tags.} \tagS~source-verified in this search; \tagU~provided by the researcher; \tagB~background knowledge not re-verified; \tagI~analytical inference.
+
+\section{Scope and assumptions}
+\fillin{Scope sentence, field, purpose, target venue or funder, year range, assumptions made at intake.}
+
+\section{Search strategy and coverage}
+\fillin{Concept blocks, tools, passes run, number of queries, records screened, papers coded, saturation status. Full log in Appendix~\ref{app:log}.}
+
+\section{Literature map}
+\fillin{Cluster table (M1) and cross-cutting observations.}
+% \input{gap_matrix_out/tables.tex}  % optional descriptive tables
+
+\section{Lens analyses}
+\subsection{Contradictions}\fillin{M2 or remove.}
+\subsection{Recurring recommendations}\fillin{M3 or remove.}
+\subsection{Methodology}\fillin{M4 or remove.}
+\subsection{Population and context}\fillin{M5 or remove.}
+\subsection{Theory}\fillin{M6 or remove.}
+\subsection{Variables and relationships}\fillin{M7 or remove.}
+\subsection{Time and data}\fillin{M8 or remove.}
+\subsection{Practice and policy}\fillin{M11 or remove.}
+\subsection{Assumptions}\fillin{M12 or remove.}
+
+\section{Candidate gaps and scoring}
+\begin{table}[htbp]
+\centering
+\small
+\caption{Candidate gaps scored on verified insufficiency (E), theoretical (T) and practical (P) significance, non-triviality (N), convergence (C), and recency robustness (R).}
+\label{tab:scores}
+\begin{tabular}{@{}p{5.2cm}cccccccl@{}}
+\toprule
+Candidate & E & T & P & N & C & R & Total & Class \\
+\midrule
+\fillin{gap 1} & -- & -- & -- & -- & -- & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Recommended research gap}
+\subsection{Synthesis matrix}
+\fillin{Established / disputed / understudied / methodological limitations / theoretical failures, with citations.}
+
+\subsection{Gap statement}
+\begin{quote}
+\textbf{Research gap.} \fillin{Gap statement using the formulas in gap-evaluation.md.}
+\end{quote}
+
+\subsection{Significance and novelty}
+\fillin{Theoretical and practical significance; scoped novelty claim; contribution type.}
+
+\subsection{Research questions and hypotheses}
+\begin{enumerate}[label=\textbf{RQ\arabic*.}, leftmargin=*]
+  \item \fillin{RQ1}
+  \item \fillin{RQ2}
+  \item \fillin{RQ3}
+\end{enumerate}
+\begin{enumerate}[label=\textbf{H\arabic*.}, leftmargin=*]
+  \item \fillin{Hypothesis with direction and rationale}
+\end{enumerate}
+
+\subsection{Methodology and variables}
+\fillin{Design, data, variables with roles and operationalizations, analysis plan, scope boundaries.}
+
+\subsection{Stress-test result}
+\fillin{M9 verdict, attack results, how the statement was revised, falsification condition.}
+
+\subsection{Feasibility and fit}
+\fillin{Go / Conditional / No-go with reasons.}
+
+\subsection{Validation plan}
+\fillin{Types of papers still to search and ready-to-run search strings per database.}
+
+\subsection{Alternatives considered}
+\fillin{Two runner-up gaps and why they ranked lower.}
+
+\section{Limitations of this analysis}
+\fillin{Coverage-limitations statement from search-protocol.md, plus claims tagged [B] or [I] that need verification.}
+
+\appendix
+\section{Search log}\label{app:log}
+\fillin{Table from search\_log.csv.}
+
+\section{Source ledger}
+\fillin{Summary table from source\_ledger.csv (key, year, venue, retrieved via, verification level).}
+
+% Bibliography is included only when references.bib exists.
+\IfFileExists{references.bib}{%
+  \bibliographystyle{plainnat}
+  \bibliography{references}
+}{}
+
+\end{document}

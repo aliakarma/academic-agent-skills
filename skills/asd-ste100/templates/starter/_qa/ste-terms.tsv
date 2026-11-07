@@ -1,0 +1,22 @@
+# Terminology register for this page (ASD-STE100 Issue 9, Rules 1.5, 1.8, 1.11, 1.12).
+# Format: term<TAB>type and category<TAB>note. TN = technical noun (Rule 1.5, categories 1 to 22).
+# TV = technical verb (Rule 1.12, categories 1 to 4). ste_tool.py check reads this file and does not
+# report these terms as unknown words. Declare only real terms of the subject field, one meaning each.
+# Interface terms of the starter. Keep them, then add the terms of the source below.
+content	TN 19	page content (listed example in category 19)
+dark mode	TN 19	interface setting
+section	TN 15	part of documentation (listed example in category 15)
+page	TN 15	part of documentation (listed example in category 15)
+technical explanation	TN 15	named part of this page
+diagram	TN 15	listed example in category 15
+figure	TN 15	listed example in category 15
+table	TN 15	listed example in category 15
+listing	TN 15	code listing, a part of documentation
+equation	TN 7	formula (category 7)
+glossary	TN 15	part of documentation
+term	TN 15	entry in the glossary
+filter	TV 2b	listed example in category 2 b), also the name of the glossary control
+type	TV 2a	listed example in category 2 a)
+copy	TV 2b	listed example in category 2 b)
+code	TN 19	program code (CODE (n) is approved only for identification codes)
+# Terms of the source:
