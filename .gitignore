@@ -1,0 +1,23 @@
+# Generated caches (they also appear inside skills/*/scripts/)
+__pycache__/
+*.py[cod]
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+node_modules/
+.venv/
+venv/
+.playwright-cli/
+.DS_Store
+Thumbs.db
+
+# User-supplied ASD-STE100 material (skills/asd-ste100/REFERENCES.md). This project does not distribute the
+# specification or a guide made from it. Keep the exact paths: the validator reads them as user-supplied files.
+skills/asd-ste100/references/ASD-STE100_ISSUE9.pdf
+skills/asd-ste100/references/STE-ISSUE9-REFERENCE-GUIDE.md
+skills/asd-ste100/references/*.pdf
+
+# Local-only release files: planning notes and the private review folder (with excluded material). Never publish.
+RELEASE_COMMIT_PLAN.md
+MANUAL_RELEASE_CHECKLIST.md
+.release-review/

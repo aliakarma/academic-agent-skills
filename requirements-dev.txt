@@ -1,0 +1,3 @@
+# Tooling for scripts/ and tests/. The skills themselves list their own runtime needs in docs/PLATFORM_COMPATIBILITY.md.
+PyYAML>=6.0,<7
+pytest>=8,<10
