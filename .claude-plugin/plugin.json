@@ -1,0 +1,13 @@
+{
+  "name": "academic-agent-skills",
+  "version": "1.0.0",
+  "description": "Agent skills for academic research and scientific publishing: literature review, research gaps, manuscript drafting and polishing, peer review, reviewer responses, reference verification, writing and integrity audits, figures, slides, and venue conversion.",
+  "author": {
+    "name": "aliakarma",
+    "url": "https://github.com/aliakarma"
+  },
+  "homepage": "https://github.com/aliakarma/academic-agent-skills",
+  "repository": "https://github.com/aliakarma/academic-agent-skills",
+  "license": "CC-BY-4.0",
+  "keywords": ["academic", "research", "scientific-writing", "peer-review", "latex", "manuscript", "literature-review", "agent-skills"]
+}

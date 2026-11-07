@@ -1,0 +1,19 @@
+{
+  "name": "academic-agent-skills",
+  "metadata": {
+    "description": "Marketplace for the Academic Agent Skills plugin: one plugin that bundles every skill in skills/."
+  },
+  "owner": {
+    "name": "aliakarma",
+    "url": "https://github.com/aliakarma"
+  },
+  "plugins": [
+    {
+      "name": "academic-agent-skills",
+      "source": "./",
+      "description": "Agent skills for academic research and scientific publishing: literature review, research gaps, manuscript drafting and polishing, peer review, reviewer responses, reference verification, writing and integrity audits, figures, slides, and venue conversion.",
+      "category": "research",
+      "tags": ["academic", "research", "writing", "peer-review", "latex"]
+    }
+  ]
+}
