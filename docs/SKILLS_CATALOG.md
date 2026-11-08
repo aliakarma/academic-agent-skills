@@ -40,7 +40,7 @@ The collection has **22 skills** in 8 categories. "Manual only" skills set `disa
 
 | Skill | What it does | Invocation |
 |---|---|---|
-| [`reference-verify`](../skills/reference-verify/SKILL.md) | Checks one reference against publisher, DOI, Crossref, arXiv, or issuing-body sources and returns a corrected, paste-ready BibTeX entry. | Automatic or by name |
+| [`reference-verify`](../skills/reference-verify/SKILL.md) | Checks one reference against publisher, DOI, Crossref, arXiv, or issuing-body sources and returns a corrected, paste-ready BibTeX entry. Triages a whole .bib file by script first, with a Colab notebook front end. | Automatic or by name |
 | [`repo-forensic-audit`](../skills/repo-forensic-audit/SKILL.md) | Forensic audit of a research code repository for reproducibility, hard-coded metrics, disconnected evaluation pipelines, and other fabrication fingerprints. | Automatic or by name |
 | [`research-auditor`](../skills/research-auditor/SKILL.md) | Independent pre-submission diagnosis of a research project: its real claims, the research gap checked against the literature, closest prior work, journal fit, and acceptance blockers. | Automatic or by name |
 

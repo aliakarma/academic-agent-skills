@@ -38,7 +38,8 @@ EMAIL_OK = re.compile(r"@(?:example\.(?:com|org|net)|users\.noreply\.github\.com
 VENDORED = ("skills/awesome-design/design-md/", "skills/awesome-design/preview-library/")  # third-party demo pages
 DOC_BINARIES = {".pdf", ".docx", ".doc", ".pptx", ".xlsx", ".zip", ".7z", ".tar", ".gz"}
 TEXT_SUFFIXES = {".md", ".py", ".txt", ".json", ".yml", ".yaml", ".toml", ".cfg", ".ini", ".tex", ".bib", ".sty",
-                 ".js", ".mjs", ".ts", ".html", ".css", ".tsv", ".csv", ".ps1", ".sh", ".aux", ""}
+                 ".js", ".mjs", ".ts", ".html", ".css", ".tsv", ".csv", ".ps1", ".sh", ".aux", ".ipynb", ""}
+# .ipynb is JSON text: saved cell outputs can carry e-mail addresses and local paths.
 PRIVATE_TERMS = Path(".release-review") / "private-terms.txt"  # local-only denylist, never published
 
 

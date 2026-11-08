@@ -1,6 +1,6 @@
 ---
 name: reference-verify
-description: Use when a scholarly, technical, standards, legal, software, dataset, or web reference (usually a BibTeX entry, often supplied one at a time with reviewer or automated-verifier comments such as "DEAD 202", "DOI not found", "title mismatch", "author mismatch", or "possibly hallucinated") must be independently checked against publisher, DOI, venue, repository, or issuing-body sources and returned as a corrected paste-ready BibTeX entry. Trigger on "reference-verify", "verify this reference", "check this BibTeX", "is this citation real", "fix this bib entry", "the verifier flagged this reference". Not for whole-file .bib formatting or style cleanup (bibtex-validator) or for finding new literature (Literature-Review).
+description: Use when a scholarly, technical, standards, legal, software, dataset, or web reference (usually a BibTeX entry, often supplied one at a time with reviewer or automated-verifier comments such as "DEAD 202", "DOI not found", "title mismatch", "author mismatch", or "possibly hallucinated") must be independently checked against publisher, DOI, venue, repository, or issuing-body sources and returned as a corrected paste-ready BibTeX entry. Also use to triage a whole .bib file ("verify my bibliography", "check all my references") with the bundled verify_bib.py before checking flagged entries one by one. Trigger on "reference-verify", "verify this reference", "check this BibTeX", "is this citation real", "fix this bib entry", "the verifier flagged this reference". Not for .bib formatting or style cleanup (bibtex-validator) or for finding new literature (Literature-Review).
 ---
 
 # Reference verification
@@ -62,6 +62,15 @@ The sections above are the contract. Everything below explains how to meet it wi
 5. **Account for every field.** Go through the diff and the source page one field at a time. Name each changed, added, or removed field under **Corrections made**. Answer each reviewer or verifier claim in **Notes** with "confirmed", "refuted", or "unresolved", plus the evidence.
 6. **Run the format check.** Save the drafted response to the scratchpad and run `python "${CLAUDE_SKILL_DIR}/scripts/check_response.py" <file> --key <originalKey>`. Fix every ERROR. A WARN needs a deliberate decision. Then send the response.
 
+## Whole-file mode
+
+Use this when the user hands over a complete `.bib` file rather than one entry.
+
+1. **Triage the file.** Run `python "${CLAUDE_SKILL_DIR}/scripts/verify_bib.py" <file.bib>` from the folder where the reports should go. It needs `bibtexparser` 1.x and `requests` (`python -m pip install "bibtexparser>=1.4,<2" "requests>=2.28,<3"`). Pass `--email <address>` only if the user gives one. It reports only and never edits the file. It writes `verification_report.md` and `verification_report.csv`, and exits 1 when any entry needs attention.
+2. **Read the statuses.** `CLEAN` and `NORMALIZED` entries need no further work. `REVIEW`, `PROBLEM` (wrong field, DOI of another work, retracted work), `UNVERIFIED` (no registry record, possibly fabricated), and `ERROR` entries go to step 3. The script's verdicts are leads, not evidence. A `RETRACTED` row means a registry marks the work as retracted or withdrawn. Tell the user before anything else.
+3. **Verify each flagged entry.** Run the full workflow above for each one, with its report rows as the verifier comments. Use the per-entry response structure.
+4. **Write corrections only on request.** `--apply` writes only identity-confirmed corrections that no trusted source disputes. It edits just those values in place, keeps the original as `<file>.orig.bak`, and adds `% bibverify:` comments above entries that still need a human. Run it only when the user asks for the file to be changed, and tell them what changed.
+
 ## Input handling
 
 - **Several entries at once.** Handle them in the order given. Give each one its own complete response block and its own lookups. Separate blocks with `---`. Evidence for one entry never counts for another.
@@ -89,4 +98,5 @@ The sections above are the contract. Everything below explains how to meet it wi
 
 - `scripts/fetch_metadata.py`: registry lookup and field diff. Run `--selftest` for the offline tests.
 - `scripts/check_response.py`: checks the response structure. Run `--selftest` for the offline tests.
+- `scripts/verify_bib.py`: whole-file triage against CrossRef, DataCite, OpenAlex, Europe PMC, DBLP, OpenLibrary, arXiv, and publisher BibTeX pages. Needs `bibtexparser` 1.x and `requests`. Run `--help` for the options. A Colab front end is in the repository's `notebook/BibTeX_DOI_Verifier.ipynb`.
 - `references/source-guide.md`: which source governs which field, by reference type, plus integrity signals.

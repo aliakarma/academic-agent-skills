@@ -15,7 +15,7 @@ Depth: every `SKILL.md` frontmatter was parsed and every body was scanned. Long 
 
 ## 1. Inventory
 
-**22 skills** and 363 published files under `skills/`. Generated cache folders (`__pycache__`, `.mypy_cache`,
+**22 skills** and 364 published files under `skills/`. Generated cache folders (`__pycache__`, `.mypy_cache`,
 `.ruff_cache`) are excluded by `.gitignore`.
 
 | Skill | Purpose | Files | Scripts | SKILL.md lines | Frontmatter beyond name and description |
@@ -35,7 +35,7 @@ Depth: every `SKILL.md` frontmatter was parsed and every body was scanned. Long 
 | peer-review | Simulated three-reviewer journal review with meta-review | 3 | 0 | 340 | none |
 | project-report-to-github | Tested research repository built from a project report | 4 | 1 | 61 | none |
 | readme-improvement | README.md upgraded without changing technical meaning | 1 | 0 | 304 | none |
-| reference-verify | One reference verified and returned as corrected BibTeX | 4 | 2 | 92 | none |
+| reference-verify | One reference verified and returned as corrected BibTeX; a whole `.bib` triaged by script | 5 | 3 | 102 | none |
 | repair-paper | Manuscript revised against an existing `audit.md` | 4 | 2 | 59 | none |
 | repo-forensic-audit | Research-repository integrity and reproducibility audit | 5 | 0 | 212 | none |
 | research-auditor | Pre-submission diagnosis of claims, gap, prior work, journal fit | 5 | 0 | 140 | none |

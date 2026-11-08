@@ -73,7 +73,8 @@ CATALOG = {
                             "disconnected evaluation pipelines, and other fabrication fingerprints."),
     "reference-verify": ("Research Quality Assurance",
                          "Checks one reference against publisher, DOI, Crossref, arXiv, or issuing-body sources and "
-                         "returns a corrected, paste-ready BibTeX entry."),
+                         "returns a corrected, paste-ready BibTeX entry. Triages a whole .bib file by script "
+                         "first, with a Colab notebook front end."),
     "figure-rebuild": ("Figures, Slides and Explainers",
                        "Rebuilds a raster or AI-generated research figure as LaTeX/TikZ with selectable text and a "
                        "matched style, and audits the figure's claims against measured results."),
