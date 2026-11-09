@@ -15,20 +15,21 @@ Depth: every `SKILL.md` frontmatter was parsed and every body was scanned. Long 
 
 ## 1. Inventory
 
-**22 skills** and 364 published files under `skills/`. Generated cache folders (`__pycache__`, `.mypy_cache`,
+**23 skills** and 142 published files under `skills/`. Generated cache folders (`__pycache__`, `.mypy_cache`,
 `.ruff_cache`) are excluded by `.gitignore`.
 
 | Skill | Purpose | Files | Scripts | SKILL.md lines | Frontmatter beyond name and description |
 |---|---|---|---|---|---|
 | asd-ste100 | Offline HTML explainer in ASD-STE100 Simplified Technical English | 10 | 2 | 167 | argument-hint, disable-model-invocation, user-invocable |
 | audit-paper | Line-by-line forensic writing audit to `audit.md` | 3 | 1 | 71 | none |
-| awesome-design | 54 DESIGN.md design-system specs and a preview library (from VoltAgent, MIT) | 227 | 1 | 140 | license, metadata |
 | clean-user-facing-text | Invisible-Unicode audit and prose finalization | 10 | 5 | 191 | none |
 | figure-rebuild | Raster figure to LaTeX/TikZ with selectable text and claim audit | 5 | 2 | 260 | none |
 | finding-gap | Evidence-grounded research-gap discovery with a source ledger | 7 | 1 | 139 | none |
 | highlighted-pdf-from-reviews | Highlighted revised manuscript keyed to reviewer-comment IDs | 8 | 2 | 71 | none |
 | idea-to-paper | Full LaTeX paper project from an idea or abstract | 10 | 1 | 148 | argument-hint |
 | literature-review | Literature base built, extended, or repaired and integrated | 14 | 7 | 193 | none |
+| manuscript-revision | Reviewer-driven revision of every comment, with requested experiments and a completion gate | 3 | 1 | 124 | none |
+| nanobanana-prompt-generator | NanoBanana prompts for every non-results TikZ diagram, with a user guide | 2 | 1 | 166 | none |
 | paper-format-converter | Manuscript converted to a venue's official template | 8 | 2 | 137 | argument-hint, disable-model-invocation |
 | paper-to-pptx | Paper-faithful 15-slide PowerPoint deck | 7 | 3 | 90 | none |
 | paper-to-project-report | Paper to engineering spec `PROJECT_REPORT.md` | 5 | 1 | 53 | none |
@@ -49,9 +50,7 @@ Depth: every `SKILL.md` frontmatter was parsed and every body was scanned. Long 
 
 All skills first sat directly in the repository root (`<skill>/SKILL.md`). There was no README, license, manifest,
 test, or CI file. Each skill folder followed the Agent Skills layout (`SKILL.md` plus `scripts/`, `references/`,
-`templates/`, `assets/`, `examples/`, `evals/`, `tests/`). `awesome-design` also keeps the files of its upstream
-repository (`README.md`, `LICENSE`, `CONTRIBUTING.md`, `.gitignore`, `.github/`, `agents/openai.yaml`). They are
-inert inside a skill folder and were kept.
+`templates/`, `assets/`, `examples/`, `evals/`, `tests/`).
 
 ## 3. Metadata validation
 
@@ -59,11 +58,10 @@ inert inside a skill folder and were kept.
 |---|---|---|---|
 | literature-review | `name: Literature-Review` was not lowercase and did not match the folder | name format, name = folder | Fixed |
 | figure-rebuild | Description was 1,248 characters | description at most 1,024 | Fixed. Trigger list moved to the body |
-| awesome-design | `metadata.sources` was a list | metadata maps strings to strings | Fixed. Now `metadata.source` |
 | 10 skills | Hard-coded `~/.claude/skills/...` paths | repository portability rule | Fixed (Section 4) |
 | asd-ste100, idea-to-paper, paper-format-converter | Claude Code fields `argument-hint`, `disable-model-invocation`, `user-invocable` | `skills-ref` rejects unexpected fields | Kept on purpose. Reported as warnings |
 
-Other checks passed: every skill folder has a `SKILL.md`, all frontmatter parses as YAML, all 22 names are unique and
+Other checks passed: every skill folder has a `SKILL.md`, all frontmatter parses as YAML, all 23 names are unique and
 match their folders, every description is between 40 and 1,024 characters, no `SKILL.md` exceeds 500 lines, no file
 or folder is empty, and every resource that a `SKILL.md` names exists.
 
@@ -91,8 +89,8 @@ or folder is empty, and every resource that a `SKILL.md` names exists.
    to the STANDARD punctuation policy. The `paper-to-project-report` and `project-report-to-github` checkers run the
    punctuation check only with `--style`. `idea-to-paper`'s checker still reports em dashes and semicolons in
    generated papers (E14, E15) as its own house style.
-10. **Line endings.** Two `SKILL.md` files use CRLF (awesome-design, clean-user-facing-text). Both loaders accept
-    them. Kept as found.
+10. **Line endings.** One `SKILL.md` file uses CRLF (clean-user-facing-text). Both loaders accept
+    it. Kept as found.
 
 Per-agent status is in [PLATFORM_COMPATIBILITY.md](PLATFORM_COMPATIBILITY.md).
 
@@ -102,15 +100,13 @@ Per-agent status is in [PLATFORM_COMPATIBILITY.md](PLATFORM_COMPATIBILITY.md).
 |---|---|---|
 | "audit my paper" | audit-paper, research-auditor | Fixed. `audit-paper` covers the writing, `research-auditor` the research substance (claims, gap, prior work, journal fit). Each description names the other as the alternative, and neither lists the bare phrase as its own trigger |
 | Rebuttal or reviewer response letter | peer-review, response-to-reviewer | Open. peer-review's description includes "help preparing a rebuttal or reviewer response letter" |
+| Reviewer-driven revision | manuscript-revision, response-to-reviewer | Separated. `manuscript-revision` edits the paper and calls `response-to-reviewer` for the letter. `response-to-reviewer` never edits the manuscript |
 | Research gap analysis, gap matrix | finding-gap, literature-review | Open. Both build gap matrices |
 | Prose humanizing | text-humanizer, clean-user-facing-text | Open. Overlapping rewrite scope |
 
-**Skills named but not included.** Descriptions route to `bibtex-validator`, `manuscript-revision`, `humanize-latex`,
-`MDPI-Format`, and `anthropic-skills:pptx`, which are not in this repository. Only `paper-to-pptx` depends on one.
+**Skills named but not included.** Descriptions route to `bibtex-validator`, `humanize-latex`, `MDPI-Format`,
+and `anthropic-skills:pptx`, which are not in this repository. Only `paper-to-pptx` depends on one.
 The others are "use X instead" hints.
-
-**Content claims.** `awesome-design/SKILL.md` claimed "55+" specifications. The folder holds 54, and the text now
-says 54.
 
 ## 6. Changes made to skill content
 
@@ -121,7 +117,6 @@ None of these changes alters what a skill does, except where the Reason column s
 | all skill folders | Moved from the root to `skills/<name>/` | Canonical layout for both installers |
 | literature-review/SKILL.md | `name: Literature-Review` → `literature-review` | Spec name rule |
 | figure-rebuild/SKILL.md | Description shortened. The full trigger list moved, unchanged, to a `## Trigger phrases` section | Spec 1,024-character limit |
-| awesome-design/SKILL.md | `metadata.sources: [url]` → `metadata.source: "url"`. "55+" → "54" | Spec metadata type, accurate count |
 | ten SKILL.md files and one reference file | `~/.claude/skills/...` → `${CLAUDE_SKILL_DIR}/...`, plus a short "Paths" note | Portability |
 | asd-ste100/SKILL.md, scripts/ste_tool.py, new REFERENCES.md | The specification is user-supplied, with a configurable location (`ASD_STE100_PDF`, `--pdf`). The optional reference guide has fallbacks. The example names in the text and the self-test are neutral | Licensing, portability |
 | finding-gap/SKILL.md, references/search-protocol.md | A fixed personal portfolio URL → "the portfolio or profile URL they give you" | Correctness: the skill fetched one person's site for every user |
@@ -138,7 +133,6 @@ None of these changes alters what a skill does, except where the Reason column s
 |---|---|---|
 | Secret scan (API keys, tokens, private keys, passwords) | all public files | None found. One pattern hit in `text-humanizer/references/bibliography.md` is a URL slug, not a credential |
 | ASD-STE100 specification and a reference guide made from it | `skills/asd-ste100/references/` | Not distributed. Both paths are in `.gitignore`. Users supply an authorized copy |
-| Vendored third-party content: MIT license, VoltAgent | `skills/awesome-design/` | Kept with its license notice. Credited in README and [LICENSE_AND_ATTRIBUTION.md](LICENSE_AND_ATTRIBUTION.md) |
 | Pattern lists described as adapted from two MIT-licensed catalogs, without the upstream notices | `skills/clean-user-facing-text/` | Open. Listed in LICENSE_AND_ATTRIBUTION.md |
 | `-ExecutionPolicy Bypass` in a usage line | `paper-to-pptx` | Documented. It runs the bundled script only |
 | No `shell=True`, `os.system`, `eval`, `exec`, or unpickling in any bundled script | all scripts | None |

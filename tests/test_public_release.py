@@ -18,7 +18,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import generate_catalog  # noqa: E402
 from validate_skills import PRIVATE_TERMS, user_supplied_files, validate_privacy, validate_repo  # noqa: E402
 
-EXPECTED_SKILL_COUNT = 22                       # release 1.0.0; change together with the CATALOG table
+EXPECTED_SKILL_COUNT = 23                       # release 1.0.0; change together with the CATALOG table
 EXCLUDED_SKILLS = ("remove-ai-marks",)          # not part of the public collection
 LOCAL_ONLY = ("RELEASE_COMMIT_PLAN.md", "MANUAL_RELEASE_CHECKLIST.md", ".release-review/")
 ASD_RESTRICTED = ("skills/asd-ste100/references/ASD-STE100_ISSUE9.pdf",

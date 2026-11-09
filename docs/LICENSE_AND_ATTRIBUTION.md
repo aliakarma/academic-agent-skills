@@ -67,7 +67,6 @@ not apply to it or grant any permission for it.
 
 | Material | Location | Owner and terms |
 |---|---|---|
-| DESIGN.md design-system specifications, preview pages, and upstream repository files | `skills/awesome-design/` | VoltAgent, MIT license in [`skills/awesome-design/LICENSE`](../skills/awesome-design/LICENSE). Keep that notice with any copy. The specifications describe the visual styles of third-party websites. The names, logos, and trademarks of those companies belong to their owners |
 | Rewrite-pattern and word-replacement lists that the skill says it adapted from the public `blader/humanizer` and `conorbronsdon/avoid-ai-writing` catalogs (described there as MIT-licensed) | `skills/clean-user-facing-text/` (`scripts/score_stylometry.py`, `references/detectors.md`) | Their authors. The upstream license notices are not yet included. This is an open item for the maintainer |
 | Cited publications, standards, and web pages | Bibliographies and reference files in several skills | Their publishers and authors. The skills cite and summarize them. They do not reproduce them |
 
