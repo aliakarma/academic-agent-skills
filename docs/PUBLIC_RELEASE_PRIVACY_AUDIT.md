@@ -9,8 +9,7 @@ private values that were removed.
 Every file that the repository publishes: skill instructions, reference files, templates, examples, evaluation
 records, scripts, tests, configuration, manifests, issue templates, workflows, and documentation. The review also
 covered file names and paths, and looked for embedded document metadata. The public tree contains no PDF, Word,
-PowerPoint, spreadsheet, archive, or image file, so there was no document metadata to scrub. The HTML preview pages
-of the vendored `awesome-design` library are third-party demonstration material.
+PowerPoint, spreadsheet, archive, or image file, so there was no document metadata to scrub.
 
 The review read each finding in context. It did not replace text blindly. Citations of published research and the
 names of their authors are kept.

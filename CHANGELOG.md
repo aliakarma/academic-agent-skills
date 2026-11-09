@@ -6,8 +6,21 @@ All notable changes to this project are recorded here. The format follows
 
 ## [Unreleased]
 
+### Removed
+
+- `awesome-design`: the vendored third-party DESIGN.md library (VoltAgent, MIT) and its "General-Purpose
+  Utilities" catalog category. The collection now holds only this project's own skills.
+
 ### Added
 
+- `nanobanana-prompt-generator`: writes a NanoBanana prompt for every TikZ diagram in `figures/tikz/` or the
+  manuscript and a step-by-step `GUIDE.md` for generating reference images in Google Gemini or Google Flow for
+  `figure-rebuild`. Results figures never get a prompt: `scripts/find_tikz.py` excludes plot code outright and
+  flags results captions and values for review. Tested by `tests/test_find_tikz.py`.
+- `manuscript-revision`: revises a manuscript against every editor and reviewer comment, runs the experiments
+  the reviewers request, and hands the letter to `response-to-reviewer`. `scripts/check_audit.py` keeps the run going
+  until each comment in `revision_audit.md` is ADDRESSED with evidence, or BLOCKED with a stated need from the
+  authors. Tested by `tests/test_check_audit.py`.
 - `reference-verify` whole-file mode: `scripts/verify_bib.py` checks every field of every entry in a `.bib`
   against CrossRef, DataCite, OpenAlex, Europe PMC, DBLP, OpenLibrary, arXiv, DOI content negotiation, and
   publisher BibTeX pages (PMLR, ACL Anthology). It flags retracted works and duplicate entries, writes Markdown

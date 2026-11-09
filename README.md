@@ -28,18 +28,15 @@ letter checker, an audit-report validator) before the agent reports back.
 
 ## What the skills cover
 
-The collection has **22 skills** in seven groups:
+The collection has **23 skills** in seven groups:
 
 - **Literature and research gaps.** Logged searches, source ledgers, gap matrices, and verified BibTeX (`literature-review`, `finding-gap`).
 - **Manuscript development.** From an idea to a full LaTeX paper project, staged polishing, and conversion to a venue's official template (`idea-to-paper`, `universal-manuscript-polish`, `paper-format-converter`).
 - **Writing quality.** Prose revision, a line-by-line forensic writing audit, and audit-driven repair (`text-humanizer`, `audit-paper`, `repair-paper`, `clean-user-facing-text`).
-- **Peer review and revision.** Simulated multi-reviewer review, response letters with reference checks, and highlighted change PDFs (`peer-review`, `response-to-reviewer`, `highlighted-pdf-from-reviews`).
+- **Peer review and revision.** Simulated multi-reviewer review, complete reviewer-driven revision with the requested experiments, response letters with reference checks, and highlighted change PDFs (`peer-review`, `manuscript-revision`, `response-to-reviewer`, `highlighted-pdf-from-reviews`).
 - **Research quality assurance.** Pre-submission diagnosis, repository forensics, and reference verification, one entry or a whole `.bib` (`research-auditor`, `repo-forensic-audit`, `reference-verify`).
-- **Figures and talks.** Raster figures rebuilt as TikZ, paper-faithful PowerPoint decks, and Simplified Technical English explainers (`figure-rebuild`, `paper-to-pptx`, `asd-ste100`).
+- **Figures and talks.** NanoBanana prompts that turn TikZ diagrams into reference images, raster figures rebuilt as TikZ, paper-faithful PowerPoint decks, and Simplified Technical English explainers (`nanobanana-prompt-generator`, `figure-rebuild`, `paper-to-pptx`, `asd-ste100`).
 - **Research engineering.** Paper to engineering spec to tested code repository, and README upgrades (`paper-to-project-report`, `project-report-to-github`, `readme-improvement`).
-
-The collection also includes one general-purpose utility, `awesome-design`, a library of design-system specifications
-for building user interfaces.
 
 ## Quick installation
 
@@ -95,6 +92,7 @@ relying on a skill outside Claude Code.
 | [`repair-paper`](skills/repair-paper/SKILL.md) | Revises a manuscript against an existing audit.md so that every numbered audit issue is repaired or accounted for. | Academic Writing Quality |
 | [`text-humanizer`](skills/text-humanizer/SKILL.md) | Drafts, revises, and critiques academic and professional prose for clarity, specificity, and author voice. Also interprets AI-detection and similarity reports. | Academic Writing Quality |
 | [`highlighted-pdf-from-reviews`](skills/highlighted-pdf-from-reviews/SKILL.md) | Builds a highlighted revised-manuscript PDF from a LaTeX paper and its response letter, with each change tagged by reviewer-comment ID and mapped to pages. | Peer Review and Revision |
+| [`manuscript-revision`](skills/manuscript-revision/SKILL.md) | Revises a manuscript against every editor and reviewer comment, runs the experiments reviewers request, and writes a matching response letter, with a script that keeps the run going until each comment is addressed or its blocker is stated. | Peer Review and Revision |
 | [`peer-review`](skills/peer-review/SKILL.md) | Simulates a three-reviewer Q1 journal peer review with an area-chair meta-review, for whole manuscripts or single sections. | Peer Review and Revision |
 | [`response-to-reviewer`](skills/response-to-reviewer/SKILL.md) | Drafts, updates, or verifies a point-by-point response-to-reviewers letter, with scripts that check completeness, page and line references, and numbers. | Peer Review and Revision |
 | [`reference-verify`](skills/reference-verify/SKILL.md) | Checks one reference against publisher, DOI, Crossref, arXiv, or issuing-body sources and returns a corrected, paste-ready BibTeX entry. Triages a whole .bib file by script first, with a Colab notebook front end. | Research Quality Assurance |
@@ -102,11 +100,11 @@ relying on a skill outside Claude Code.
 | [`research-auditor`](skills/research-auditor/SKILL.md) | Independent pre-submission diagnosis of a research project: its real claims, the research gap checked against the literature, closest prior work, journal fit, and acceptance blockers. | Research Quality Assurance |
 | [`asd-ste100`](skills/asd-ste100/SKILL.md) | Builds an interactive offline HTML explainer of a paper, method, or codebase, with visible text written to ASD-STE100 Issue 9 Simplified Technical English rules. Needs your own authorized copy of the specification, which is not included. Manual only. | Figures, Slides and Explainers |
 | [`figure-rebuild`](skills/figure-rebuild/SKILL.md) | Rebuilds a raster or AI-generated research figure as LaTeX/TikZ with selectable text and a matched style, and audits the figure's claims against measured results. | Figures, Slides and Explainers |
+| [`nanobanana-prompt-generator`](skills/nanobanana-prompt-generator/SKILL.md) | Writes a NanoBanana prompt for every TikZ diagram in a paper, never for results figures, and a step-by-step guide for making reference images in Google Gemini or Flow that figure-rebuild then turns into vector figures. | Figures, Slides and Explainers |
 | [`paper-to-pptx`](skills/paper-to-pptx/SKILL.md) | Turns a LaTeX paper into an editable 15-slide PowerPoint talk deck that stays faithful to the paper, with rendered equations and a number-fidelity check. | Figures, Slides and Explainers |
 | [`paper-to-project-report`](skills/paper-to-project-report/SKILL.md) | Converts a paper into an implementation-oriented PROJECT_REPORT.md (engineering spec, reproducibility audit, roadmap phases), checked by a bundled script. | Research Engineering and Repositories |
 | [`project-report-to-github`](skills/project-report-to-github/SKILL.md) | Builds a runnable, tested, GitHub-ready research code repository from a PROJECT_REPORT.md and the paper's .tex, checked by a bundled script. | Research Engineering and Repositories |
 | [`readme-improvement`](skills/readme-improvement/SKILL.md) | Refactors a repository README.md to publication quality without changing the project's technical meaning. | Research Engineering and Repositories |
-| [`awesome-design`](skills/awesome-design/SKILL.md) | Library of 54 DESIGN.md design-system specs from public websites (from VoltAgent/awesome-design-md, MIT) with a visual preview page, for building UI in a chosen style. | General-Purpose Utilities |
 <!-- catalog:end -->
 
 The [full catalog](docs/SKILLS_CATALOG.md) groups the skills by research workflow and marks which ones are manual only.
@@ -180,9 +178,8 @@ This project is licensed under the [Creative Commons Attribution 4.0 Internation
 You may share and adapt it, including commercially, if you credit **Academic Agent Skills**, link to this
 repository, name the license, and say whether you made changes.
 
-The license covers this project's own material. Third-party material keeps its own license: the
-`skills/awesome-design` folder is MIT-licensed by VoltAgent ([its license](skills/awesome-design/LICENSE)), and the
-ASD-STE100 specification is not part of this repository. Creative Commons does not recommend its licenses for
+The license covers this project's own material. Third-party material keeps its own license, and the ASD-STE100
+specification is not part of this repository. Creative Commons does not recommend its licenses for
 software, so read [docs/LICENSE_AND_ATTRIBUTION.md](docs/LICENSE_AND_ATTRIBUTION.md) for how the license applies to
 the bundled scripts, attribution examples, and the third-party material.
 
@@ -191,4 +188,3 @@ the bundled scripts, attribution examples, and the third-party material.
 - The [Agent Skills specification](https://agentskills.io/specification) defines the skill format used here.
 - [Vercel Skills CLI](https://github.com/vercel-labs/skills) installs the skills across agents.
 - [Claude Code plugins](https://code.claude.com/docs/en/plugins) provide the native plugin and marketplace format.
-- `skills/awesome-design` is based on [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) (MIT).

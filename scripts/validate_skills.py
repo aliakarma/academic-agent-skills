@@ -35,7 +35,6 @@ PERSONAL_PATH = re.compile(r"(?:[A-Za-z]:[\\/]+Users|/Users|/home)[\\/]+(?!<|\.\
                            r"[A-Za-z][\w .-]*[\\/]")
 EMAIL = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}\b")
 EMAIL_OK = re.compile(r"@(?:example\.(?:com|org|net)|users\.noreply\.github\.com)$")
-VENDORED = ("skills/awesome-design/design-md/", "skills/awesome-design/preview-library/")  # third-party demo pages
 DOC_BINARIES = {".pdf", ".docx", ".doc", ".pptx", ".xlsx", ".zip", ".7z", ".tar", ".gz"}
 TEXT_SUFFIXES = {".md", ".py", ".txt", ".json", ".yml", ".yaml", ".toml", ".cfg", ".ini", ".tex", ".bib", ".sty",
                  ".js", ".mjs", ".ts", ".html", ".css", ".tsv", ".csv", ".ps1", ".sh", ".aux", ".ipynb", ""}
@@ -257,11 +256,10 @@ def validate_privacy(root: Path, user_supplied: set[str] | frozenset[str] = froz
             continue
         if PERSONAL_PATH.search(text):
             issues.append(Issue("ERROR", rel, "personal machine path (use a placeholder such as C:/Users/<name>/)"))
-        if not rel.startswith(VENDORED):
-            for m in EMAIL.finditer(text):
-                if not EMAIL_OK.search(m.group(0)):
-                    issues.append(Issue("ERROR", rel, "e-mail address in a public file (use name@example.com)"))
-                    break
+        for m in EMAIL.finditer(text):
+            if not EMAIL_OK.search(m.group(0)):
+                issues.append(Issue("ERROR", rel, "e-mail address in a public file (use name@example.com)"))
+                break
         low = text.lower() + "\n" + rel.lower()
         if any(re.search(r"(?<![a-z0-9])" + re.escape(t) + r"(?![a-z0-9])", low) for t in terms):  # never printed
             issues.append(Issue("ERROR", rel, f"contains a term from the private denylist ({terms_file.name})"))

@@ -25,7 +25,6 @@ CATEGORIES = [
     "Research Quality Assurance",
     "Figures, Slides and Explainers",
     "Research Engineering and Repositories",
-    "General-Purpose Utilities",
 ]
 
 CATALOG = {
@@ -59,6 +58,10 @@ CATALOG = {
     "peer-review": ("Peer Review and Revision",
                     "Simulates a three-reviewer Q1 journal peer review with an area-chair meta-review, for whole "
                     "manuscripts or single sections."),
+    "manuscript-revision": ("Peer Review and Revision",
+                            "Revises a manuscript against every editor and reviewer comment, runs the experiments "
+                            "reviewers request, and writes a matching response letter, with a script that keeps the "
+                            "run going until each comment is addressed or its blocker is stated."),
     "response-to-reviewer": ("Peer Review and Revision",
                              "Drafts, updates, or verifies a point-by-point response-to-reviewers letter, with scripts "
                              "that check completeness, page and line references, and numbers."),
@@ -75,6 +78,10 @@ CATALOG = {
                          "Checks one reference against publisher, DOI, Crossref, arXiv, or issuing-body sources and "
                          "returns a corrected, paste-ready BibTeX entry. Triages a whole .bib file by script "
                          "first, with a Colab notebook front end."),
+    "nanobanana-prompt-generator": ("Figures, Slides and Explainers",
+                                    "Writes a NanoBanana prompt for every TikZ diagram in a paper, never for results "
+                                    "figures, and a step-by-step guide for making reference images in Google Gemini "
+                                    "or Flow that figure-rebuild then turns into vector figures."),
     "figure-rebuild": ("Figures, Slides and Explainers",
                        "Rebuilds a raster or AI-generated research figure as LaTeX/TikZ with selectable text and a "
                        "matched style, and audits the figure's claims against measured results."),
@@ -94,9 +101,6 @@ CATALOG = {
     "readme-improvement": ("Research Engineering and Repositories",
                            "Refactors a repository README.md to publication quality without changing the project's "
                            "technical meaning."),
-    "awesome-design": ("General-Purpose Utilities",
-                       "Library of 54 DESIGN.md design-system specs from public websites (from VoltAgent/"
-                       "awesome-design-md, MIT) with a visual preview page, for building UI in a chosen style."),
 }
 
 README_START, README_END = "<!-- catalog:start -->", "<!-- catalog:end -->"

@@ -7,7 +7,7 @@ academic-agent-skills/          repository root = Claude Code plugin root = mark
 ├── .claude-plugin/
 │   ├── plugin.json             plugin "academic-agent-skills", version 1.0.0
 │   └── marketplace.json        marketplace "academic-agent-skills", one entry with source "./"
-├── skills/<name>/SKILL.md      the only copy of each skill (22), the single source of truth
+├── skills/<name>/SKILL.md      the only copy of each skill (23), the single source of truth
 ├── scripts/                    repository tooling: validator and catalog generator
 ├── tests/                      pytest suite for the tooling and the release rules
 ├── docs/                       installation, catalog, compatibility, audits, license notes, this file
