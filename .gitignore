@@ -21,3 +21,12 @@ skills/asd-ste100/references/*.pdf
 RELEASE_COMMIT_PLAN.md
 MANUAL_RELEASE_CHECKLIST.md
 .release-review/
+
+# Output of skills/reference-verify/scripts/verify_bib.py and its notebook when run inside the repository
+.bibverify_cache.json
+.bibverify_cache.json.tmp
+verification_report*.csv
+verification_report*.md
+*_applied_corrections.csv
+*.bib.orig.bak
+.ipynb_checkpoints/

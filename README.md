@@ -34,7 +34,7 @@ The collection has **22 skills** in seven groups:
 - **Manuscript development.** From an idea to a full LaTeX paper project, staged polishing, and conversion to a venue's official template (`idea-to-paper`, `universal-manuscript-polish`, `paper-format-converter`).
 - **Writing quality.** Prose revision, a line-by-line forensic writing audit, and audit-driven repair (`text-humanizer`, `audit-paper`, `repair-paper`, `clean-user-facing-text`).
 - **Peer review and revision.** Simulated multi-reviewer review, response letters with reference checks, and highlighted change PDFs (`peer-review`, `response-to-reviewer`, `highlighted-pdf-from-reviews`).
-- **Research quality assurance.** Pre-submission diagnosis, repository forensics, and single-reference verification (`research-auditor`, `repo-forensic-audit`, `reference-verify`).
+- **Research quality assurance.** Pre-submission diagnosis, repository forensics, and reference verification, one entry or a whole `.bib` (`research-auditor`, `repo-forensic-audit`, `reference-verify`).
 - **Figures and talks.** Raster figures rebuilt as TikZ, paper-faithful PowerPoint decks, and Simplified Technical English explainers (`figure-rebuild`, `paper-to-pptx`, `asd-ste100`).
 - **Research engineering.** Paper to engineering spec to tested code repository, and README upgrades (`paper-to-project-report`, `project-report-to-github`, `readme-improvement`).
 
@@ -97,7 +97,7 @@ relying on a skill outside Claude Code.
 | [`highlighted-pdf-from-reviews`](skills/highlighted-pdf-from-reviews/SKILL.md) | Builds a highlighted revised-manuscript PDF from a LaTeX paper and its response letter, with each change tagged by reviewer-comment ID and mapped to pages. | Peer Review and Revision |
 | [`peer-review`](skills/peer-review/SKILL.md) | Simulates a three-reviewer Q1 journal peer review with an area-chair meta-review, for whole manuscripts or single sections. | Peer Review and Revision |
 | [`response-to-reviewer`](skills/response-to-reviewer/SKILL.md) | Drafts, updates, or verifies a point-by-point response-to-reviewers letter, with scripts that check completeness, page and line references, and numbers. | Peer Review and Revision |
-| [`reference-verify`](skills/reference-verify/SKILL.md) | Checks one reference against publisher, DOI, Crossref, arXiv, or issuing-body sources and returns a corrected, paste-ready BibTeX entry. | Research Quality Assurance |
+| [`reference-verify`](skills/reference-verify/SKILL.md) | Checks one reference against publisher, DOI, Crossref, arXiv, or issuing-body sources and returns a corrected, paste-ready BibTeX entry. Triages a whole .bib file by script first, with a Colab notebook front end. | Research Quality Assurance |
 | [`repo-forensic-audit`](skills/repo-forensic-audit/SKILL.md) | Forensic audit of a research code repository for reproducibility, hard-coded metrics, disconnected evaluation pipelines, and other fabrication fingerprints. | Research Quality Assurance |
 | [`research-auditor`](skills/research-auditor/SKILL.md) | Independent pre-submission diagnosis of a research project: its real claims, the research gap checked against the literature, closest prior work, journal fit, and acceptance blockers. | Research Quality Assurance |
 | [`asd-ste100`](skills/asd-ste100/SKILL.md) | Builds an interactive offline HTML explainer of a paper, method, or codebase, with visible text written to ASD-STE100 Issue 9 Simplified Technical English rules. Needs your own authorized copy of the specification, which is not included. Manual only. | Figures, Slides and Explainers |
@@ -119,6 +119,7 @@ Most skills start from a plain request. In Claude Code you can also call a skill
 | You ask | Skill that runs | What you get |
 |---|---|---|
 | "The verifier flagged this reference as DOI not found" plus a BibTeX entry | `reference-verify` | A corrected, paste-ready BibTeX entry, checked against the DOI registry and the publisher page |
+| "Check every reference in references.bib" | `reference-verify` | A field-by-field report on the whole file (wrong, disputed, retracted, duplicate, and unfound entries), then a verified entry for each flagged one. Also runs as a [Colab notebook](notebook/BibTeX_DOI_Verifier.ipynb) |
 | "Strengthen the related work in main.tex" | `literature-review` | A search log, source ledger, gap matrix, verified `.bib` entries, and new citations placed in the paper |
 | "Draft the response to reviewers" with the reviews and the revised `.tex` | `response-to-reviewer` | A point-by-point letter whose page, line, and number references are checked by script |
 | "Audit the writing of my paper before I edit it" | `audit-paper` | `audit.md` with numbered issues, and the manuscript left unchanged |

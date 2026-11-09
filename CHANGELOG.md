@@ -6,6 +6,24 @@ All notable changes to this project are recorded here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- `reference-verify` whole-file mode: `scripts/verify_bib.py` checks every field of every entry in a `.bib`
+  against CrossRef, DataCite, OpenAlex, Europe PMC, DBLP, OpenLibrary, arXiv, DOI content negotiation, and
+  publisher BibTeX pages (PMLR, ACL Anthology). It flags retracted works and duplicate entries, writes Markdown
+  and CSV reports, and exits 1 when an entry needs attention. It is report-only unless `--apply` is given.
+  `--apply` edits only the corrected values in place and keeps a `.orig.bak` backup. A record found by title
+  alone must share an author surname with the entry before it can supply values. When any registry or search
+  service is unreachable, the entry gets formatting fixes only.
+- `notebook/BibTeX_DOI_Verifier.ipynb`: a Colab and Jupyter front end for `verify_bib.py`.
+- `tests/test_verify_bib.py`: offline tests for the verifier's decision rules, write-back, and command line, and a
+  check that the notebook is committed without outputs.
+
+### Changed
+
+- `scripts/validate_skills.py` includes `.ipynb` files in the privacy scan.
+- `requirements-dev.txt` adds `bibtexparser` 1.x and `requests` for the new tests.
+
 ## [1.0.0] - 2026-11-07
 
 First public release.

@@ -86,6 +86,7 @@ normally.
 | Pillow | figure-rebuild (`extract_icons.py`), paper-to-pptx |
 | python-pptx | paper-to-pptx (`qa_check.py`) |
 | PyYAML | paper-format-converter (`evals/validate_skill.py`), this repository's validator |
+| bibtexparser 1.x, requests | reference-verify (`verify_bib.py`, whole-file mode) |
 | Node.js + `pptxgenjs` | paper-to-pptx |
 | LaTeX (`latexmk`, `pdflatex`) | figure-rebuild, highlighted-pdf-from-reviews, idea-to-paper, paper-format-converter, paper-to-pptx, response-to-reviewer, universal-manuscript-polish |
 | Poppler (`pdftoppm`, `pdftocairo`, `pdftotext`) | highlighted-pdf-from-reviews, idea-to-paper, paper-format-converter, paper-to-pptx, response-to-reviewer |
