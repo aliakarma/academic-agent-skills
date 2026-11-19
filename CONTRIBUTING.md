@@ -13,7 +13,7 @@ documentation corrections.
 - **No secrets or personal data.** No API keys, tokens, personal paths, e-mail addresses, private manuscripts, or
   unpublished project names, including in examples and test records. Use placeholders and synthetic fixtures. See
   [docs/PUBLIC_RELEASE_PRIVACY_AUDIT.md](docs/PUBLIC_RELEASE_PRIVACY_AUDIT.md).
-- **License.** Contributions are licensed under CC BY 4.0, the project license. Keep the license notice of any
+- **License.** Contributions are licensed under the MIT License, the project license. Keep the license notice of any
   third-party material you add, and list it in [docs/LICENSE_AND_ATTRIBUTION.md](docs/LICENSE_AND_ATTRIBUTION.md).
 
 ## Add or change a skill

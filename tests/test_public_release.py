@@ -85,7 +85,7 @@ def test_plugin_discovers_exactly_the_public_collection():
     # Claude Code scans <plugin root>/skills/ unless plugin.json overrides it.
     assert plugin.get("skills") in (None, "./skills", "./skills/")
     assert [e["source"] for e in market["plugins"]] == ["./"]
-    assert plugin.get("license") == "CC-BY-4.0"
+    assert plugin.get("license") == "MIT"
     assert skill_folders() == sorted(generate_catalog.CATALOG)
 
 

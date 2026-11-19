@@ -8,7 +8,7 @@
 <p align="center">
   <a href="https://github.com/aliakarma/academic-agent-skills/actions/workflows/validate.yml"><img src="https://github.com/aliakarma/academic-agent-skills/actions/workflows/validate.yml/badge.svg" alt="Validate skills"></a>
   <a href="https://agentskills.io/specification"><img src="https://img.shields.io/badge/format-Agent%20Skills-blue" alt="Agent Skills format"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey" alt="License: CC BY 4.0"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="License: MIT"></a>
 </p>
 
 <p align="center">
@@ -310,14 +310,12 @@ through GitHub's private vulnerability reporting, as described in [SECURITY.md](
 
 ## License
 
-This project is licensed under the [Creative Commons Attribution 4.0 International license](LICENSE) (CC BY 4.0).
-You may share and adapt it, including for commercial use, if you credit **Academic Agent Skills**, link to this
-repository, name the license, and say whether you made changes.
+This project is released under the [MIT License](LICENSE). You may use, copy, change, share, and sell it, in open or
+closed projects, as long as every copy keeps the copyright notice and the license text.
 
 The license covers this project's own material. Third-party material keeps its own license, and the ASD-STE100
-specification is not part of this repository. Creative Commons does not recommend its licenses for software, so read
-[docs/LICENSE_AND_ATTRIBUTION.md](docs/LICENSE_AND_ATTRIBUTION.md) for how the license applies to the bundled
-scripts, attribution examples, and third-party material.
+specification is not part of this repository. [docs/LICENSE_AND_ATTRIBUTION.md](docs/LICENSE_AND_ATTRIBUTION.md)
+explains what the license covers, how to credit the project, and the third-party material.
 
 ## Acknowledgments
 

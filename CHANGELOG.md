@@ -44,6 +44,8 @@ All notable changes to this project are recorded here. The format follows
 
 ### Changed
 
+- License: the project moves from CC BY 4.0 to the MIT License (`LICENSE`, plugin manifest, README, contributing
+  guide, and `docs/LICENSE_AND_ATTRIBUTION.md`). Copies obtained under release 1.0.0 keep CC BY 4.0.
 - `literature-review` is now a read-only discovery and validation phase. It writes `literature_review.md` (17
   sections from the bundled brief, `references/prompt.md`) and leaves the manuscript, bib, code, and data
   untouched. Integration into the paper is a separate step on explicit request. New scripts: `search.py` (logged

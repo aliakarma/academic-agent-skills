@@ -12,7 +12,7 @@ academic-agent-skills/          repository root = Claude Code plugin root = mark
 ├── tests/                      pytest suite for the tooling and the release rules
 ├── docs/                       installation, catalog, compatibility, audits, license notes, this file
 ├── .github/                    CI workflow and issue templates
-└── LICENSE                     CC BY 4.0 legal code
+└── LICENSE                     MIT License text
 ```
 
 Each distribution channel reads `skills/` directly. Nothing is copied or generated per platform, so a skill is

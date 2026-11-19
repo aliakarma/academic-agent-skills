@@ -139,7 +139,7 @@ None of these changes alters what a skill does, except where the Reason column s
 | `-ExecutionPolicy Bypass` in a usage line | `paper-to-pptx` | Documented. It runs the bundled script only |
 | No `shell=True`, `os.system`, `eval`, `exec`, or unpickling in any bundled script | all scripts | None |
 | Downloaded archives are extracted only through `scripts/safe_extract.py` | paper-format-converter | Good practice |
-| Project license | root | CC BY 4.0 in [LICENSE](../LICENSE) |
+| Project license | root | MIT in [LICENSE](../LICENSE) (CC BY 4.0 until release 1.0.0) |
 
 ## 8. Recommendations
 
