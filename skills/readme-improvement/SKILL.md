@@ -302,3 +302,12 @@ When generating final README:
 - do not include TODO sections unless already present in repository
 
 The final output should feel like documentation from a mature, well-maintained research engineering repository.
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Outside the paper cycle.** Use it on any repository README.
+- **Needs first:** any repository, often one from `project-report-to-github`.
+- **Alongside:** `repo-forensic-audit` so the README claims match what the code does.

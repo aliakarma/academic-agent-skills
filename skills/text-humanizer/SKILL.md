@@ -162,3 +162,13 @@ Evidence: `references/detection-principles.md`. Request handling: `references/ac
 | Reporting a withdrawn claim as a style edit | List it under substantive changes |
 | Calling text "AI-sounding" | Name the pattern and its cost to the reader |
 | Promising a detector outcome | State that no edit guarantees a score |
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Paper cycle:** step 12 of 14, run together with `clean-user-facing-text`.
+- **Needs first:** the polished paper from `universal-manuscript-polish` (step 11), or any prose.
+- **Called by:** `universal-manuscript-polish`, `idea-to-paper`, `audit-paper`, `repair-paper`, `journal-cover-letter`, `manuscript-revision`, `response-to-reviewer`.
+- **Hands on to:** `clean-user-facing-text` (same step), then `reference-verify` (step 13).

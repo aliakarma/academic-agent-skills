@@ -449,3 +449,14 @@ Point to `_polish/AUDIT.md` for the full findings and `_polish/original/` for th
 Deliver a manuscript that reads like a carefully edited, professionally written research paper by an experienced American English-speaking researcher, with the author's scientific contribution preserved exactly.
 
 Improve language aggressively. Preserve science conservatively. Make completed work sound completed, but never make uncertain science sound certain. Never invent, never guess, never import, and never claim a check you did not run. Never change numerical values, equations, algorithms, experiments, datasets, statistical results, or scientific conclusions for stylistic reasons. Read every in-scope file in full and finish every stage the run mode calls for before you report.
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Paper cycle:** step 11 of 14.
+- **Needs first:** `repair-paper` (substance first). `paper-format-converter` when the paper must move to another template: convert first, then polish.
+- **Uses during the run:** `text-humanizer` (prose references), `reference-verify` (flagged `.bib` entries), `figure-rebuild` (figure fixes), `clean-user-facing-text` (invisible Unicode).
+- **Called by:** `idea-to-paper`, `repair-paper`, `manuscript-revision`.
+- **Hands on to:** `text-humanizer` and `clean-user-facing-text` (step 12).

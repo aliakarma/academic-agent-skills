@@ -50,7 +50,7 @@ The paper's findings, each paired with what it genuinely establishes versus what
 
 ## 10. Full Weakness and Risk Audit
 
-All findings from `weakness-audit.md`, grouped as **Critical**, **Major**, **Minor**. Each Critical and Major finding carries: what is wrong, why it matters, evidence with file and location, and how it should be improved. Include the cross-cutting sweep results (number trace, terminology drift, figure-text agreement, citation spot-check).
+All findings from `weakness-audit.md`, grouped as **Critical**, **Major**, **Minor**. Number every finding once, across all three groups, in the form `**Finding R-001** (Critical)`, so `repair-paper` can account for each one by ID. Each Critical and Major finding carries: what is wrong, why it matters, evidence with file and location, and how it should be improved. Include the cross-cutting sweep results (number trace, terminology drift, figure-text agreement, citation spot-check).
 
 ## 11. Target Journal Analysis
 

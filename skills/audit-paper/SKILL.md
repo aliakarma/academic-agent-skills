@@ -69,3 +69,13 @@ The audit itself carries the detail.
 | Calling text "AI-generated" | Name the pattern and its cost to the reader. Never estimate an AI probability. |
 | Overwriting an earlier audit | Ask first, or date the new file |
 | Fixing a typo "while you are there" | The manuscript stays untouched in this skill |
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Paper cycle:** step 9 of 14, run together with `research-auditor`.
+- **Needs first:** the paper with its final figures (steps 1 to 8), or any draft.
+- **Uses during the run:** `text-humanizer` (optional) for its pattern IDs.
+- **Hands on to:** `repair-paper` (step 10: fixes every issue in `audit.md`).

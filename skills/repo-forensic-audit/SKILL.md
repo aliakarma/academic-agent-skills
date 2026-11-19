@@ -210,3 +210,12 @@ For **Quick Triage** mode: produce only the Overall Verdict + Fraud Risk Assessm
 - Never recommend acceptance of a repo with unresolved CRITICAL fraud fingerprints.
 - If the repo is clean, say so clearly — false accusations are also harmful.
 - The audit report must be self-contained: a reader unfamiliar with the repo should understand every finding from the report alone.
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Outside the paper cycle.** Run it on any research repository, or right after `project-report-to-github` (step 5).
+- **Needs first:** a code repository.
+- **Hands on to:** `research-auditor` (the paper side of the same claims), `manuscript-revision` (when results must change), `readme-improvement`.

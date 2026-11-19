@@ -39,7 +39,7 @@ SCHEMAS = {
         "doi", "url", "peer_review_status", "version_note",
         "verification_status", "verification_date", "verification_evidence",
         "access_level", "screening_decision", "exclusion_reason",
-        "relevance", "themes", "cited_in_manuscript", "notes",
+        "relevance", "themes", "cited_in_manuscript", "notes", "venue_access",
     ],
     "extraction_sheet.csv": [
         "source_id", "problem", "objectives", "theory", "method", "data",
@@ -62,6 +62,7 @@ ENUMS = {
                            "thesis", "book", "other", "unknown"},
     "relevance": {"essential", "useful", "optional", ""},
     "cited_in_manuscript": {"yes", "no"},
+    "venue_access": {"open", "closed", "unknown", ""},
     "claim_type": {"definition", "fact", "method", "comparison", "result",
                    "limitation", "gap", "novelty"},
     "support": {"full", "partial"},

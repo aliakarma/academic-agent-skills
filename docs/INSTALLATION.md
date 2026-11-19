@@ -148,6 +148,7 @@ Some skills call files in a sibling skill through `${CLAUDE_SKILL_DIR}/../<skill
 | `repair-paper` | `universal-manuscript-polish` (and an `audit.md` from `audit-paper`) |
 | `manuscript-revision` | `response-to-reviewer`, `reference-verify`, `universal-manuscript-polish`, `text-humanizer` |
 | `audit-paper` | `text-humanizer` (optional, for pattern IDs) |
+| `journal-cover-letter` | `text-humanizer` |
 | `paper-to-pptx` | Anthropic's `pptx` skill, which this repository does not include. Set `PPTX_SKILL_DIR` to its folder |
 | `asd-ste100` | No other skill, but your own authorized copy of the ASD-STE100 specification ([REFERENCES.md](../skills/asd-ste100/REFERENCES.md)) |
 

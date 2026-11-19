@@ -51,3 +51,12 @@ The checker covers P01 to P11: the section 36 order, IDs present, every cited ID
 | Generic phases (setup, build, test, deploy) | Derive phases from the paper's own plan, milestones, and blockers |
 | Adding Docker, MLflow, databases by habit | Recommend only what the research needs, classified per section 28 |
 | Printing the whole report into chat | Write the file and give a short handoff |
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Paper cycle:** step 4 of 14.
+- **Needs first:** the paper with its literature, from `literature-review` (step 3). Any finished paper also works.
+- **Hands on to:** `project-report-to-github` (step 5, required next step: it builds the repository from `PROJECT_REPORT.md`).

@@ -7,7 +7,7 @@ Mandatory for every source proposed for the final manuscript, new or pre-existin
 ### Step 1. Machine check
 
 ```
-python scripts/verify_refs.py literature/references_lit.bib \
+python "$S/verify_refs.py" literature/references_lit.bib \
     --out literature/raw/verification/verify_<date>.csv \
     --raw-dir literature/raw/verification
 ```

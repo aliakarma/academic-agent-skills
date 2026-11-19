@@ -1,79 +1,80 @@
-# Quality Assurance and Deliverables (Phase 12)
+# Quality Control and Deliverables (Phases 8 and 9)
 
-The task is not complete when citations are in. It is complete when these audits pass, or their failures are documented, and `summary.md` reports both.
+The task is complete when `literature_review.md` passes the mechanical checks, the judgment audit is recorded, and the completion report states only counts the files support.
 
-## 1. Run the mechanical checks
+## 1. Mechanical checks
 
 ```
-python scripts/audit_citations.py <main.tex> --compare literature/baseline_citations.json
-python scripts/verify_refs.py <active.bib> --keys <every newly added key> --strict \
+python "$S/check_review.py" literature_review.md --ledger literature/source_ledger.csv --search-log literature/search_log.csv
+python "$S/verify_refs.py" literature/references_lit.bib --strict \
     --out literature/raw/verification/final_verify.csv --raw-dir literature/raw/verification
-python scripts/check_ledger.py --lit literature --tex <main.tex> --baseline literature/baseline_citations.json
+python "$S/audit_citations.py" <main.tex> --compare literature/baseline_citations.json
 ```
 
-Then compile the manuscript with its own build and read the log. Copy the exit status and the error and warning counts of each command into `qa_report.md`. If a command could not run, say so and why.
+The last command proves the manuscript's citations did not change during the review. Copy each command's exit status and its error and warning counts into `literature/qa_report.md`. If a command could not run, say so and why.
 
-## 2. Judgment audits
+Every `check_review.py` ERROR is fixed before reporting. Every WARN is fixed or listed in `qa_report.md` with the reason it stands (for example, W05 on a sentence that says the review is not a PRISMA review).
 
-Work through these and record each result in `qa_report.md`. Each line is pass, fail with location, or not checked with reason.
+## 2. Judgment audit (brief section 10)
 
-**Reference audit**
-- [ ] Every new citation is VERIFIED or VERIFIED-QUALIFIED in the ledger
-- [ ] Every DOI, title, author list, and year matches its authoritative record
-- [ ] No entry was written from memory or inferred without a retrieved record
-- [ ] Duplicates and versions (preprint vs. published, conference vs. journal) resolved
-- [ ] UNRESOLVED and REJECTED sources are absent from the bibliography
-- [ ] Retractions, corrections, and expressions of concern handled
+Record each line as pass, fail with location, or not checked with reason.
 
-**Evidence audit**
-- [ ] Each added factual claim has a source whose access level permits it
-- [ ] Each reported number matches the source, with its conditions
-- [ ] Each citation supports the sentence where it sits (spot-check every `result`, `comparison`, `gap`, and `novelty` claim in the citation map)
-- [ ] No finding is attributed to the wrong authors
-- [ ] Contradictory evidence and qualifications survive in the text
-- [ ] No abstract-only source is presented as read in full
-- [ ] No unsupported gap or novelty wording was added
+**Scientific accuracy**
+- [ ] Terminology and technical explanations match the sources
+- [ ] Every reported number matches its source, with its conditions, at an access level that permits it
+- [ ] Contributions and limitations of each study are attributed to the right authors, and reviewer-observed limitations are labeled as such
+- [ ] Disagreements and contradicting findings are stated
+- [ ] Speculation is labeled
 
-**Citation and bibliography audit**
-- [ ] `audit_citations.py` reports no errors
-- [ ] Citation style matches the manuscript's existing style
-- [ ] Keys unique, no unescaped special characters, no padding clusters
+**Research-gap validity**
+- [ ] Each gap has a logged counterevidence search
+- [ ] Each gap's category and confidence follow the gap-matrix.md section 3a table
+- [ ] Gap statements are narrow enough to test
+- [ ] Resolved and tentative gaps are not presented as established
+- [ ] If no gap is strongly supported, the review says so in Sec. 2 and Sec. 9
 
-**Manuscript integrity audit**
-- [ ] Contributions, methods, and results unchanged except documented corrections
-- [ ] The related work argues toward the gap, and the gap follows from the matrix
-- [ ] The discussion does not overstate what prior work implies
-- [ ] Cross-references, labels, figures, and tables intact
-- [ ] Manuscript compiles or renders (state the command and result)
+**Reference integrity**
+- [ ] Every Sec. 15 entry is VERIFIED or VERIFIED-QUALIFIED in the ledger, with raw verification evidence on disk
+- [ ] No entry was written from memory
+- [ ] Preprint versus published versions resolved, retractions and corrections checked
+- [ ] Every unverifiable source is in Sec. 16 with the reason
+- [ ] The manuscript's own bib was machine-checked and its problems reported
+
+**Coverage and reproducibility**
+- [ ] Foundational work and the last 24 to 36 months covered per core concept
+- [ ] Closest-competitor, neighboring-field, and counterevidence sweeps ran
+- [ ] Sec. 17 or `search_log.csv` lets another researcher rerun the main searches
+- [ ] Databases not searched are named as not searched
+- [ ] Closed-access versus open-access venue split is within 40-60%, or the imbalance and its reason are reported
+
+**Deliverable integrity**
+- [ ] `literature_review.md` sits beside the manuscript, and an earlier version (if any) is preserved
+- [ ] The manuscript, bib, code, and data are unchanged (`audit_citations.py --compare` and file timestamps)
+- [ ] The document is a review with evidence, not an outline
 
 ## 3. Deliverables
 
-Report each one in `summary.md` with its path. If one does not apply, say why. Do not create empty files.
-
 | # | Deliverable | Where |
 |---|---|---|
-| 1 | Revised manuscript | Its own path, named as the final version. Originals in `literature/originals/` |
-| 2 | Literature synthesis | `literature/review_body.md` or the revised sections |
-| 3 | Verified bibliography | The active bib, plus `literature/references_lit.bib` staging |
+| 1 | The review | `<project>/literature_review.md` |
+| 2 | Research profile and claim list | `literature/research_profile.md` |
+| 3 | Search strategy and log | `literature/search_strategy.md`, `literature/search_log.csv` |
 | 4 | Source ledger | `literature/source_ledger.csv` |
 | 5 | Evidence records | `literature/extraction_sheet.csv`, `literature/raw/source_records/` |
-| 6 | Gap matrix | `literature/gap_matrix.csv`, `literature/gaps.md`, `literature/gap_matrix_out/tables.tex` |
-| 7 | Citation map | `literature/citation_map.csv` |
-| 8 | Search and verification logs | `literature/search_log.csv`, `literature/raw/verification/` |
-| 9 | QA report | `literature/qa_report.md` |
-| 10 | Change summary | `literature/summary.md` |
+| 6 | Staging bib of verified sources | `literature/references_lit.bib` (for a later integration stage) |
+| 7 | Verification evidence | `literature/raw/verification/` |
+| 8 | QA report | `literature/qa_report.md` |
 
-## 4. summary.md contract
+Do not create empty files to tick a row. If a deliverable does not apply, say why in `qa_report.md`.
 
-Sections, in this order:
+## 4. Completion report (in chat)
 
-1. **Scope.** Manuscript, genre, venue, date range of the work.
-2. **Searches.** Platforms actually used, number of executed queries, snowballing done, platforms that failed or were unreachable.
-3. **Sources.** Counts from the ledger: screened, included, excluded (top reasons), cited. Counts by status and access level.
-4. **Themes and evidence.** The main themes, the strongest evidence, and the main disagreements in the field.
-5. **Gaps.** Each gap with its claim strength and the gap record it rests on.
-6. **Existing-reference problems.** Wrong DOIs, fabricated or mismatched entries, retractions, version mismatches found in the original bib, and what was done about each.
-7. **Manuscript changes.** Section by section, with old and new wording for every changed claim.
-8. **Files.** Created and modified, with paths.
-9. **QA results.** Command results and checklist outcome.
-10. **Open items for the author.** Unresolved sources, inaccessible full texts, claims that need the author's decision.
+Short, in this order, with numbers copied from the `check_review.py` SUMMARY line and the ledger:
+
+1. Path of `literature_review.md`
+2. Themes covered
+3. Sources: included and cited, VERIFIED, VERIFIED-QUALIFIED, unverified (Sec. 16), by access level (FULLTEXT, ABSTRACT, METADATA), and the closed-access versus open-access venue split with percentages
+4. Gaps: count by category and by confidence
+5. The novelty verdict in one sentence
+6. Major limitations (tools that failed, paywalls, scope cuts)
+7. Open verification issues, and manuscript problems the author must decide on

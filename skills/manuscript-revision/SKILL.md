@@ -122,3 +122,13 @@ Both `check_audit.py --letter` and response-to-reviewer's checks pass, the manus
 | Writing the letter before the edits | Do the edits, then Stage 3, then the letter |
 | One row for a comment with three requests | Split it into R1-04a, R1-04b, R1-04c |
 | Script path with a space breaks the call | Quote it: `python "${CLAUDE_SKILL_DIR}/scripts/check_audit.py" ...` |
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Paper cycle:** step 7 of 14. It is also the skill for real comments from a journal or conference.
+- **Needs first:** `peer-review` reports (step 6), or a real decision letter and reviews.
+- **Uses during the run:** `response-to-reviewer`, `reference-verify`, `universal-manuscript-polish`, `text-humanizer` (all required), `literature-review` (broader related work), `figure-rebuild` (redrawn figures).
+- **Hands on to:** `nanobanana-prompt-generator` (step 8). After a real journal review: `highlighted-pdf-from-reviews`, and `journal-cover-letter` for a new journal.

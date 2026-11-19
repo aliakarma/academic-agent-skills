@@ -30,3 +30,9 @@ verification_report*.md
 *_applied_corrections.csv
 *.bib.orig.bak
 .ipynb_checkpoints/
+
+# Local backups of earlier skill versions; never publish
+skills/*/.backup/
+
+# Local presentation deck and report about the skills; never publish
+presentation/

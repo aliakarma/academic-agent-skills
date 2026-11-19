@@ -1,4 +1,4 @@
-# Writing and Integration (Phases 9 and 10)
+# Writing and Integration (later stage, only on explicit request)
 
 ## 1. Structure the review around an argument
 

@@ -1,0 +1,81 @@
+% !TEX program = pdflatex
+% Journal submission cover letter (journal-cover-letter skill).
+% 1. Fill the LETTER DETAILS block. 2. Write the body between BODY START and BODY END.
+% Placeholders look like [[...]]. scripts/check_letter.py fails while any remain.
+% Escape these characters in every value: & % $ # _ { } ~ ^ \
+\documentclass[11pt]{article}
+
+% ---- LETTER DETAILS ---------------------------------------------------------
+\newcommand{\LetterDate}{[[Month D, YYYY]]}
+\newcommand{\RecipientName}{[[Editor-in-Chief, or Editorial Office]]}
+\newcommand{\JournalName}{[[Official journal name]]}
+\newcommand{\Publisher}{[[Publisher]]}
+\newcommand{\Salutation}{[[Dear Editor]]}
+\newcommand{\ArticleType}{[[Journal's article-type label]]}
+\newcommand{\ManuscriptTitle}{[[Exact manuscript title]]}
+\newcommand{\AuthorName}{[[Corresponding author full name]]}
+\newcommand{\AuthorDept}{[[Department or unit]]}
+\newcommand{\AuthorInstitution}{[[Institution, City, Country]]}
+\newcommand{\AuthorEmail}{[[name@example.com]]}
+
+% ---- LAYOUT -----------------------------------------------------------------
+% To fit one page, edit the text first. Then, in order: \parskip to 0.45,
+% margins to 20mm, \fontsize{10.5}{13}. Never smaller (latex-production.md).
+\usepackage[a4paper,top=22mm,bottom=22mm,left=25mm,right=25mm]{geometry}
+\usepackage[T1]{fontenc}
+\IfFileExists{XCharter.sty}{\usepackage{XCharter}}{\usepackage{lmodern}}
+\usepackage{microtype}
+\usepackage{xcolor}
+\definecolor{accent}{HTML}{1F3A5F} % dark navy: name, rule, subject label
+\definecolor{muted}{HTML}{4A5361}  % charcoal: contact lines
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Cover letter}, pdfauthor={\AuthorName}}
+\ifdefined\pdfgentounicode\input{glyphtounicode}\pdfgentounicode=1\fi % copyable ligatures
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6\baselineskip}
+\linespread{1.04}
+\raggedbottom
+\setlength{\emergencystretch}{1.5em} % loosen a line rather than push it into the margin
+\hyphenation{} % list long words of the journal and author names here, e.g. Engineering, so they never break
+\newcommand{\Contact}[1]{{\small\color{muted}#1\par}}
+
+\begin{document}
+
+% ---- Sender ----
+{\color{accent}\Large\scshape \AuthorName\par}
+\vspace{2pt}
+\Contact{\AuthorDept\\ \AuthorInstitution\\ \href{mailto:\AuthorEmail}{\AuthorEmail}}
+\vspace{-4pt}
+{\color{accent}\rule{\linewidth}{0.6pt}}
+
+% ---- Date and recipient ----
+\LetterDate
+
+{\RecipientName\\ \emph{\JournalName}\\ \Publisher\par}
+
+{\raggedright\hyphenpenalty=10000\exhyphenpenalty=10000 % never hyphenate the title
+{\color{accent}\textbf{Re:}} \ArticleType\ submission, ``\ManuscriptTitle''\par}
+
+\Salutation,
+
+% ---- BODY START ----
+[[Paragraph 1. Opening: ask the editor to consider the enclosed manuscript as a \ArticleType\ in \emph{\JournalName}, and say in one sentence what it does. The subject line already carries the title.]]
+
+[[Paragraph 2. Problem and gap.]]
+
+[[Paragraph 3. Contribution and evidence from the manuscript.]]
+
+[[Paragraph 4. Fit with the journal's stated scope and readership.]]
+
+[[Paragraph 5. Required, verified declarations only, then thanks.]]
+% ---- BODY END ----
+
+Sincerely,
+
+\vspace{0.6\baselineskip}
+{\AuthorName\par}
+\Contact{Corresponding author\\ \AuthorDept, \AuthorInstitution\\ \AuthorEmail}
+
+\end{document}

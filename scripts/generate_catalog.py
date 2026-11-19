@@ -18,6 +18,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from validate_skills import parse_frontmatter  # noqa: E402
 
 CATEGORIES = [
+    "Workflow and Routing",
     "Research Discovery and Literature",
     "Manuscript Development",
     "Academic Writing Quality",
@@ -28,12 +29,16 @@ CATEGORIES = [
 ]
 
 CATALOG = {
+    "research-workflow-map": ("Workflow and Routing",
+                              "Routes work through the 14-step paper cycle, from a title and abstract to the cover "
+                              "letter, and the other-purpose skills: what each skill needs first and which runs next."),
     "finding-gap": ("Research Discovery and Literature",
                     "Evidence-grounded research-gap discovery with logged searches and a verified source ledger. "
                     "Stress-tests a proposed gap and drafts research questions, hypotheses, and methods."),
     "literature-review": ("Research Discovery and Literature",
-                          "Builds, extends, or repairs a manuscript's literature base: search log, source ledger, gap "
-                          "matrix, verified BibTeX, and citations placed into the paper."),
+                          "Read-only, evidence-based review of a manuscript's field written to literature_review.md: "
+                          "logged searches, a verified source ledger, gap validation against counterevidence, and a "
+                          "novelty assessment, checked by a bundled script. Edits the paper only on later request."),
     "idea-to-paper": ("Manuscript Development",
                       "Generates a complete LaTeX paper project (IEEE conference by default) from an idea, abstract, or "
                       "brief, with TikZ figures, a verified references.bib, and unmeasured results marked as targets."),
@@ -43,6 +48,10 @@ CATALOG = {
     "paper-format-converter": ("Manuscript Development",
                                "Converts a manuscript to a named journal's or conference's current official template "
                                "and guidelines, with a conversion report and a remaining-issues list. Manual only."),
+    "journal-cover-letter": ("Manuscript Development",
+                             "Writes a one-page submission cover letter for a named journal, grounded in the "
+                             "manuscript and the journal's current author instructions, compiled to LaTeX/PDF and "
+                             "checked by a bundled script."),
     "text-humanizer": ("Academic Writing Quality",
                        "Drafts, revises, and critiques academic and professional prose for clarity, specificity, and "
                        "author voice. Also interprets AI-detection and similarity reports."),
@@ -50,8 +59,8 @@ CATALOG = {
                     "Line-by-line forensic writing audit of a manuscript, written to audit.md without editing the "
                     "paper, and checked by a bundled script."),
     "repair-paper": ("Academic Writing Quality",
-                     "Revises a manuscript against an existing audit.md so that every numbered audit issue is repaired "
-                     "or accounted for."),
+                     "Revises a manuscript against audit.md and research-auditor's assessment so that every numbered "
+                     "issue and finding is repaired or accounted for."),
     "clean-user-facing-text": ("Academic Writing Quality",
                                "Audits suspicious invisible Unicode and revises reader-facing prose while keeping "
                                "facts, meaning, voice, code, citations, and quotations unchanged."),
@@ -84,7 +93,8 @@ CATALOG = {
                                     "or Flow that figure-rebuild then turns into vector figures."),
     "figure-rebuild": ("Figures, Slides and Explainers",
                        "Rebuilds a raster or AI-generated research figure as LaTeX/TikZ with selectable text and a "
-                       "matched style, and audits the figure's claims against measured results."),
+                       "matched style, plus an editable one-slide PowerPoint twin, and audits the figure's claims "
+                       "against measured results."),
     "paper-to-pptx": ("Figures, Slides and Explainers",
                       "Turns a LaTeX paper into an editable 15-slide PowerPoint talk deck that stays faithful to the "
                       "paper, with rendered equations and a number-fidelity check."),

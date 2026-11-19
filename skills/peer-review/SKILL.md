@@ -338,3 +338,12 @@ When the user provides reviewer comments, produce:
 - Reviewers MUST disagree where their perspectives genuinely diverge — do not force consensus
 - Output must be valid Markdown
 - Do not output anything outside the structured report
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Paper cycle:** step 6 of 14.
+- **Needs first:** the paper and its repository (steps 1 to 5), or any manuscript.
+- **Hands on to:** `manuscript-revision` (step 7: treat the simulated reports as reviewer comments).
