@@ -59,6 +59,10 @@ All notable changes to this project are recorded here. The format follows
 - `figure-rebuild` ships every rebuilt figure with an editable one-slide PowerPoint twin (Phase 8):
   `assets/figure_pptx_template.js` transcribes the TikZ figure into native shapes and real text with pptxgenjs, and
   `scripts/render_pptx.py` renders the slide for viewing (PowerPoint over COM on Windows, LibreOffice elsewhere).
+- `README.md` rewritten for beginners around the paper cycle: what a skill is, the 14 steps with what each takes
+  and returns, the seven other-purpose skills, a quick start, a glossary, and the repository layout. Four diagrams
+  in `docs/images/` illustrate the cycle, step 8, the other-purpose skills, and how to read a skill. All install,
+  update, and uninstall commands are unchanged.
 - `scripts/validate_skills.py` includes `.ipynb` files in the privacy scan and skips the local, git-ignored
   `presentation/` folder.
 - `requirements-dev.txt` adds `bibtexparser` 1.x and `requests` for the new tests.

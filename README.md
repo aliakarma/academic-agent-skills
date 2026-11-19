@@ -1,84 +1,205 @@
-# Academic Agent Skills
+<h1 align="center">Academic Agent Skills</h1>
 
-An open collection of AI agent skills for academic research, scientific writing, peer review, and publishing.
+<p align="center">
+  Step-by-step research skills for AI coding assistants.<br>
+  From a title and abstract to a submitted paper, with every step checked.
+</p>
 
-[![Validate skills](https://github.com/aliakarma/academic-agent-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/aliakarma/academic-agent-skills/actions/workflows/validate.yml)
-[![Agent Skills format](https://img.shields.io/badge/format-Agent%20Skills-blue)](https://agentskills.io/specification)
-[![License: CC BY 4.0](https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey)](LICENSE)
+<p align="center">
+  <a href="https://github.com/aliakarma/academic-agent-skills/actions/workflows/validate.yml"><img src="https://github.com/aliakarma/academic-agent-skills/actions/workflows/validate.yml/badge.svg" alt="Validate skills"></a>
+  <a href="https://agentskills.io/specification"><img src="https://img.shields.io/badge/format-Agent%20Skills-blue" alt="Agent Skills format"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC%20BY%204.0-lightgrey" alt="License: CC BY 4.0"></a>
+</p>
 
-## Overview
+<p align="center">
+  <img src="docs/images/paper-cycle.png" alt="The 14-step paper cycle: find the gap, draft, literature, project report, code repository, simulated review, revision, figures, deep audit, repair, polish, remove AI patterns, verify references, cover letter" width="900">
+</p>
 
-Academic Agent Skills gives a coding agent (Claude Code, OpenAI Codex, Google Antigravity, Cursor, and other agents
-that read the open [Agent Skills](https://agentskills.io/) format) step-by-step procedures for research work that
-generic assistants tend to do badly. These include finding a defensible research gap, verifying every reference
-against its publisher record, answering reviewers point by point, and auditing a paper or a code repository for claims
-the evidence does not support.
+## What is this?
 
-The collection is for researchers, graduate students, and research engineers who write in LaTeX or Word and want an
-agent that checks its own work. Most skills include scripts that verify the output (a reference checker, a response
-letter checker, an audit-report validator) before the agent reports back.
+AI assistants such as Claude Code, Codex, Antigravity, and Cursor can read and edit the files on your computer. A
+**skill** is a folder of written instructions, plus small helper scripts, that tells the assistant exactly how to do
+one job. When your request matches a skill, the assistant loads it and follows its steps.
 
-## Objectives
+This repository holds **25 skills** for research work: finding a research gap, writing the paper, checking every
+reference, answering reviewers, making figures and slides, and more. They are written for researchers, students,
+and research engineers who write in LaTeX or Word.
 
-- **Honest output.** No skill fabricates citations, data, results, or test outcomes. Each one says what it did not
-  verify, and unmeasured numbers stay marked as targets.
-- **Checked work.** Wherever a result can be checked mechanically, a bundled script checks it.
-- **One source for every agent.** There is one canonical copy of every skill in [`skills/`](skills/), and the same
-  files serve every installer and agent.
+Three promises hold for every skill:
 
-## What the skills cover
+| | Promise | What it means for you |
+|---|---|---|
+| 🔍 | **Honest output** | No made-up citations, data, results, or test outcomes. Each skill tells you what it could not check, and numbers you have not measured yet stay marked as targets. |
+| ✅ | **Checked work** | Wherever a result can be checked by a program, a bundled script checks it before the assistant reports back. |
+| 📦 | **One copy for every assistant** | Each skill lives once in [`skills/`](skills/), and the same files work for every installer and assistant. |
 
-The collection has **25 skills** in eight groups:
+## Contents
 
-- **Workflow and routing.** One map of how the skills connect, the order to run them in, and what each needs first. Every skill's `Related skills` section points back to it (`research-workflow-map`). The paper cycle runs in 14 steps from a title and abstract to a submitted paper: `finding-gap` → `idea-to-paper` → `literature-review` → `paper-to-project-report` → `project-report-to-github` → `peer-review` → `manuscript-revision` → `nanobanana-prompt-generator` (then Google Flow) → `figure-rebuild` → `audit-paper` + `research-auditor` → `repair-paper` → `universal-manuscript-polish` → `text-humanizer` + `clean-user-facing-text` → `reference-verify` → `journal-cover-letter`.
-- **Literature and research gaps.** Logged searches, source ledgers, gap matrices, novelty assessments, and verified BibTeX (`literature-review`, `finding-gap`).
-- **Manuscript development.** From an idea to a full LaTeX paper project, staged polishing, conversion to a venue's official template, and a journal-specific submission cover letter (`idea-to-paper`, `universal-manuscript-polish`, `paper-format-converter`, `journal-cover-letter`).
-- **Writing quality.** Prose revision, a line-by-line forensic writing audit, and audit-driven repair (`text-humanizer`, `audit-paper`, `repair-paper`, `clean-user-facing-text`).
-- **Peer review and revision.** Simulated multi-reviewer review, complete reviewer-driven revision with the requested experiments, response letters with reference checks, and highlighted change PDFs (`peer-review`, `manuscript-revision`, `response-to-reviewer`, `highlighted-pdf-from-reviews`).
-- **Research quality assurance.** Pre-submission diagnosis, repository forensics, and reference verification, one entry or a whole `.bib` (`research-auditor`, `repo-forensic-audit`, `reference-verify`).
-- **Figures and talks.** NanoBanana prompts that turn TikZ diagrams into reference images, raster figures rebuilt as TikZ, paper-faithful PowerPoint decks, and Simplified Technical English explainers (`nanobanana-prompt-generator`, `figure-rebuild`, `paper-to-pptx`, `asd-ste100`).
-- **Research engineering.** Paper to engineering spec to tested code repository, and README upgrades (`paper-to-project-report`, `project-report-to-github`, `readme-improvement`).
+- [The paper cycle: 14 steps from idea to submission](#the-paper-cycle-14-steps-from-idea-to-submission)
+- [Seven skills for other jobs](#seven-skills-for-other-jobs)
+- [How to read a skill](#how-to-read-a-skill)
+- [Quick start](#quick-start)
+- [Example requests](#example-requests)
+- [Full skills catalog](#full-skills-catalog)
+- [Things you supply yourself](#things-you-supply-yourself)
+- [Words used in this README](#words-used-in-this-readme)
+- [Repository layout](#repository-layout)
+- [Updating and uninstalling](#updating-and-uninstalling)
+- [Contributing](#contributing)
+- [Security](#security)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
 
-## Quick installation
+## The paper cycle: 14 steps from idea to submission
 
-### 1. Vercel Skills CLI (Claude Code, Codex, Antigravity, Cursor, and others)
+You bring an idea as a **title and abstract**. You can add research questions, methods, datasets, or results if you
+have them. The skills then take the idea to a paper that is ready to submit, in four phases:
 
-Requires Node.js. Preview what the repository offers, then install:
+| Phase | Steps | What happens |
+|---|---|---|
+| 1️⃣ **Gap and draft** | 1 to 3 | Find a real gap, write the first draft inside it, and cite checked literature |
+| 2️⃣ **Code and review** | 4 to 7 | Turn the paper into tested code, then fix what simulated reviewers find |
+| 3️⃣ **Figures, audit, and repair** | 8 to 10 | Make the final figures, audit the paper twice, and repair every finding |
+| 4️⃣ **Finish and submit** | 11 to 14 | Polish the language, check every reference, and write the cover letter |
+
+Each step, what you give it, and what you get back:
+
+| Step | Skill | You give | You get |
+|:---:|---|---|---|
+| 1 | [`finding-gap`](skills/finding-gap/SKILL.md) | Your title and abstract, plus any research questions, methods, or datasets | A research gap that holds up against the published work, with research questions |
+| 2 | [`idea-to-paper`](skills/idea-to-paper/SKILL.md) | Your idea and the gap from step 1 | A complete first draft: LaTeX paper, reference list, PDF, and a report of what still needs real data |
+| 3 | [`literature-review`](skills/literature-review/SKILL.md) | The draft | A review of the related work, every source checked. Ask it to add the citations to the paper. |
+| 4 | [`paper-to-project-report`](skills/paper-to-project-report/SKILL.md) | The paper | `PROJECT_REPORT.md`, a plan for the code the paper describes |
+| 5 | [`project-report-to-github`](skills/project-report-to-github/SKILL.md) | The plan and the paper | A working code repository with tests |
+| 6 | [`peer-review`](skills/peer-review/SKILL.md) | The paper and its code | Three simulated reviewer reports and a list of what to fix |
+| 7 | [`manuscript-revision`](skills/manuscript-revision/SKILL.md) | The paper and the reviews | A revised paper with every comment handled |
+| 8 | [`nanobanana-prompt-generator`](skills/nanobanana-prompt-generator/SKILL.md) → Google Flow → [`figure-rebuild`](skills/figure-rebuild/SKILL.md) | The paper's diagrams | Final figures with selectable text, plus an editable PowerPoint copy of each |
+| 9 | [`audit-paper`](skills/audit-paper/SKILL.md) + [`research-auditor`](skills/research-auditor/SKILL.md) | The paper and its project folder | Two reports: writing problems (`audit.md`) and research problems (`MASTER_PAPER_ASSESSMENT.md`) |
+| 10 | [`repair-paper`](skills/repair-paper/SKILL.md) | Both reports from step 9 | A repaired paper and a record of how each problem was handled |
+| 11 | [`universal-manuscript-polish`](skills/universal-manuscript-polish/SKILL.md) | The repaired paper | Polished language. The science stays exactly as it was. |
+| 12 | [`text-humanizer`](skills/text-humanizer/SKILL.md) + [`clean-user-facing-text`](skills/clean-user-facing-text/SKILL.md) | The polished paper | Clear, natural prose: vague or inflated wording fixed and stray invisible characters removed |
+| 13 | [`reference-verify`](skills/reference-verify/SKILL.md) | The final reference list (`.bib`) | Every reference checked one by one against its publisher or registry record |
+| 14 | [`journal-cover-letter`](skills/journal-cover-letter/SKILL.md) | The final paper and the journal's name | A one-page cover letter that follows the journal's rules |
+
+`→` means the skills run one after the other. `+` means they run together.
+
+> [!TIP]
+> You do not have to start at step 1. With a finished draft, start at step 6 or step 9. With only a reference list
+> to check, go straight to step 13. The [`research-workflow-map`](skills/research-workflow-map/SKILL.md) skill knows
+> the whole order and tells the assistant which step comes next.
+
+### Step 8 uses Google Flow
+
+Step 8 is the one place where you work outside the assistant. `nanobanana-prompt-generator` writes one prompt for
+each diagram in your paper. You paste each prompt into Google Flow (Google's image tool), save the image under the
+file name the skill gives you, and `figure-rebuild` redraws it as a clean figure with real, selectable text.
+
+<p align="center">
+  <img src="docs/images/figures-step.png" alt="Step 8: nanobanana-prompt-generator writes prompts, you generate images in Google Flow, figure-rebuild rebuilds them as vector figures" width="800">
+</p>
+
+## Seven skills for other jobs
+
+These skills sit outside the paper cycle. Use them whenever you need them.
+
+<p align="center">
+  <img src="docs/images/other-purpose-skills.png" alt="The seven other-purpose skills" width="800">
+</p>
+
+| Skill | Use it when you want to |
+|---|---|
+| [`repo-forensic-audit`](skills/repo-forensic-audit/SKILL.md) | Review a whole GitHub repository, right after step 5 or on any research code |
+| [`response-to-reviewer`](skills/response-to-reviewer/SKILL.md) | Write the response letter for real comments from a journal or conference |
+| [`highlighted-pdf-from-reviews`](skills/highlighted-pdf-from-reviews/SKILL.md) | Highlight what changed in the paper, once every comment is fixed and the response letter is written |
+| [`paper-to-pptx`](skills/paper-to-pptx/SKILL.md) | Make a PowerPoint talk from a paper |
+| [`paper-format-converter`](skills/paper-format-converter/SKILL.md) | Move a paper from one journal's or conference's format to another |
+| [`readme-improvement`](skills/readme-improvement/SKILL.md) | Make a repository's README clear and true to the project |
+| [`asd-ste100`](skills/asd-ste100/SKILL.md) | Build an easy-to-read web page that explains a paper or project in Simplified Technical English |
+
+## How to read a skill
+
+Every skill follows the same simple shape: **you give** something, **it does** a fixed set of steps, and **you get**
+named files back. Each skill also says which skill comes before it and which comes next.
+
+<p align="center">
+  <img src="docs/images/skill-slide-example.png" alt="Example: finding-gap. You give a title and abstract, it maps the literature and stress-tests the gap, you get a gap analysis, a reference list, and a source ledger" width="800">
+</p>
+
+To see exactly what a skill does, open its `SKILL.md` file. It is plain text, written for both people and assistants.
+
+## Quick start
+
+### 1. Install
+
+Pick one of the three ways below. You only do this once.
+
+**Option A. Vercel Skills CLI** (Claude Code, Codex, Antigravity, Cursor, and others). It needs
+[Node.js](https://nodejs.org/). Preview what the repository offers, then install:
 
 ```bash
 npx skills add aliakarma/academic-agent-skills --list
 npx skills add aliakarma/academic-agent-skills --skill '*' --agent claude-code --global --yes
 ```
 
-Change `--agent` to `codex`, `antigravity`, or `cursor`, or repeat it to target several agents. Omit `--global` to
-install into the current project instead. To install selected skills only:
+Change `--agent` to `codex`, `antigravity`, or `cursor`, or repeat it to target several assistants. Leave out
+`--global` to install into the current project only. To install selected skills only:
 
 ```bash
 npx skills add aliakarma/academic-agent-skills --skill literature-review --skill reference-verify --agent codex --global --yes
 ```
 
-For Antigravity and Cursor, a global install writes the skills only to `~/.agents/skills/`. See
+For Antigravity and Cursor, a global install writes the skills only to `~/.agents/skills/`. Read
 [docs/INSTALLATION.md](docs/INSTALLATION.md#antigravity-and-cursor-global-installs) before you rely on it.
 
-### 2. Native Claude Code plugin
+**Option B. Claude Code plugin**
 
 ```bash
 claude plugin marketplace add aliakarma/academic-agent-skills
 claude plugin install academic-agent-skills@academic-agent-skills --scope user
 ```
 
-Plugin skills are namespaced, for example `/academic-agent-skills:reference-verify`.
+Plugin skills get a prefix, for example `/academic-agent-skills:reference-verify`.
 
-### 3. Manual installation
+**Option C. Copy by hand.** Copy a skill folder from `skills/` into your assistant's skills folder, for example
+`~/.claude/skills/reference-verify/` for Claude Code or `~/.agents/skills/reference-verify/` for Codex. Copy the
+whole folder, because skills use their own `scripts/`, `references/`, and `templates/` folders.
 
-Copy a skill folder from `skills/` into your agent's skills directory, for example
-`~/.claude/skills/reference-verify/` for Claude Code or `~/.agents/skills/reference-verify/` for Codex.
+[docs/INSTALLATION.md](docs/INSTALLATION.md) covers every method, what you need first, the folder each assistant
+uses, and troubleshooting. Before you rely on a skill outside Claude Code, check
+[docs/PLATFORM_COMPATIBILITY.md](docs/PLATFORM_COMPATIBILITY.md).
 
-[docs/INSTALLATION.md](docs/INSTALLATION.md) covers every method, prerequisites, per-agent paths, updating,
-uninstalling, and troubleshooting. Check [docs/PLATFORM_COMPATIBILITY.md](docs/PLATFORM_COMPATIBILITY.md) before
-relying on a skill outside Claude Code.
+### 2. Ask in plain words
 
-## Skills catalog
+Open your assistant in your project folder and describe what you want. The matching skill starts on its own. To
+begin the paper cycle:
+
+```text
+Here is my paper idea: <title + abstract>. Find the research gap in this domain.
+```
+
+When step 1 finishes, the skill names the next step. You can also call any skill by name, for example
+`/finding-gap` in Claude Code.
+
+## Example requests
+
+| You ask | Skill that runs | What you get |
+|---|---|---|
+| "Here is my title and abstract, write the paper" | `research-workflow-map`, then `finding-gap` | The paper cycle from step 1, one skill at a time |
+| "The verifier flagged this reference as DOI not found" plus a BibTeX entry | `reference-verify` | A corrected, paste-ready BibTeX entry, checked against the DOI registry and the publisher page |
+| "Check every reference in references.bib" | `reference-verify` | A field-by-field report on the whole file (wrong, disputed, retracted, duplicate, and unfound entries), then a verified entry for each flagged one. Also runs as a [Colab notebook](notebook/BibTeX_DOI_Verifier.ipynb) |
+| "Do a literature review for main.tex, then cite the verified works in the paper" | `literature-review` | `literature_review.md` with a search log, checked sources, and tested gaps, then the citations added to the paper |
+| "Rebuild this figure as TikZ with selectable text" | `figure-rebuild` | A vector figure for the paper and an editable one-slide PowerPoint copy |
+| "Draft the response to reviewers" with the reviews and the revised `.tex` | `response-to-reviewer` | A point-by-point letter whose page, line, and number references are checked by script |
+| "Write a cover letter for submitting main.tex to IEEE Access" | `journal-cover-letter` | A one-page `cover_letter.tex` and `cover_letter.pdf` based on the paper and the journal's current author instructions, checked by script |
+| `/paper-format-converter IEEE Transactions on Smart Grid` | `paper-format-converter` | A `[Venue] Format` folder with the official template, the converted paper, and a conversion report |
+
+## Full skills catalog
+
+All 25 skills with a one-line description each. The [full catalog](docs/SKILLS_CATALOG.md) groups them by topic and
+marks the two that run only when you call them by name.
+
+<details>
+<summary><b>Show all 25 skills</b></summary>
 
 <!-- catalog:start -->
 | Skill | Description | Category |
@@ -110,33 +231,43 @@ relying on a skill outside Claude Code.
 | [`readme-improvement`](skills/readme-improvement/SKILL.md) | Refactors a repository README.md to publication quality without changing the project's technical meaning. | Research Engineering and Repositories |
 <!-- catalog:end -->
 
-The [full catalog](docs/SKILLS_CATALOG.md) groups the skills by research workflow and marks which ones are manual only.
+</details>
 
-## Examples
+## Things you supply yourself
 
-Most skills start from a plain request. In Claude Code you can also call a skill by name (`/reference-verify`, or
-`/academic-agent-skills:reference-verify` when installed as a plugin).
-
-| You ask | Skill that runs | What you get |
+| Skill | What you need | Why |
 |---|---|---|
-| "The verifier flagged this reference as DOI not found" plus a BibTeX entry | `reference-verify` | A corrected, paste-ready BibTeX entry, checked against the DOI registry and the publisher page |
-| "Check every reference in references.bib" | `reference-verify` | A field-by-field report on the whole file (wrong, disputed, retracted, duplicate, and unfound entries), then a verified entry for each flagged one. Also runs as a [Colab notebook](notebook/BibTeX_DOI_Verifier.ipynb) |
-| "Do a literature review for main.tex and check whether my research gap is real" | `literature-review` | `literature_review.md` with a search log, verified source ledger, validated gaps, and a novelty assessment. The manuscript is left unchanged until you ask for integration |
-| "Draft the response to reviewers" with the reviews and the revised `.tex` | `response-to-reviewer` | A point-by-point letter whose page, line, and number references are checked by script |
-| "Audit the writing of my paper before I edit it" | `audit-paper` | `audit.md` with numbered issues, and the manuscript left unchanged |
-| "Is my research gap real, and does my target journal fit?" | `research-auditor` | An evidence-tagged assessment of the claims, the gap, the closest prior work, and journal fit |
-| "Write a cover letter for submitting main.tex to IEEE Access" | `journal-cover-letter` | A one-page `cover_letter.tex` and `cover_letter.pdf` grounded in the paper and the journal's current author instructions, checked by script |
-| `/paper-format-converter IEEE Transactions on Smart Grid` | `paper-format-converter` | A `[Venue] Format` folder with the official template, the converted paper, and a conversion report |
+| `asd-ste100` | Your own copy of the ASD-STE100 specification (PDF) | The standard is not included. Download it from the official ASD website, then give it to the assistant or save it in the skill's `references/` folder. [skills/asd-ste100/REFERENCES.md](skills/asd-ste100/REFERENCES.md) explains how. |
+| `paper-to-pptx` | Anthropic's `pptx` skill | This repository does not include it |
+| `nanobanana-prompt-generator` | Access to Google Flow (or Google Gemini) | You generate the figure images there yourself |
 
-## Skills that need material you supply
+## Words used in this README
 
-`asd-ste100` writes explanations to the ASD-STE100 Simplified Technical English rules. This repository does not
-include the ASD-STE100 specification or any extract from it. Get an authorized copy from ASD through its official
-website and point the skill at it. [skills/asd-ste100/REFERENCES.md](skills/asd-ste100/REFERENCES.md) explains how.
+| Word | Meaning |
+|---|---|
+| **Assistant** (or agent) | An AI tool that can read and change files on your computer, such as Claude Code, Codex, Antigravity, or Cursor |
+| **Skill** | A folder with a `SKILL.md` instruction file and helper scripts. The assistant follows it when your request matches. |
+| **LaTeX** (`.tex`) | A typesetting system many journals use for papers |
+| **BibTeX** (`.bib`) | The reference-list file that goes with a LaTeX paper |
+| **TikZ** | A way to draw diagrams inside LaTeX, so the text in a figure stays real, selectable text |
+| **Terminal** | The window where you type commands such as `npx` or `claude` |
 
-`paper-to-pptx` also needs Anthropic's `pptx` skill, which this repository does not include.
+## Repository layout
 
-## Updating
+```text
+academic-agent-skills/
+├── skills/           one folder per skill: SKILL.md plus its scripts, references, and templates
+├── docs/             installation, compatibility, full catalog, architecture, and the images in this README
+├── scripts/          repository checks: validate_skills.py and generate_catalog.py
+├── tests/            automated tests for the skills and the repository
+├── notebook/         a Colab notebook that checks a whole .bib file
+├── .claude-plugin/   Claude Code plugin and marketplace files
+└── .github/          automated checks that run on GitHub
+```
+
+## Updating and uninstalling
+
+Update:
 
 ```bash
 npx skills check                      # report available updates without installing
@@ -145,7 +276,7 @@ claude plugin marketplace update academic-agent-skills
 claude plugin update academic-agent-skills@academic-agent-skills
 ```
 
-## Uninstalling
+Uninstall:
 
 ```bash
 npx skills remove aliakarma/academic-agent-skills --global --yes   # removes only this collection's skills
@@ -153,13 +284,14 @@ claude plugin uninstall academic-agent-skills@academic-agent-skills
 claude plugin marketplace remove academic-agent-skills
 ```
 
-Do not uninstall with `npx skills remove --skill '*'`. It removes every installed skill, including skills from other
-sources.
+> [!WARNING]
+> Do not uninstall with `npx skills remove --skill '*'`. It removes every installed skill, including skills from other
+> sources.
 
 ## Contributing
 
-Researchers and developers can contribute new skills, fixes, and compatibility reports. Read
-[CONTRIBUTING.md](CONTRIBUTING.md), then run the checks locally:
+New skills, fixes, and reports on how the skills behave in other assistants are welcome. Read
+[CONTRIBUTING.md](CONTRIBUTING.md), then run the checks on your computer:
 
 ```bash
 pip install -r requirements-dev.txt
@@ -168,27 +300,27 @@ python scripts/generate_catalog.py --check
 python -m pytest tests
 ```
 
-[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) explains how one `skills/` folder serves every distribution channel.
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) explains how one `skills/` folder serves every way of installing.
 
 ## Security
 
-Skills run with the permissions of the agent that loads them. Read a skill's `SKILL.md` and its scripts before you
-install it. Report vulnerabilities, leaked secrets, personal data, or content that may not be redistributed through
-GitHub's private vulnerability reporting, as described in [SECURITY.md](SECURITY.md).
+Skills run with the same permissions as the assistant that loads them. Read a skill's `SKILL.md` and its scripts
+before you install it. Report security problems, leaked secrets, personal data, or content that may not be shared
+through GitHub's private vulnerability reporting, as described in [SECURITY.md](SECURITY.md).
 
 ## License
 
 This project is licensed under the [Creative Commons Attribution 4.0 International license](LICENSE) (CC BY 4.0).
-You may share and adapt it, including commercially, if you credit **Academic Agent Skills**, link to this
+You may share and adapt it, including for commercial use, if you credit **Academic Agent Skills**, link to this
 repository, name the license, and say whether you made changes.
 
 The license covers this project's own material. Third-party material keeps its own license, and the ASD-STE100
-specification is not part of this repository. Creative Commons does not recommend its licenses for
-software, so read [docs/LICENSE_AND_ATTRIBUTION.md](docs/LICENSE_AND_ATTRIBUTION.md) for how the license applies to
-the bundled scripts, attribution examples, and the third-party material.
+specification is not part of this repository. Creative Commons does not recommend its licenses for software, so read
+[docs/LICENSE_AND_ATTRIBUTION.md](docs/LICENSE_AND_ATTRIBUTION.md) for how the license applies to the bundled
+scripts, attribution examples, and third-party material.
 
 ## Acknowledgments
 
 - The [Agent Skills specification](https://agentskills.io/specification) defines the skill format used here.
-- [Vercel Skills CLI](https://github.com/vercel-labs/skills) installs the skills across agents.
+- [Vercel Skills CLI](https://github.com/vercel-labs/skills) installs the skills across assistants.
 - [Claude Code plugins](https://code.claude.com/docs/en/plugins) provide the native plugin and marketplace format.
