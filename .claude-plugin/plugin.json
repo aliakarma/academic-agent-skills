@@ -1,6 +1,6 @@
 {
   "name": "academic-agent-skills",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Agent skills for academic research and scientific publishing: literature review, research gaps, manuscript drafting and polishing, peer review, reviewer responses, reference verification, writing and integrity audits, figures, slides, and venue conversion.",
   "author": {
     "name": "aliakarma",
