@@ -189,3 +189,13 @@ When the user asks for an audit, distinguish:
 - **Not established:** official detector evasion, human authorship, or removal of a vendor's secret-key watermark.
 
 For technical background, read `references/watermark-notes.md`. For misuse or disclosure questions, read `references/responsible-use.md`.
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Paper cycle:** step 12 of 14, the final pass after `text-humanizer`.
+- **Needs first:** text from `text-humanizer`, or any reader-facing text.
+- **Uses during the run:** `text-humanizer` for deeper prose revision.
+- **Hands on to:** `reference-verify` (step 13). Outside the cycle: final delivery.

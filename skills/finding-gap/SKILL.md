@@ -35,7 +35,7 @@ Collect what is needed before searching. If the user has already supplied enough
 
 | Input | Required? | Default if absent |
 |---|---|---|
-| Topic (as specific as possible) | Required | none, ask |
+| Topic (as specific as possible), or a paper idea as a title and abstract with any research questions, methodology, or datasets | Required | none, ask |
 | Field / discipline and sub-community | Strongly recommended | inferred from topic, stated as assumption |
 | Purpose (paper, thesis, grant, SOP, review) and target venue or funder | Recommended | "journal or conference paper" |
 | Mode (which module, or full pipeline) | Recommended | Full pipeline if the user wants "a gap"; M9 if they paste a gap |
@@ -121,13 +121,16 @@ The user's main fields are agentic AI, AI safety and governance, trustworthy ML,
 - Common gap types include evaluation gaps (metrics that do not measure the target construct, static rather than adaptive adversaries, benchmark saturation or contamination), deployment gaps (simulation vs real-world), scale gaps (single-agent results assumed to transfer to multi-agent settings), reproducibility gaps, and policy-translation gaps (for example, regulatory requirements without validated technical methods to meet them).
 - "Theory" often means formal frameworks (game theory, mechanism design, (PO)MDP and Dec-POMDP formalisms, social choice, control theory, verification) as well as social-science theories used in governance work.
 
-## Hand-offs to the user's other skills
+## Related skills
 
-- `bibtex-validator`: validate `references.bib` before it goes into any manuscript.
-- `peer-review`: once a draft paper built on the gap exists.
-- `manuscript-revision`: when a reviewer has challenged the novelty claim of an existing paper.
-- `humanize-latex` and `stealth-writer`: to polish the gap paragraph's prose after the substance is settled.
-- `sop-skill`: when the gap becomes the research narrative of a statement of purpose.
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Paper cycle:** step 1 of 14, the entry point. Give it the paper's title and abstract, or any other relevant data (research questions, methodology, datasets), and it finds the gap in that domain. It also works from a bare topic.
+- **Needs first:** nothing.
+- **Uses during the run:** `reference-verify` for any source-ledger entry whose metadata or BibTeX is in doubt.
+- **Hands on to:** `idea-to-paper` (step 2: write the paper inside the validated gap). Outside the cycle: `manuscript-revision` when a reviewer has challenged the novelty claim.
+- **Outside this collection, if installed:** `bibtex-validator` for `.bib` formatting, `sop-skill` when the gap becomes a statement of purpose.
 
 ## Reference files
 

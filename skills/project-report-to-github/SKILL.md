@@ -59,3 +59,12 @@ Then reply in the format of prompt section 32, and add the checker's final line,
 | Tests that only assert imports or shapes | Add a paper-derived numeric check per key equation |
 | Calling a paid LLM API during smoke tests | Use the offline stub. The live path is NOT RUN |
 | Launching the full experiment during the build | Run the smoke config only. Full runs are the user's call |
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Paper cycle:** step 5 of 14.
+- **Needs first:** `paper-to-project-report` (required: this skill needs its `PROJECT_REPORT.md`).
+- **Hands on to:** `peer-review` (step 6). Optional at this point: `repo-forensic-audit` (review the new repository), `readme-improvement`.

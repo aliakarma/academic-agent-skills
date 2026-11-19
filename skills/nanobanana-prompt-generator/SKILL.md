@@ -164,3 +164,12 @@ Write `figures/nanobanana/GUIDE.md` with these parts, in this order:
 - "It is mostly an architecture diagram, so the one score in it does not count."
 - A prompt that names a component, value, or claim the TikZ does not contain.
 - A prompt with a code fence inside a `.txt` file, which the user would copy along with the prompt.
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Paper cycle:** step 8 of 14, first part.
+- **Needs first:** the revised paper from `manuscript-revision` (step 7), or any draft that holds TikZ diagrams.
+- **Hands on to:** the user, who generates each reference image in Google Flow (or Gemini) from the prompts, then `figure-rebuild` (required next step: it turns those images into vector TikZ figures).

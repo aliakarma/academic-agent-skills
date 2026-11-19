@@ -2,68 +2,53 @@
 
 ## The license
 
-Academic Agent Skills is licensed under the **Creative Commons Attribution 4.0 International** license
-(CC BY 4.0). The full legal code is in [LICENSE](../LICENSE), copied unchanged from
-[creativecommons.org/licenses/by/4.0/legalcode](https://creativecommons.org/licenses/by/4.0/legalcode). The
-human-readable summary is at [creativecommons.org/licenses/by/4.0](https://creativecommons.org/licenses/by/4.0/).
-The summary is not a substitute for the legal code.
+Academic Agent Skills is released under the **MIT License**. The full text is in [LICENSE](../LICENSE). It is the
+standard MIT text as published by the [Open Source Initiative](https://opensource.org/license/mit).
 
 This page explains how the project applies the license. It is not legal advice.
 
+Releases up to and including 1.0.0 were published under the Creative Commons Attribution 4.0 International license
+(CC BY 4.0). Copies obtained under that license keep it. Everything published after 1.0.0 is under MIT.
+
 ## What the license covers
 
-CC BY 4.0 applies to the original material of this project that its authors have the right to license:
+The MIT License applies to the original material of this project that its authors have the right to license:
 
 - The skill instructions (`skills/*/SKILL.md`) and their reference documents, templates, examples, and evaluation
   records.
-- The project documentation (`README.md`, `docs/`, `CONTRIBUTING.md`, `SECURITY.md`, `CHANGELOG.md`).
 - The scripts and tests written for this project, inside `skills/*/scripts/` and in the repository's own `scripts/`
-  and `tests/` folders (see "Software components" below).
+  and `tests/` folders.
+- The project documentation (`README.md`, `docs/`, `CONTRIBUTING.md`, `SECURITY.md`, `CHANGELOG.md`) and the images
+  in `docs/images/`.
 
 It does not cover the material listed under "Third-party material", and it does not cover any trademark.
 
-## Software components
+## What you may do
 
-Creative Commons [recommends against](https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software)
-using its licenses for software, because they say nothing about source code, patents, or software distribution. This
-project has chosen CC BY 4.0 for the whole collection, including its scripts, because the scripts are small helpers
-that the skill instructions run. In practice:
+- Use, copy, change, merge, publish, distribute, sublicense, and sell the material, in open or closed projects.
+- Ship a single skill, or an adapted skill, on its own.
 
-- You may use, copy, change, and redistribute the scripts, including commercially, if you give attribution as
-  described below.
-- CC BY 4.0 grants no express patent license and contains no software-specific terms.
-- If you need a software license (for example, MIT or Apache-2.0) for a script, open an issue. This project has not
-  dual-licensed any file.
+The one condition: every copy or substantial portion must include the copyright notice and the license text from
+[LICENSE](../LICENSE). The material comes with no warranty.
 
-## How to give attribution
+## How to give credit
 
-When you share this project, a skill from it, or a work adapted from it, Section 3(a) of the license requires you to:
+The MIT License requires the copyright notice and license text, nothing more. A visible credit is appreciated, for
+example:
 
-1. Credit the project: **Academic Agent Skills**.
-2. Link to the source: <https://github.com/aliakarma/academic-agent-skills>.
-3. Name the license and link to it: CC BY 4.0, <https://creativecommons.org/licenses/by/4.0/>.
-4. Say whether you changed the material.
+> `reference-verify` from [Academic Agent Skills](https://github.com/aliakarma/academic-agent-skills) (MIT License).
 
-The license also lets you give these details in any reasonable manner for your medium, for example a link to a page
-that contains them.
+For an adapted skill, say what you changed:
 
-Example for an unchanged skill:
+> Adapted from `literature-review` in [Academic Agent Skills](https://github.com/aliakarma/academic-agent-skills)
+> (MIT License). Changes: shortened the search protocol and added a Zotero export step.
 
-> `reference-verify` from [Academic Agent Skills](https://github.com/aliakarma/academic-agent-skills), licensed
-> under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-
-Example for an adapted skill:
-
-> Adapted from `literature-review` in [Academic Agent Skills](https://github.com/aliakarma/academic-agent-skills),
-> licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Changes: shortened the search protocol
-> and added a Zotero export step.
-
-The attribution must not suggest that the project endorses you or your adaptation (Section 2(a)(6)).
+A credit must not suggest that the project endorses you or your adaptation.
 
 ## Third-party material
 
-Some material in this repository belongs to others. It keeps its own license, and CC BY 4.0 from this project does
-not apply to it or grant any permission for it.
+Some material in this repository belongs to others. It keeps its own license, and the MIT License of this project
+does not apply to it or grant any permission for it.
 
 | Material | Location | Owner and terms |
 |---|---|---|
@@ -71,8 +56,8 @@ not apply to it or grant any permission for it.
 | Cited publications, standards, and web pages | Bibliographies and reference files in several skills | Their publishers and authors. The skills cite and summarize them. They do not reproduce them |
 
 Software that the skills call but that this repository does not include (Python packages, LaTeX, Poppler, Node.js
-packages, Microsoft PowerPoint, Anthropic's `pptx` skill) stays under its own license. Using it with this project
-does not change its license, and the CC BY 4.0 license of this project does not extend to it.
+packages, Microsoft PowerPoint, LibreOffice, Google Flow, Anthropic's `pptx` skill) stays under its own license.
+Using it with this project does not change its license, and the MIT License of this project does not extend to it.
 
 ## Material that is not distributed
 
@@ -83,8 +68,8 @@ ASD and point the skill at it. See [skills/asd-ste100/REFERENCES.md](../skills/a
 
 ## For contributors
 
-- By contributing, you agree that your contribution is licensed under CC BY 4.0 as part of this project.
-- Contribute only material that you wrote or that you have the right to license under CC BY 4.0.
+- By contributing, you agree that your contribution is licensed under the MIT License as part of this project.
+- Contribute only material that you wrote or that you have the right to license under the MIT License.
 - For third-party material that has a compatible license and may be redistributed, keep its license file and notice
   next to it, and add a row to the table above in the same pull request.
 - Do not add copyrighted standards, publisher templates, paywalled papers, or other material that may not be

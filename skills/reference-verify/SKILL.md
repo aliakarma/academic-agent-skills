@@ -100,3 +100,13 @@ Use this when the user hands over a complete `.bib` file rather than one entry.
 - `scripts/check_response.py`: checks the response structure. Run `--selftest` for the offline tests.
 - `scripts/verify_bib.py`: whole-file triage against CrossRef, DataCite, OpenAlex, Europe PMC, DBLP, OpenLibrary, arXiv, and publisher BibTeX pages. Needs `bibtexparser` 1.x and `requests`. Run `--help` for the options. A Colab front end is in the repository's `notebook/BibTeX_DOI_Verifier.ipynb`.
 - `references/source-guide.md`: which source governs which field, by reference type, plus integrity signals.
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Paper cycle:** step 13 of 14: verify every reference, one by one, against authentic sources.
+- **Needs first:** the final manuscript and its `.bib` (steps 1 to 12), or any BibTeX.
+- **Called by:** `finding-gap`, `literature-review`, `idea-to-paper`, `universal-manuscript-polish`, `manuscript-revision`.
+- **Hands on to:** `journal-cover-letter` (step 14). `literature-review` when an entry is fabricated or retracted and needs a real replacement.

@@ -18,7 +18,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import generate_catalog  # noqa: E402
 from validate_skills import PRIVATE_TERMS, user_supplied_files, validate_privacy, validate_repo  # noqa: E402
 
-EXPECTED_SKILL_COUNT = 23                       # release 1.0.0; change together with the CATALOG table
+EXPECTED_SKILL_COUNT = 25                       # release 1.0.0; change together with the CATALOG table
 EXCLUDED_SKILLS = ("remove-ai-marks",)          # not part of the public collection
 LOCAL_ONLY = ("RELEASE_COMMIT_PLAN.md", "MANUAL_RELEASE_CHECKLIST.md", ".release-review/")
 ASD_RESTRICTED = ("skills/asd-ste100/references/ASD-STE100_ISSUE9.pdf",
@@ -85,7 +85,7 @@ def test_plugin_discovers_exactly_the_public_collection():
     # Claude Code scans <plugin root>/skills/ unless plugin.json overrides it.
     assert plugin.get("skills") in (None, "./skills", "./skills/")
     assert [e["source"] for e in market["plugins"]] == ["./"]
-    assert plugin.get("license") == "CC-BY-4.0"
+    assert plugin.get("license") == "MIT"
     assert skill_folders() == sorted(generate_catalog.CATALOG)
 
 

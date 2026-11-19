@@ -1,6 +1,6 @@
 ---
 name: figure-rebuild
-description: Convert an AI-generated or raster research figure (JPEG/PNG from an image model, a screenshot, or a legacy diagram) into a publication-quality LaTeX/TikZ figure with fully selectable vector text, while preserving the original pictograms, matching a reference visual style, and auditing every claim the figure makes against the project's measured results. Use whenever the user wants a figure redrawn for a paper, wants figure text to be selectable or searchable, wants a figure title removed and turned into a caption, wants an image-model figure made submission-ready, wants two figures restyled to match a reference image or each other, or wants figures checked for claims the work does not support. Trigger on "rebuild my figure", "convert this figure to TikZ", "make the figure text selectable", "vectorise this diagram", or image files supplied with a LaTeX manuscript. Not for plotting CSV data, prose editing, or image editing with no paper.
+description: Convert an AI-generated or raster research figure (image-model JPEG/PNG, screenshot, or legacy diagram) into a publication-quality LaTeX/TikZ figure with selectable vector text, while preserving the original pictograms, matching a reference visual style, and auditing every claim the figure makes against the project's measured results. Use whenever the user wants a figure redrawn for a paper, wants figure text to be selectable or searchable, wants a figure title removed and turned into a caption, wants an image-model figure made submission-ready, wants two figures restyled to match a reference image or each other, wants an editable PowerPoint (.pptx) version of a paper figure, or wants figures checked for claims the work does not support. Trigger on "rebuild my figure", "convert this figure to TikZ", "make the figure text selectable", "vectorise this diagram", "make a pptx of the figure", or image files supplied with a LaTeX manuscript. Not for plotting CSV data, prose editing, or image editing with no paper.
 ---
 
 # Rebuild a raster figure as a publication-quality TikZ figure
@@ -13,6 +13,20 @@ they confidently render **claims the work does not support**.
 
 This skill fixes all three without discarding the artwork. The pictograms are
 extracted and reused unchanged. Everything else is redrawn in TikZ.
+
+## Deliverables: every rebuilt figure ships as four files
+
+| File | What it is |
+|---|---|
+| `figures/<name>.tex` | standalone TikZ source (Phase 6) |
+| `figures/<name>.pdf` | compiled vector figure the manuscript includes (Phase 7) |
+| `figures/<name>_pptx.js` | generator for the PowerPoint twin, copied from `assets/figure_pptx_template.js` (Phase 8) |
+| `figures/<name>.pptx` | editable one-slide PowerPoint twin: native shapes, real text, the same icons and palette (Phase 8) |
+
+The PPTX is produced on every run, whether or not the user mentions it: authors
+reuse figures in talks, posters and graphical abstracts, and an editable twin
+saves them redrawing it. A figure is not done until all four files exist and
+both the PDF and the PPTX have been rendered and viewed.
 
 ## The rule that governs everything
 
@@ -34,6 +48,8 @@ diagram, you have failed the task even though every fact is now right.
 | `assets/figstyle.tex` | Drop-in shared style file: palette, `figbase` tikzset (`colhdr`, `colrule`, `badge`/`badgeG`/`badgeC`/`badgeT`, `stepflow`, `panel`, `card`, `dashbox`, `dataflow`, `hairflow`, `tealflow`, `corflow`, `callout`), `\capblocks`, `\ficon`. Copy next to the figures, then re-sample the palette. |
 | `scripts/extract_icons.py` | Crop, auto-trim, upscale and contact-sheet the pictograms out of the source render. |
 | `scripts/verify_selectable.py` | Probe the compiled PDF to prove the figure text is real text. |
+| `assets/figure_pptx_template.js` | pptxgenjs generator for the PowerPoint twin. Takes TikZ coordinates in cm unchanged; provides `box`, `enclosure`, `poly` (orthogonal connectors), `label` (with white knockout), `icon`, and `{italic}`/`_{sub}`/`^{sup}` text markup; fits the figure to a 13.33×7.5 in slide and scales the type with it. Edit only its CONFIG and FIGURE CONTENT blocks. |
+| `scripts/render_pptx.py` | Render slide 1 of the `.pptx` to PNG for viewing: PowerPoint over COM on Windows, LibreOffice + pdftoppm elsewhere. |
 
 ## Workflow
 
@@ -220,6 +236,44 @@ for probe in ["O-RU", "harmonised", "emulated"]:
 5. Render the page in context and view it. Figures look different on the page
    than in isolation.
 
+### Phase 8 — Build the PowerPoint twin (every run)
+
+Do this once the TikZ figure is final, because the PPTX is a transcription of
+it: the same audited content, coordinates, palette and icons. It is never a
+copy of the original render.
+
+1. Copy `assets/figure_pptx_template.js` to `figures/<name>_pptx.js`. Fill in
+   its CONFIG block:
+   - `OUT` is `<name>.pptx`, `TITLE` is the figure number and caption head, and `NOTES` is the full caption (it becomes the speaker notes, and nothing is drawn as a title).
+   - `EXTENT` is the TikZ bounding box in cm.
+   - `TIKZ_PT` holds the manuscript's `\scriptsize`/`\tiny` sizes.
+   - `COL` holds the hex values from `figures/figstyle.tex`.
+2. Replace the FIGURE CONTENT block by transcribing `<name>.tex` node by node,
+   with the same cm coordinates:
+
+   | TikZ | Generator |
+   |---|---|
+   | `\node[blk, minimum width=w] (n) at (cx,cy) {\ficon{ic}{..}\\ Title\\ {\tiny detail}}` | `box("n", cx, cy, w, h, COL.x, [["Title", T], ["detail", D]], { ic: "ic" })` |
+   | dashed group (`fit=` or explicit rectangle) | `enclosure("name", x1, y1, x2, y2)` |
+   | `\draw[flow] (a) -- ++(dx,0) \|- (b)` | `poly([[x0,y0], [x1,y0], [x1,y1], [x2,y1]])` with every corner written out |
+   | dashed comparison or control path | `poly(pts, { dash: "dash" })` |
+   | `node[fill=white]` callout on a line | `label("text", cx, cy, wCm, { knock: true })` |
+   | `$k_L$`, `$\rho$`, `$x^2$` | `"{k}_{L}"`, `"{ρ}"`, `"x^{2}"` |
+
+3. Build from inside `figures/`:
+   `node <name>_pptx.js && zip -dq <name>.pptx '*/'`.
+   If `require('pptxgenjs')` fails, run it with `NODE_PATH="$(npm root -g)"` or install with `npm i pptxgenjs`.
+4. If the `pptx` skill is installed, validate with its
+   `scripts/office/validate.py figures/<name>.pptx`.
+5. Render with `python scripts/render_pptx.py figures/<name>.pptx <scratch>/slide.png`
+   and **view it**. Check four things:
+   - text overflowing or wrapping inside boxes (Calibri is wider than the TeX body font);
+   - white knockouts wider than their label;
+   - arrows that stop short of a box edge;
+   - every icon sitting in the right box.
+
+   Expect one fix pass. Fix the generator, rebuild, and view again.
+
 ## Pitfalls that cost real time
 
 | Pitfall | Avoidance |
@@ -239,6 +293,12 @@ for probe in ["O-RU", "harmonised", "emulated"]:
 | TikZ written inline in `main.tex` | Never. Figures live in `figures/<name>.tex`, compile to PDF, and the paper uses `\includegraphics`. |
 | Figure compiled from the repo root | `\input{figstyle}` and the icon paths are relative to `figures/`. Compile from inside `figures/`. |
 | Edited `figures/<name>.tex` but the paper shows the old figure | The manuscript reads the PDF. Recompile the figure before the paper. |
+| Fixed the TikZ figure, the PPTX still shows the old content | The twin is a transcription. Edit `<name>_pptx.js` in the same pass and rebuild both. |
+| The pptx skill's `soffice.py` dies on Windows with `socket.AF_UNIX` | Render with `scripts/render_pptx.py`, which drives PowerPoint over COM. |
+| `validate.py` warns about ZIP folder entries | pptxgenjs writes them, and cloud co-editing chokes on them. Run `zip -dq <name>.pptx '*/'` after every build. |
+| A TikZ label that just fitted wraps or overflows in the PPTX | Calibri runs wider than Computer Modern or Times. Shorten the text or widen the box in the generator. Leave the TikZ alone. |
+| `poly` throws "segment is diagonal" | TikZ `-\|` and `\|-` hide the corner point. Write it out explicitly. |
+| A white label knockout blanks a long stretch of connector | The `label` width is in cm. Size it to the text, not to the gap. |
 
 ## What to report back
 
@@ -246,6 +306,8 @@ State plainly:
 
 - which source images were used, and how they were chosen;
 - the path of each `figures/<name>.tex` and its compiled `figures/<name>.pdf`;
+- the path of each `figures/<name>.pptx` and its generator `figures/<name>_pptx.js`,
+  the validation result, and confirmation that the slide render was viewed;
 - every **error found in the render**, with what the evidence says instead;
 - any error found **elsewhere in the paper** while wiring the figure in — this
   is common, because rebuilding a figure forces you to check its numbers
@@ -253,8 +315,18 @@ State plainly:
 - confirmation that the text is selectable, with the probe output.
 
 Never claim the figure is "publication ready" without having viewed the
-rendered page.
+rendered page, and never report the PPTX without having viewed its slide render.
 
 ## Trigger phrases
 
-Moved here from the description so it fits the 1024-character limit of the Agent Skills specification. Use this skill on requests such as "rebuild my figure", "convert this figure to TikZ", "make the figure text selectable", "remove the title from the figure", "use the figure in downloads", "use this style for my figures", "make the figures match", "add more icons", "make my figure publication quality", "fix my figure", "vectorise this diagram", or when image files are supplied alongside a LaTeX manuscript. Do not use it for plotting data series from a CSV (write matplotlib/pgfplots directly), for prose editing, or for generic image editing with no paper attached.
+Moved here from the description so it fits the 1024-character limit of the Agent Skills specification. Use this skill on requests such as "rebuild my figure", "convert this figure to TikZ", "make the figure text selectable", "remove the title from the figure", "use the figure in downloads", "use this style for my figures", "make the figures match", "add more icons", "make my figure publication quality", "fix my figure", "vectorise this diagram", "make a pptx of the figure", or when image files are supplied alongside a LaTeX manuscript. Do not use it for plotting data series from a CSV (write matplotlib/pgfplots directly), for prose editing, or for generic image editing with no paper attached.
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Paper cycle:** step 8 of 14, last part.
+- **Needs first:** `nanobanana-prompt-generator` and the reference images the user generated in Google Flow (or Gemini).
+- **Called by:** `idea-to-paper`, `manuscript-revision`, `paper-format-converter`, `universal-manuscript-polish`.
+- **Hands on to:** `audit-paper` and `research-auditor` (step 9). Outside the cycle: `paper-to-pptx` (talk deck).

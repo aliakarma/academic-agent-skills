@@ -87,3 +87,13 @@ Recompile the manuscript, rebuild the index, and rerun `check_locations.py`. Fin
 - Writing "addressed" for a comment with no implemented change.
 - A page or line number recalled from the `.tex` source instead of read from the PDF index.
 - Finishing with a verification step skipped "because it passed last time".
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Outside the paper cycle.** Use it for real comments from a journal or conference.
+- **Needs first:** `manuscript-revision` (the revision is done before the letter).
+- **Uses during the run:** `text-humanizer` for the letter's prose.
+- **Hands on to:** `highlighted-pdf-from-reviews`.

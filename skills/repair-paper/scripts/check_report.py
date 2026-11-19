@@ -1,25 +1,26 @@
 #!/usr/bin/env python3
 """Check a repair report against the audit it answers.
 
-Usage: python -I check_report.py <audit.md> <REPAIR_REPORT.md>
+Usage: python -I check_report.py <audit.md> <REPAIR_REPORT.md> [MASTER_PAPER_ASSESSMENT.md]
        python -I check_report.py --selftest
 
-Checks: sections A-F present and in order, every audit ID appears exactly once
-in the Section B matrix with a valid status, no matrix ID missing from the audit,
+Checks: sections A-F present and in order, every audit ID (I-) and, when the
+research-auditor assessment is given, every finding ID (R-) appears exactly once
+in the Section B matrix with a valid status, no matrix ID missing from the sources,
 MERGED rows name an existing target, and the Section A counts match the matrix.
 Prints one line per problem and "N problems". Exit code 1 if any problem.
 """
 import re
 import sys
 
-ID = re.compile(r"\bI-\d{3,}\b")
+ID = re.compile(r"\b[IR]-\d{3,}\b")
 SECTIONS = ["A", "B", "C", "D", "E", "F"]
 
 
-def audit_ids(text):
-    # Issue headings and master-index rows are the two forms audit-paper writes.
-    heads = re.findall(r"\*\*Issue (I-\d{3,})\*\*", text)
-    rows = re.findall(r"^\|\s*(I-\d{3,})\s*\|", text, re.M)
+def audit_ids(text, prefix="I", word="Issue"):
+    # Headings and index rows: audit-paper writes "**Issue I-001**", research-auditor "**Finding R-001**".
+    heads = re.findall(rf"\*\*{word} ({prefix}-\d{{3,}})\*\*", text)
+    rows = re.findall(rf"^\|\s*({prefix}-\d{{3,}})\s*\|", text, re.M)
     return set(heads) | set(rows)
 
 
@@ -49,7 +50,7 @@ def split_sections(text):
     return found, body
 
 
-def check(audit_text, report_text):
+def check(audit_text, report_text, assessment_text=None):
     problems = []
     found, body = split_sections(report_text)
     if [s for s in found if s in SECTIONS] != SECTIONS:
@@ -58,10 +59,15 @@ def check(audit_text, report_text):
     expected = audit_ids(audit_text)
     if not expected:
         problems.append("no audit IDs found in the audit file")
+    if assessment_text is not None:
+        r_ids = audit_ids(assessment_text, "R", "Finding")
+        if not r_ids:
+            problems.append("no R- finding IDs found in the assessment file")
+        expected |= r_ids
 
     rows = {}
     for line in body.get("B", "").splitlines():
-        m = re.match(r"^\|\s*(I-\d{3,})\s*\|([^|]*)\|", line)
+        m = re.match(r"^\|\s*([IR]-\d{3,})\s*\|([^|]*)\|", line)
         if not m:
             continue
         iid, cell = m.group(1), m.group(2)
@@ -111,6 +117,15 @@ def _selftest():
     msgs = check(audit, bad)
     for needle in ("out of order", "twice", "no valid status", "I-003 is in the audit", "says 2 fixed"):
         assert any(needle in m for m in msgs), (needle, msgs)
+    # research-auditor findings: every R- ID must be in the matrix once the assessment is given
+    assessment = "**Finding R-001** (Critical)\n**Finding R-002** (Minor)\n"
+    with_r = good.replace("| Audit issues identified | 3 |", "| Audit issues identified | 5 |").replace(
+        "## C. x", "| R-001 | NOT FIXED: REQUIRES AUTHOR INPUT | s | x |\n| R-002 | FIXED | s | x |\n## C. x")
+    with_r = with_r.replace("| Fixed | 2 |", "| Fixed | 3 |")
+    assert check(audit, with_r, assessment) == [], check(audit, with_r, assessment)
+    msgs = check(audit, good, assessment)
+    assert any("R-001 is in the audit but missing" in m for m in msgs), msgs
+    assert any("R-001 is in the matrix but not in the audit" in m for m in check(audit, with_r)), "R rows need the assessment"
     print("selftest ok")
 
 
@@ -118,13 +133,13 @@ if __name__ == "__main__":
     if sys.argv[1:] == ["--selftest"]:
         _selftest()
         sys.exit(0)
-    if len(sys.argv) != 3:
+    if len(sys.argv) not in (3, 4):
         sys.exit(__doc__)
-    with open(sys.argv[1], encoding="utf-8") as f:
-        audit_text = f.read()
-    with open(sys.argv[2], encoding="utf-8") as f:
-        report_text = f.read()
-    probs = check(audit_text, report_text)
+    texts = []
+    for p in sys.argv[1:]:
+        with open(p, encoding="utf-8") as f:
+            texts.append(f.read())
+    probs = check(*texts)
     for p in probs:
         print(p)
     print(f"{len(probs)} problems")

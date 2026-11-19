@@ -85,7 +85,7 @@ Identify the target journal from the project files. If unclear, infer it from th
 
 Work through `references/weakness-audit.md` — all checkpoints, not only the visible writing problems. For every major weakness state: **what is wrong → why it matters → evidence (file and location) → how it should be improved.**
 
-Sort into Critical (may prevent acceptance), Major (substantially weakens the paper), Minor (should still be corrected).
+Sort into Critical (may prevent acceptance), Major (substantially weakens the paper), Minor (should still be corrected). Number every finding `R-001`, `R-002`, and so on, in report order, as `**Finding R-001** (Critical)`. `repair-paper` fixes or accounts for each R- ID.
 
 ### Stage 6 — Assess submission readiness
 
@@ -110,7 +110,7 @@ Searching is not optional. An audit that reports no searches is an opinion piece
 | 2 Gap verification | Gap table with five-way verdicts and citations |
 | 3 Field positioning | State of the field, closest 5-15 papers with differentiation |
 | 4 Journal | Journal profile from official pages plus recent comparable papers |
-| 5 Weakness audit | Critical / Major / Minor, each with a fix |
+| 5 Weakness audit | Critical / Major / Minor, each numbered R-001... with a fix |
 | 6 Readiness | Evidence-based verdict with conditions |
 | 7 Report | `MASTER_PAPER_ASSESSMENT.md`, 17 sections |
 
@@ -138,3 +138,13 @@ Searching is not optional. An audit that reports no searches is an opinion piece
 - Report has fewer than 17 sections, or a section is silently empty
 - Journal section cites only the journal's own scope statement
 - Weakness audit found no Critical or Major issues in a pre-submission draft — re-audit against `references/weakness-audit.md`
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Paper cycle:** step 9 of 14, run together with `audit-paper`.
+- **Needs first:** the paper and its project folder (steps 1 to 8).
+- **Uses during the run:** `literature-review` for deeper gap verification, `repo-forensic-audit` when code exists.
+- **Hands on to:** `repair-paper` (step 10: fixes every numbered R- finding). Later, for journal fit: `journal-cover-letter`, `paper-format-converter`.

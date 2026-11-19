@@ -1,4 +1,4 @@
-# Gap Matrix and Gap Records (Phase 7)
+# Gap Matrix, Gap Records, and Novelty Table (Phases 5 and 6)
 
 A research gap is a conclusion drawn from comparing what the literature does. It is never inferred from the manuscript's own citation list or from a search that returned nothing.
 
@@ -19,25 +19,32 @@ Every cell traces to an extraction_sheet row. `n.r.` and `no` differ: `no` means
 Include the closest competitors and the strongest counter-examples, not only the studies that make the manuscript look new. Render with:
 
 ```
-python scripts/gap_table.py literature/gap_matrix.csv --out literature/gap_matrix_out/tables.tex
+python "$S/gap_table.py" literature/gap_matrix.csv --out literature/gap_matrix_out/tables.tex
 ```
 
 ## 3. Write one record per gap in `gaps.md`
 
-```markdown
-## G2: <precise gap statement>
+Use the A to K record in `review-template.md` Sec. 9 and write it straight into `literature_review.md`. `gaps.md` is optional scratch space. Each record ends with an **Examined** line listing the source_ids and the search_ids (including the `counterevidence G<n>` query) that established it.
 
-1. Gap: <one sentence, testable>
-2. Examined: <source_ids of every paper used to establish it, plus the search_ids>
-3. What existing work does: <with source_ids>
-4. What it does not do: <with source_ids>
-5. Competing approaches: <source_ids>
-6. Contrary or partial evidence: <work that addresses part of the gap>
-7. Why it matters: <scientific or practical consequence, with evidence>
-8. How the manuscript addresses it: <section reference>
-9. What the manuscript leaves open: <honest residue>
-Claim strength: <level from the ladder below>
-```
+Fill the fields from evidence, in this order of work:
+
+1. **C and D first.** Run the counterevidence sweep before writing A. What existing work already does decides how narrow A must be.
+2. **A** is the residue after D: one testable sentence naming the setting and the missing capability. "No trust layer for agentic water twins" is too broad if agent-security frameworks exist elsewhere. "No reported evaluation of compromised-agent messages against a hydraulic action guard in a water twin" is testable.
+3. **B** cites what the supporting studies did (their methods, evaluations, stated limits), not only that they exist.
+4. **E to G** name what remains, why it matters, and how one might investigate it, without designing the solution.
+5. **H to K** come last, from the table below.
+
+## 3a. Category, confidence, and novelty risk
+
+| Evidence you hold | Category | H. Confidence | I. Novelty risk |
+|---|---|---|---|
+| Two or more FULLTEXT or ABSTRACT sources show the problem, counterevidence sweep in this and neighboring vocabularies found no adequate solution | Established research gap | Strongly supported | Low or Medium |
+| Solutions exist in some settings, and sources show where they stop working | Context-dependent gap | Moderately or Strongly supported | Medium |
+| A recent development (last 24 months) creates the problem, and a dated search of recent work found little | Emerging research gap | Moderately supported or Tentative | Medium or High |
+| Suggestive evidence, but the search was narrow, access was abstract-only, or the field moves too fast to be sure | Potential or tentative gap | Tentative | High |
+| The counterevidence sweep found work that solves it within the claimed scope, or support is only the manuscript's own say-so | Unsupported or resolved gap | Unsupported | High |
+
+Downgrade one step when the main supporting sources are preprints, METADATA-only, or the manuscript's own citations described by the manuscript. A gap resting on one source is never "Established".
 
 The research-auditor skill's `references/gap-verification.md` has a five-way verdict and gap taxonomy. Use it when a gap's status is contested.
 
@@ -57,4 +64,15 @@ Never write "first", "only", "no prior work", or "most comprehensive" without th
 
 ## 5. Novelty claims in the manuscript
 
-For each novelty phrase found in Phase 1, record in `gaps.md`: phrase, location, the gap record that tests it, verdict (supported, overstated, contradicted), and the replacement wording when overstated. Change the manuscript text only in Phase 10, and list every change in the summary.
+Each claimed contribution and each novelty phrase from Phase 1 (M-ids) gets one row in the Sec. 11 novelty table of `literature_review.md`:
+
+| Column | How to fill it |
+|---|---|
+| Manuscript claim | M-id plus the claim, quoted or closely paraphrased, with its location |
+| Closest related work | The 1 to 3 nearest works by what they do, found by the closest-competitor sweep, not only the manuscript's citations |
+| Verified similarities | What those works demonstrably share with the claim, at the access level you hold |
+| Potentially distinctive aspect | What remains different, worded as a hypothesis |
+| Evidence required | The comparison, experiment, or argument that would establish the difference |
+| Current assessment | One of: Supported, Supported with narrower wording, Overstated, Contradicted, Not assessable. Then the novelty type (conceptual, methodological, empirical, application-specific) |
+
+Do not edit the manuscript in this phase. Suggested replacement wording goes into Sec. 13.1 of the review.

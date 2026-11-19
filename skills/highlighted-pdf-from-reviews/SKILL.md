@@ -69,3 +69,12 @@ The `where` labels fill the map's "Highlighted in" column automatically. Supplem
 | Bar marker stranded at a page foot | Long table starts on the next page | `\needspace` inside `\rvbar` |
 | Highlights cover whole letter ranges, including old text | Letter location taken as proof of change | Reviewer-quote rule and sentence-level `W` |
 | `soul` error on `\cite`/`\cref` inside a highlight | Command not registered with soul | `\soulregister\<cmd>7` in `rvhighlight.sty` |
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Outside the paper cycle.** Use it after every review comment is fixed and the response letter exists.
+- **Needs first:** `manuscript-revision` and `response-to-reviewer` (needs the revised LaTeX and the response letter).
+- **Hands on to:** resubmission.

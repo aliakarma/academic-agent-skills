@@ -8,19 +8,19 @@
 literature/
   PROGRESS.md                 (init) phase gates, open questions, access limits
   baseline_citations.json     Phase 0 snapshot from audit_citations.py
-  baseline_diagnosis.md       Phase 1
   search_strategy.md          Phase 2 concept table and query plan
   search_log.csv              (init) every executed query
   source_ledger.csv           (init) one row per unique publication screened
   extraction_sheet.csv        (init) one row per included source
   citation_map.csv            (init) one row per claim that gets a citation
   references_lit.bib          staging bib, verified entries move to the manuscript bib
-  gap_matrix.csv              Phase 7 comparison matrix
-  gaps.md                     Phase 7 per-gap evidence records
-  review_body.md              Phase 9 synthesis draft
-  qa_report.md                Phase 12
-  summary.md                  Phase 12 final report
-  originals/                  dated copies of the manuscript and bib before editing
+  research_profile.md         Phase 1 profile, claim list (M-ids), demonstrated vs proposed
+  gap_matrix.csv              optional study x dimension matrix (feeds review Sec. 7)
+  gaps.md                     optional scratch for gap records
+  review_body.md              integration stage only
+  qa_report.md                Phase 8
+  summary.md                  integration stage only
+  originals/                  earlier literature_review.md copies; manuscript copies in the integration stage
   gap_matrix_out/             (init) tables.tex from gap_table.py
   raw/source_records/         (init) <source_id>.md per included source
   raw/evidence_notes/         (init) longer reading notes when needed

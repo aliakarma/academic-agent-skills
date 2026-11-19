@@ -8,6 +8,6 @@
   },
   "homepage": "https://github.com/aliakarma/academic-agent-skills",
   "repository": "https://github.com/aliakarma/academic-agent-skills",
-  "license": "CC-BY-4.0",
+  "license": "MIT",
   "keywords": ["academic", "research", "scientific-writing", "peer-review", "latex", "manuscript", "literature-review", "agent-skills"]
 }

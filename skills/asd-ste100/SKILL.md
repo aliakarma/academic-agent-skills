@@ -165,3 +165,12 @@ Use it only when the user asks for formal ASD-STE100 compliance, a compliance re
 | A diagram node that the source does not name | Remove it, or say in the figure note that the figure simplifies the source. |
 | Starter components left empty | Delete them. |
 | A check reported as passed without a run | Run it, or say that you did not run it. |
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Outside the paper cycle.** Use it for an easy-to-read HTML explainer of a paper, project, or codebase.
+- **Needs first:** the material to explain, plus your own copy of the ASD-STE100 PDF, downloaded from the official ASD website and saved as `references/ASD-STE100_ISSUE9.pdf` in this skill's folder (or named in `ASD_STE100_PDF`).
+- **Alongside:** `paper-to-pptx` for a talk deck of the same paper.

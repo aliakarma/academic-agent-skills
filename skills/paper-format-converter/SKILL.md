@@ -135,3 +135,13 @@ Keep it short: the output folder path, the converted files, whether the build su
 | "Cropping the figure would fit the column better." | Change width and placement only, never the image. |
 | "It mostly compiled." | Report the exact build result and every remaining error. |
 | "The checks look fine, so it is submission-ready." | Apply the readiness rules in the QA reference. |
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Outside the paper cycle.** Use it to move a paper from one journal or conference format to another.
+- **Needs first:** a finished paper, and `research-auditor` for journal fit.
+- **Uses during the run:** `figure-rebuild` when figures must be redrawn to the venue's rules.
+- **Hands on to:** `universal-manuscript-polish` (polish in the new template), `journal-cover-letter`.

@@ -47,7 +47,7 @@ def main():
     header = list(rows[0].keys()) if rows else litlib.SCHEMAS["source_ledger.csv"]
     for c in litlib.SCHEMAS["source_ledger.csv"]:
         if c not in header:
-            errors.append(f"ledger lacks column '{c}'")
+            (warns if c == "venue_access" else errors).append(f"ledger lacks column {c!r}")
     ledger = {}
     for i, r in enumerate(rows, 2):
         sid = (r.get("source_id") or "").strip()

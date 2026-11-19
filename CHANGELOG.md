@@ -13,6 +13,16 @@ All notable changes to this project are recorded here. The format follows
 
 ### Added
 
+- `research-workflow-map`: one routing skill that holds the run order of all skills (a 14-step paper cycle from a
+  title and abstract to the cover letter, plus seven other-purpose skills), what each skill needs first, and which
+  skill to run next. Every skill now ends with a `Related skills` section that names its step in the cycle, the
+  skills it needs first, uses during the run, and hands on to, and points back to the map. `tests/test_skill_links.py`
+  checks that every named skill exists and that the map covers every skill.
+- `journal-cover-letter`: writes a one-page submission cover letter for a named journal. It researches the
+  journal's current author instructions and scope on official pages, grounds every claim and declaration in the
+  manuscript or the user, runs the letter through `text-humanizer`, and fills a LaTeX template.
+  `scripts/check_letter.py` compiles the letter and fails it on more than one page, leftover placeholders, missing
+  glyphs, em dashes, semicolons, or missing required text. `--selftest` proves the checks fire.
 - `nanobanana-prompt-generator`: writes a NanoBanana prompt for every TikZ diagram in `figures/tikz/` or the
   manuscript and a step-by-step `GUIDE.md` for generating reference images in Google Gemini or Google Flow for
   `figure-rebuild`. Results figures never get a prompt: `scripts/find_tikz.py` excludes plot code outright and
@@ -34,7 +44,29 @@ All notable changes to this project are recorded here. The format follows
 
 ### Changed
 
-- `scripts/validate_skills.py` includes `.ipynb` files in the privacy scan.
+- License: the project moves from CC BY 4.0 to the MIT License (`LICENSE`, plugin manifest, README, contributing
+  guide, and `docs/LICENSE_AND_ATTRIBUTION.md`). Copies obtained under release 1.0.0 keep CC BY 4.0.
+- `literature-review` is now a read-only discovery and validation phase. It writes `literature_review.md` (17
+  sections from the bundled brief, `references/prompt.md`) and leaves the manuscript, bib, code, and data
+  untouched. Integration into the paper is a separate step on explicit request. New scripts: `search.py` (logged
+  OpenAlex, Crossref, and arXiv queries and snowballing), `seed_ledger.py` (builds `source_ledger.csv` and measures
+  the open-access and closed-access venue split), `render_references.py` (generates the reference sections), and
+  `check_review.py` (validates the review against the ledger and search log). New `references/review-template.md`.
+- Run order: the skills follow one 14-step paper cycle. `finding-gap` is the entry point and takes a title and
+  abstract; `idea-to-paper` writes the paper inside the validated gap; `literature-review` (with its integration
+  stage) cites the verified literature. Seven skills sit outside the cycle for other purposes.
+- `research-auditor` numbers every weakness finding `R-001` onward. `repair-paper` takes its
+  `MASTER_PAPER_ASSESSMENT.md` beside `audit.md` and accounts for every I- and R- ID. `check_report.py` accepts the
+  assessment as an optional third argument, and its `--selftest` covers it.
+- `figure-rebuild` ships every rebuilt figure with an editable one-slide PowerPoint twin (Phase 8):
+  `assets/figure_pptx_template.js` transcribes the TikZ figure into native shapes and real text with pptxgenjs, and
+  `scripts/render_pptx.py` renders the slide for viewing (PowerPoint over COM on Windows, LibreOffice elsewhere).
+- `README.md` rewritten for beginners around the paper cycle: what a skill is, the 14 steps with what each takes
+  and returns, the seven other-purpose skills, a quick start, a glossary, and the repository layout. Four diagrams
+  in `docs/images/` illustrate the cycle, step 8, the other-purpose skills, and how to read a skill. All install,
+  update, and uninstall commands are unchanged.
+- `scripts/validate_skills.py` includes `.ipynb` files in the privacy scan and skips the local, git-ignored
+  `presentation/` folder.
 - `requirements-dev.txt` adds `bibtexparser` 1.x and `requests` for the new tests.
 
 ## [1.0.0] - 2026-11-07

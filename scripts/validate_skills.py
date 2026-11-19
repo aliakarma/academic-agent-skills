@@ -232,7 +232,8 @@ def validate_doc_links(root: Path) -> list[Issue]:
 
 def _public_text_files(root: Path, user_supplied: set[str]) -> list[Path]:
     """Text files that would be published: everything except local-only, git-ignored and cache paths."""
-    local_only = {".release-review", "RELEASE_COMMIT_PLAN.md", "MANUAL_RELEASE_CHECKLIST.md", ".git"} | CACHE_DIRS
+    local_only = {".release-review", "RELEASE_COMMIT_PLAN.md", "MANUAL_RELEASE_CHECKLIST.md", ".git",
+                  "presentation"} | CACHE_DIRS
     out = []
     for p in sorted(root.rglob("*")):
         rel = p.relative_to(root)

@@ -15,34 +15,36 @@ Depth: every `SKILL.md` frontmatter was parsed and every body was scanned. Long 
 
 ## 1. Inventory
 
-**23 skills** and 142 published files under `skills/`. Generated cache folders (`__pycache__`, `.mypy_cache`,
+**25 skills** and 159 published files under `skills/`. Generated cache folders (`__pycache__`, `.mypy_cache`,
 `.ruff_cache`) are excluded by `.gitignore`.
 
 | Skill | Purpose | Files | Scripts | SKILL.md lines | Frontmatter beyond name and description |
 |---|---|---|---|---|---|
-| asd-ste100 | Offline HTML explainer in ASD-STE100 Simplified Technical English | 10 | 2 | 167 | argument-hint, disable-model-invocation, user-invocable |
-| audit-paper | Line-by-line forensic writing audit to `audit.md` | 3 | 1 | 71 | none |
-| clean-user-facing-text | Invisible-Unicode audit and prose finalization | 10 | 5 | 191 | none |
-| figure-rebuild | Raster figure to LaTeX/TikZ with selectable text and claim audit | 5 | 2 | 260 | none |
-| finding-gap | Evidence-grounded research-gap discovery with a source ledger | 7 | 1 | 139 | none |
-| highlighted-pdf-from-reviews | Highlighted revised manuscript keyed to reviewer-comment IDs | 8 | 2 | 71 | none |
-| idea-to-paper | Full LaTeX paper project from an idea or abstract | 10 | 1 | 148 | argument-hint |
-| literature-review | Literature base built, extended, or repaired and integrated | 14 | 7 | 193 | none |
-| manuscript-revision | Reviewer-driven revision of every comment, with requested experiments and a completion gate | 3 | 1 | 124 | none |
-| nanobanana-prompt-generator | NanoBanana prompts for every non-results TikZ diagram, with a user guide | 2 | 1 | 166 | none |
-| paper-format-converter | Manuscript converted to a venue's official template | 8 | 2 | 137 | argument-hint, disable-model-invocation |
-| paper-to-pptx | Paper-faithful 15-slide PowerPoint deck | 7 | 3 | 90 | none |
-| paper-to-project-report | Paper to engineering spec `PROJECT_REPORT.md` | 5 | 1 | 53 | none |
-| peer-review | Simulated three-reviewer journal review with meta-review | 3 | 0 | 340 | none |
-| project-report-to-github | Tested research repository built from a project report | 4 | 1 | 61 | none |
-| readme-improvement | README.md upgraded without changing technical meaning | 1 | 0 | 304 | none |
-| reference-verify | One reference verified and returned as corrected BibTeX; a whole `.bib` triaged by script | 5 | 3 | 102 | none |
-| repair-paper | Manuscript revised against an existing `audit.md` | 4 | 2 | 59 | none |
-| repo-forensic-audit | Research-repository integrity and reproducibility audit | 5 | 0 | 212 | none |
-| research-auditor | Pre-submission diagnosis of claims, gap, prior work, journal fit | 5 | 0 | 140 | none |
-| response-to-reviewer | Point-by-point response letter with checking scripts | 8 | 5 | 89 | none |
-| text-humanizer | Academic and professional prose revision and critique | 12 | 1 | 164 | none |
-| universal-manuscript-polish | Staged, verified manuscript polishing | 3 | 2 | 451 | none |
+| asd-ste100 | Offline HTML explainer in ASD-STE100 Simplified Technical English | 10 | 2 | 176 | argument-hint, disable-model-invocation, user-invocable |
+| audit-paper | Line-by-line forensic writing audit to `audit.md` | 3 | 1 | 81 | none |
+| clean-user-facing-text | Invisible-Unicode audit and prose finalization | 10 | 5 | 201 | none |
+| figure-rebuild | Raster figure to LaTeX/TikZ with selectable text, a PowerPoint twin, and claim audit | 7 | 3 | 332 | none |
+| finding-gap | Evidence-grounded research-gap discovery with a source ledger | 7 | 1 | 142 | none |
+| highlighted-pdf-from-reviews | Highlighted revised manuscript keyed to reviewer-comment IDs | 8 | 2 | 80 | none |
+| idea-to-paper | Full LaTeX paper project from an idea or abstract | 10 | 1 | 150 | argument-hint |
+| journal-cover-letter | One-page journal submission cover letter compiled and checked as LaTeX/PDF | 8 | 1 | 104 | argument-hint |
+| literature-review | Read-only field review, gap validation, and novelty assessment in `literature_review.md` | 20 | 11 | 254 | none |
+| manuscript-revision | Reviewer-driven revision of every comment, with requested experiments and a completion gate | 3 | 1 | 134 | none |
+| nanobanana-prompt-generator | NanoBanana prompts for every non-results TikZ diagram, with a user guide | 2 | 1 | 175 | none |
+| paper-format-converter | Manuscript converted to a venue's official template | 8 | 2 | 147 | argument-hint, disable-model-invocation |
+| paper-to-pptx | Paper-faithful 15-slide PowerPoint deck | 7 | 3 | 100 | none |
+| paper-to-project-report | Paper to engineering spec `PROJECT_REPORT.md` | 5 | 1 | 62 | none |
+| peer-review | Simulated three-reviewer journal review with meta-review | 3 | 0 | 349 | none |
+| project-report-to-github | Tested research repository built from a project report | 4 | 1 | 70 | none |
+| readme-improvement | README.md upgraded without changing technical meaning | 1 | 0 | 313 | none |
+| reference-verify | One reference verified and returned as corrected BibTeX; a whole `.bib` triaged by script | 5 | 3 | 112 | none |
+| repair-paper | Manuscript revised against an existing `audit.md` | 4 | 2 | 69 | none |
+| repo-forensic-audit | Research-repository integrity and reproducibility audit | 5 | 0 | 221 | none |
+| research-workflow-map | Run order and links between all skills, with request routing | 1 | 0 | 105 | none |
+| research-auditor | Pre-submission diagnosis of claims, gap, prior work, journal fit | 5 | 0 | 150 | none |
+| response-to-reviewer | Point-by-point response letter with checking scripts | 8 | 5 | 99 | none |
+| text-humanizer | Academic and professional prose revision and critique | 12 | 1 | 174 | none |
+| universal-manuscript-polish | Staged, verified manuscript polishing | 3 | 2 | 462 | none |
 
 "Scripts" counts `.py`, `.js`, `.ps1`, and `.sh` files in a skill's `scripts/` folder.
 
@@ -137,7 +139,7 @@ None of these changes alters what a skill does, except where the Reason column s
 | `-ExecutionPolicy Bypass` in a usage line | `paper-to-pptx` | Documented. It runs the bundled script only |
 | No `shell=True`, `os.system`, `eval`, `exec`, or unpickling in any bundled script | all scripts | None |
 | Downloaded archives are extracted only through `scripts/safe_extract.py` | paper-format-converter | Good practice |
-| Project license | root | CC BY 4.0 in [LICENSE](../LICENSE) |
+| Project license | root | MIT in [LICENSE](../LICENSE) (CC BY 4.0 until release 1.0.0) |
 
 ## 8. Recommendations
 

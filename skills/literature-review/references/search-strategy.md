@@ -31,6 +31,14 @@ Apply a date limit only for a stated reason (for example, "the method did not ex
 
 ## 3. Query each service the way it expects
 
+Run queries through `scripts/search.py` for OpenAlex (default), Crossref, and arXiv. It logs the row in section 5 and saves the raw response, failures included. The URL patterns below are for services it does not wrap, or for debugging. Log a manual query by hand only when no script covers it, and copy the count from the response.
+
+Lessons from the test run:
+- OpenAlex `search=` matches any term, so reported counts run into the tens of thousands. They show topical breadth, not relevant hits. Report them that way.
+- `OR` inside an OpenAlex search string is not reliably boolean. Run two queries when the alternatives matter.
+- Forward snowballing on a paper published in the last few months returns 0 citing works. Log it and note that the paper is too new to be cited.
+- The arXiv API returns abstracts even when arxiv.org pages are blocked for WebFetch.
+
 Use the services that respond in this session. Log every attempt, including failures.
 
 **Crossref** (metadata, DOIs, no abstracts for many publishers)
@@ -52,7 +60,7 @@ Without a key, requests share a small daily budget per IP. If it runs out, say s
 **PubMed** (biomedical)
 `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=<terms>[tiab]&retmax=50&retmode=json`, then `esummary` or `efetch` for records. Europe PMC: `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=<terms>&format=json`.
 
-**Publisher platforms** (IEEE Xplore, ACM DL, ScienceDirect, SpringerLink, Wiley): reach them with WebSearch and WebFetch, or the Chrome tools if the user is signed in. Many block scripted access. Say which platform you actually reached.
+**Publisher platforms** (IEEE Xplore, ACM DL, ScienceDirect, SpringerLink, Wiley): reach them with WebSearch and WebFetch first. Many block scripted access, and then use the user's Chrome browser through the Claude in Chrome tools (SKILL.md Phase 3, "Use the user's browser"), which the user has authorized. Say which platform you actually reached.
 
 **Google Scholar** has no API and blocks scripts. List it as searched only if you used it through a browser in this session.
 
@@ -71,7 +79,7 @@ Log snowballing as its own search_log row with `discovery_method` = backward or 
 
 ## 5. Search log
 
-`literature/search_log.csv`, one row per query actually executed.
+`literature/search_log.csv`, one row per query actually executed. `search.py` writes these columns. `results_screened` is the number of titles it displayed. Raise it by hand only if you screened more. `search.py` writes these columns. `results_screened` is the number of titles it displayed: raise it by hand only if you screened more.
 
 | Column | Content |
 |---|---|

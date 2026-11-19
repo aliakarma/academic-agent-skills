@@ -44,10 +44,11 @@ extra step in [INSTALLATION.md](INSTALLATION.md#antigravity-and-cursor-global-in
 | asd-ste100 | Adapt | Adapt | Adapt | Adapt | Not assessed | Needs the user's own authorized copy of the ASD-STE100 specification (not included, see `REFERENCES.md`) and PyMuPDF. Uses `$ARGUMENTS` and `disable-model-invocation`, which only Claude Code honours |
 | audit-paper | Format-compatible | Format-compatible | Format-compatible | Format-compatible | Not assessed | Script path uses `${CLAUDE_SKILL_DIR}`. Applies punctuation rules only when the user supplies them |
 | clean-user-facing-text | Format-compatible | Format-compatible | Format-compatible | Format-compatible | Not assessed | None found |
-| figure-rebuild | Format-compatible | Format-compatible | Format-compatible | Format-compatible | Not assessed | Needs LaTeX, PyMuPDF, Pillow. Names the Claude "Write tool" in one tip |
+| figure-rebuild | Format-compatible | Format-compatible | Format-compatible | Format-compatible | Not assessed | Needs LaTeX, PyMuPDF, Pillow, and Node.js with `pptxgenjs` for the PowerPoint twin. Names the Claude "Write tool" in one tip |
 | finding-gap | Partial | Partial | Partial | Partial | Not assessed | Prefers the Consensus and Scholar Gateway MCP connectors (`mcp__Consensus__search`). Without them it falls back to web search |
 | highlighted-pdf-from-reviews | Format-compatible | Format-compatible | Format-compatible | Format-compatible | Not assessed | Needs LaTeX (`latexmk`) and Poppler |
 | idea-to-paper | Format-compatible | Partial | Partial | Partial | Not assessed | Uses `$ARGUMENTS` and `argument-hint` (Claude Code only). Needs sibling skills `literature-review` and `universal-manuscript-polish`. Its checker reports em dashes and semicolons in generated papers as errors (E14, E15) |
+| journal-cover-letter | Format-compatible | Partial | Partial | Partial | Not assessed | Uses `$ARGUMENTS` and `argument-hint` (Claude Code only). Needs sibling skill `text-humanizer`, web access for the journal's author instructions, and LaTeX (`latexmk`) |
 | literature-review | Format-compatible | Format-compatible | Format-compatible | Format-compatible | Not assessed | Names Claude tools (WebFetch, WebSearch, Chrome). Needs web access |
 | manuscript-revision | Format-compatible | Format-compatible | Format-compatible | Format-compatible | Not assessed | Needs sibling skills response-to-reviewer, reference-verify, universal-manuscript-polish, and text-humanizer, and LaTeX. Requested experiments run on the project's own code, so they need whatever that code needs |
 | nanobanana-prompt-generator | Format-compatible | Format-compatible | Format-compatible | Format-compatible | Not assessed | The user generates the images in Google Gemini or Google Flow, outside the agent. The scanner reads only TikZ files and the manuscript |
@@ -60,6 +61,7 @@ extra step in [INSTALLATION.md](INSTALLATION.md#antigravity-and-cursor-global-in
 | reference-verify | Format-compatible | Format-compatible | Format-compatible | Format-compatible | Not assessed | Names Claude tools (WebFetch, WebSearch, Chrome). Needs web access |
 | repair-paper | Format-compatible | Format-compatible | Format-compatible | Format-compatible | Not assessed | Needs sibling skill `universal-manuscript-polish` and an `audit.md` |
 | repo-forensic-audit | Format-compatible | Format-compatible | Format-compatible | Format-compatible | Not assessed | None found |
+| research-workflow-map | Format-compatible | Format-compatible | Format-compatible | Format-compatible | Not assessed | Routing only. The skills it names must be installed to run |
 | research-auditor | Format-compatible | Format-compatible | Format-compatible | Format-compatible | Not assessed | Needs web access for gap verification |
 | response-to-reviewer | Format-compatible | Format-compatible | Format-compatible | Format-compatible | Not assessed | Needs PyMuPDF or Poppler for line indexes |
 | text-humanizer | Format-compatible | Format-compatible | Format-compatible | Format-compatible | Not assessed | None found |
@@ -73,7 +75,7 @@ extra step in [INSTALLATION.md](INSTALLATION.md#antigravity-and-cursor-global-in
 | `disable-model-invocation: true` | asd-ste100, paper-format-converter | Skill runs only from its slash command | Ignored, so the agent may load it on a matching request. asd-ste100's own text asks before building when it was not called by name |
 | `argument-hint`, `user-invocable` | asd-ste100, idea-to-paper, paper-format-converter | Autocomplete hint and `/` menu control | Ignored |
 | `$ARGUMENTS` | asd-ste100, idea-to-paper, paper-format-converter | Replaced with the command's arguments | Seen literally. The agent uses the user's request instead |
-| Sibling paths `${CLAUDE_SKILL_DIR}/../<skill>` | audit-paper, idea-to-paper, repair-paper | Works when the siblings are installed in the same skills folder | Same, once `${CLAUDE_SKILL_DIR}` is resolved |
+| Sibling paths `${CLAUDE_SKILL_DIR}/../<skill>` | audit-paper, idea-to-paper, journal-cover-letter, repair-paper | Works when the siblings are installed in the same skills folder | Same, once `${CLAUDE_SKILL_DIR}` is resolved |
 | Skills outside this repository named as alternatives (`bibtex-validator`, `humanize-latex`, `MDPI-Format`, `anthropic-skills:pptx`) | several descriptions | Routing hints. Only `paper-to-pptx` depends on one | Same |
 
 The three skills with Claude Code fields fail the official `skills-ref` rule that rejects unexpected frontmatter keys.
@@ -91,7 +93,8 @@ normally.
 | python-pptx | paper-to-pptx (`qa_check.py`) |
 | PyYAML | paper-format-converter (`evals/validate_skill.py`), this repository's validator |
 | bibtexparser 1.x, requests | reference-verify (`verify_bib.py`, whole-file mode) |
-| Node.js + `pptxgenjs` | paper-to-pptx |
-| LaTeX (`latexmk`, `pdflatex`) | figure-rebuild, highlighted-pdf-from-reviews, idea-to-paper, manuscript-revision, paper-format-converter, paper-to-pptx, response-to-reviewer, universal-manuscript-polish |
+| Node.js + `pptxgenjs` | figure-rebuild (PowerPoint twin), paper-to-pptx |
+| LibreOffice | figure-rebuild (`render_pptx.py` outside Windows) |
+| LaTeX (`latexmk`, `pdflatex`) | figure-rebuild, highlighted-pdf-from-reviews, idea-to-paper, journal-cover-letter, manuscript-revision, paper-format-converter, paper-to-pptx, response-to-reviewer, universal-manuscript-polish |
 | Poppler (`pdftoppm`, `pdftocairo`, `pdftotext`) | highlighted-pdf-from-reviews, idea-to-paper, paper-format-converter, paper-to-pptx, response-to-reviewer |
-| Windows PowerShell + Microsoft PowerPoint | paper-to-pptx PDF export (`export_pdf.ps1`) |
+| Windows PowerShell + Microsoft PowerPoint | paper-to-pptx PDF export (`export_pdf.ps1`), figure-rebuild slide render (`render_pptx.py` on Windows) |

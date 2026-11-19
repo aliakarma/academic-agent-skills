@@ -88,3 +88,13 @@ Keep it short:
 - what was rebuilt rather than reused
 - the items for the author (VERIFICATION.md section 7)
 - anything not checked, such as fonts on another machine or citation accuracy beyond the paper's own `.bib`
+
+## Related skills
+
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Outside the paper cycle.** Use it to make a deck from a paper, report, or similar document.
+- **Needs first:** a paper or report, and `figure-rebuild` for vector figures.
+- **Uses during the run:** Anthropic's `pptx` skill (required, not in this collection).
+- **Alongside:** `asd-ste100` for a plain-English explainer of the same paper.

@@ -123,11 +123,13 @@ The skeleton and the checker target `\documentclass[conference]{IEEEtran}`. When
 
 ## Related skills
 
-- Literature-Review: its scripts power Step 1. Run its full workflow when the user wants an auditable evidence ledger.
-- universal-manuscript-polish: the global instructions route paper writing to it. Step 5 uses it. Its standards never remove target marks.
-- text-humanizer: supplies the prose patterns and vocabulary references, per the global instructions.
-- figure-rebuild: when the author supplies raster or AI-generated figures that should become TikZ.
-- peer-review: offer a simulated review after delivery.
+
+Run order and the full map: `research-workflow-map`. Invoke these with the Skill tool. If one is not installed, say so and continue with this skill's own steps.
+
+- **Paper cycle:** step 2 of 14. Input: the title and abstract, plus any research questions, methodology, datasets, or results, and the gap from step 1.
+- **Needs first:** `finding-gap` (step 1), so the paper is written inside a validated gap.
+- **Uses during the run:** `literature-review` scripts (required, Step 1), `reference-verify` for every entry `verify_refs.py` does not verify, `nanobanana-prompt-generator` then `figure-rebuild` for author-supplied or AI figures, `universal-manuscript-polish` (required, Step 5, whose standards never remove target marks), `text-humanizer` for the prose patterns and vocabulary.
+- **Hands on to:** `literature-review` (step 3: find and cite all the literature the paper needs).
 
 ## Red flags
 
